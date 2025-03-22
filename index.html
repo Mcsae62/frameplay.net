@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online games that can be played directly in your browser. Collection of action, puzzle, and strategy iframe games.">
+    <title>FramePlay.net - Free Online Browser Games</title>
+    <link rel="canonical" href="https://frameplay.net/">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4a69bd;
+            --secondary-blue: #1e3799;
+            --light-blue: #6a89cc;
+            --text-white: #f5f6fa;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--primary-blue);
+            color: var(--text-white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header {
+            padding: 1rem 0;
+        }
+        
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-top: 4rem;
+            text-align: center;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .search-form {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .search-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-button {
+            background-color: var(--text-white);
+            color: var(--primary-blue);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .tab-button {
+            background-color: var(--text-white);
+            color: var(--primary-blue);
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: var(--secondary-blue);
+            color: var(--text-white);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .game-card {
+            background-color: var(--light-blue);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .game-content {
+            padding: 1.5rem;
+        }
+        
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .game-description {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .play-button {
+            display: inline-block;
+            background-color: var(--text-white);
+            color: var(--primary-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            background-color: var(--secondary-blue);
+            color: var(--text-white);
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .footer a {
+            color: var(--text-white);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .tabs-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-button {
+                width: 80%;
+                text-align: center;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="text-white text-xl font-bold">frameplay.net</a>
+        </header>
+        
+        <main>
+            <h1 class="main-title">I LIKE PLAY GAMES</h1>
+            <p class="subtitle">Online Game IFRAME Content</p>
+            
+            <div class="search-container">
+                <form class="search-form" action="/search" method="GET">
+                    <input type="text" class="search-input" name="q" placeholder="Search games...">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>
+            
+            <div class="tabs-container">
+                <button class="tab-button active" onclick="openTab('puzzle')">Puzzle</button>
+                <button class="tab-button" onclick="openTab('action')">Action</button>
+                <button class="tab-button" onclick="openTab('strategy')">Strategy</button>
+            </div>
+            
+            <!-- Puzzle Games Tab -->
+            <div id="puzzle" class="tab-content active">
+                <h2 class="category-title">Puzzle Games</h2>
+                
+                <div class="games-grid">
+                    <div class="game-card">
+                        <img src="https://via.placeholder.com/300x180?text=Chess" alt="Chess Game" class="game-image">
+                        <div class="game-content">
+                            <h3 class="game-title">Chess</h3>
+                            <p class="game-description">The classic strategy board game. Challenge your mind and outsmart your opponent in this timeless battle of wits.</p>
+                            <a href="/games/chess/" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- More puzzle games would be added here -->
+                </div>
+            </div>
+            
+            <!-- Action Games Tab -->
+            <div id="action" class="tab-content">
+                <h2 class="category-title">Action Games</h2>
+                
+                <div class="games-grid">
+                    <!-- Action games would be added here -->
+                    <div class="game-card">
+                        <img src="https://via.placeholder.com/300x180?text=Action+Game" alt="Action Game" class="game-image">
+                        <div class="game-content">
+                            <h3 class="game-title">Coming Soon</h3>
+                            <p class="game-description">Exciting action games will be available here soon!</p>
+                            <a href="#" class="play-button">Stay Tuned</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Strategy Games Tab -->
+            <div id="strategy" class="tab-content">
+                <h2 class="category-title">Strategy Games</h2>
+                
+                <div class="games-grid">
+                    <!-- Strategy games would be added here -->
+                    <div class="game-card">
+                        <img src="https://via.placeholder.com/300x180?text=Strategy+Game" alt="Strategy Game" class="game-image">
+                        <div class="game-content">
+                            <h3 class="game-title">Coming Soon</h3>
+                            <p class="game-description">Strategic challenges will be available here soon!</p>
+                            <a href="#" class="play-button">Stay Tuned</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/privacy">Privacy</a>
+                <a href="/policy">Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact Us</a>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.getElementsByClassName('tab-button');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            // Show the selected tab content and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
