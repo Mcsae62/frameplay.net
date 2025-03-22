@@ -1,6 +1,7 @@
 # Chess Game
 
 A classic chess game implemented in HTML5.
+
 HTML Chess (c) Copyright 2010 by Stefano Gioffré
 
 	http://sourceforge.net/projects/htmlchess/
