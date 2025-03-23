@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online games that can be played directly in your browser. Collection of action, puzzle, and strategy iframe games.">
-    <title>FramePlay.net - Free Online Browser Games</title>
+    <meta name="description" content="Free online games that can be played directly in your browser. Collection of classic puzzle games like Chess, Pacman, Connect3, and more.">
+    <title>FramePlay.net - Free Classic Online Puzzle Games</title>
     <link rel="canonical" href="https://frameplay.net/">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -17,17 +17,10 @@
       gtag('config', 'G-LXKH7CR53S');
     </script>
     <style>
-        :root {
-            --primary-blue: #4a69bd;
-            --secondary-blue: #1e3799;
-            --light-blue: #6a89cc;
-            --text-white: #f5f6fa;
-        }
-        
         body {
             font-family: 'Arial', sans-serif;
-            background-color: var(--primary-blue);
-            color: var(--text-white);
+            background-color: #E0F7FA; /* 浅蓝色背景 */
+            color: #333;
         }
         
         .container {
@@ -38,21 +31,135 @@
         
         .header {
             padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-button {
+            background-color: #0277BD;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .nav-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-dropdown:hover .nav-content {
+            display: block;
+        }
+        
+        .nav-content a {
+            display: block;
+            color: #0277BD;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            text-align: left;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-content a:hover {
+            background-color: #E0F7FA;
+            color: #FF6F00;
         }
         
         .main-title {
             font-size: 3rem;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             margin-top: 4rem;
             text-align: center;
+            color: #FF6F00; /* 经典暖色标题 */
+            line-height: 1.2;
         }
         
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-top: 1rem;
             margin-bottom: 2rem;
             text-align: center;
+            color: #0277BD;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .game-content {
+            flex: 1;
+        }
+        
+        .game-nav {
+            width: 80px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            align-self: flex-start;
+            position: sticky;
+            top: 20px;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            z-index: 100;
+        }
+        
+        .game-nav:hover {
+            width: 200px;
+        }
+        
+        .nav-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #FF6F00;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #E0E0E0;
+            white-space: nowrap;
+        }
+        
+        .game-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .game-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .game-list a {
+            display: block;
+            padding: 0.5rem;
+            color: #0277BD;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .game-list a:hover {
+            background-color: #E0F7FA;
+            color: #FF6F00;
         }
         
         .search-container {
@@ -68,14 +175,15 @@
         .search-input {
             flex-grow: 1;
             padding: 0.75rem;
-            border: none;
+            border: 2px solid #B2EBF2;
             border-radius: 4px 0 0 4px;
             outline: none;
+            font-size: 1rem;
         }
         
         .search-button {
-            background-color: var(--text-white);
-            color: var(--primary-blue);
+            background-color: #4CAF50; /* 绿色按钮 */
+            color: white;
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 0 4px 4px 0;
@@ -83,34 +191,20 @@
             font-weight: 600;
         }
         
-        .tabs-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
+        .search-button:hover {
+            background-color: #388E3C;
         }
         
-        .tab-button {
-            background-color: var(--text-white);
-            color: var(--primary-blue);
-            padding: 0.75rem 2rem;
-            border-radius: 4px;
+        .recently-added {
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .tab-button.active {
-            background-color: var(--secondary-blue);
-            color: var(--text-white);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #0277BD;
         }
         
         .games-grid {
@@ -121,65 +215,67 @@
         }
         
         .game-card {
-            background-color: var(--light-blue);
+            background-color: white;
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .game-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
         
         .game-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
+            border-bottom: 1px solid #E0E0E0;
         }
         
         .game-content {
             padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 210px; /* 固定高度确保按钮对齐 */
         }
         
         .game-title {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: #FF6F00;
         }
         
         .game-description {
             margin-bottom: 1rem;
             font-size: 0.9rem;
             line-height: 1.4;
+            color: #616161;
+            flex-grow: 1; /* 让描述部分占据剩余空间 */
         }
         
         .play-button {
             display: inline-block;
-            background-color: var(--text-white);
-            color: var(--primary-blue);
+            background-color: #4CAF50; /* 绿色按钮 */
+            color: white;
             padding: 0.5rem 1.5rem;
             border-radius: 4px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease;
         }
         
         .play-button:hover {
-            background-color: var(--secondary-blue);
-            color: var(--text-white);
-        }
-        
-        .category-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 1rem 0;
-            text-align: center;
+            background-color: #388E3C;
         }
         
         .footer {
             margin-top: 4rem;
             text-align: center;
-            padding: 1rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid #B2EBF2;
         }
         
         .footer-links {
@@ -189,28 +285,19 @@
         }
         
         .footer a {
-            color: var(--text-white);
+            color: #0277BD;
             text-decoration: none;
         }
         
         .footer a:hover {
             text-decoration: underline;
+            color: #FF6F00;
         }
         
         /* Responsive design */
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2rem;
-            }
-            
-            .tabs-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .tab-button {
-                width: 80%;
-                text-align: center;
             }
             
             .games-grid {
@@ -222,12 +309,24 @@
 <body>
     <div class="container">
         <header class="header">
-            <a href="/" class="text-white text-xl font-bold">frameplay.net</a>
+            <a href="/" class="text-blue-800 text-xl font-bold">frameplay.net</a>
+            <div class="nav-dropdown">
+                <span class="nav-button">Game Navigation</span>
+                <div class="nav-content">
+                    <a href="/games/2048.html">2048</a>
+                    <a href="/games/adarkroom.html">A Dark Room</a>
+                    <a href="/games/chess.html">Chess</a>
+                    <a href="/games/connect3.html">Connect 3</a>
+                    <a href="/games/pacman.html">Pacman</a>
+                    <a href="/games/snake.html">Snake</a>
+                    <a href="/games/tetris.html">Tetris</a>
+                </div>
+            </div>
         </header>
         
         <main>
-            <h1 class="main-title">I LIKE PLAY GAMES</h1>
-            <p class="subtitle">Online Game IFRAME Content</p>
+            <h1 class="main-title">Enjoy Free Classic Online<br>Puzzle Games</h1>
+            <p class="subtitle">No Download Needed, Instantly Play HTML5 Games</p>
             
             <div class="search-container">
                 <form class="search-form" action="/search" method="GET">
@@ -236,59 +335,34 @@
                 </form>
             </div>
             
-            <div class="tabs-container">
-                <button class="tab-button active" onclick="openTab('puzzle')">Puzzle</button>
-                <button class="tab-button" onclick="openTab('action')">Action</button>
-                <button class="tab-button" onclick="openTab('strategy')">Strategy</button>
-            </div>
-            
-            <!-- Puzzle Games Tab -->
-            <div id="puzzle" class="tab-content active">
-                <h2 class="category-title">Puzzle Games</h2>
+            <div class="recently-added">
+                <h2 class="section-title">Newly Added Recently</h2>
                 
                 <div class="games-grid">
                     <div class="game-card">
-                        <img src="https://via.placeholder.com/300x180?text=Chess" alt="Chess Game" class="game-image">
+                        <img src="https://images.unsplash.com/photo-1586165368502-1bad197a6461?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chess Game" class="game-image">
                         <div class="game-content">
                             <h3 class="game-title">Chess</h3>
                             <p class="game-description">The classic strategy board game. Challenge your mind and outsmart your opponent in this timeless battle of wits.</p>
-                            <a href="/games/chess/" class="play-button">Play Now</a>
+                            <a href="/games/chess.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                     
-                    <!-- More puzzle games would be added here -->
-                </div>
-            </div>
-            
-            <!-- Action Games Tab -->
-            <div id="action" class="tab-content">
-                <h2 class="category-title">Action Games</h2>
-                
-                <div class="games-grid">
-                    <!-- Action games would be added here -->
                     <div class="game-card">
-                        <img src="https://via.placeholder.com/300x180?text=Action+Game" alt="Action Game" class="game-image">
+                        <img src="images/经典H5小游戏 Pacman游戏、Connect 3的示意.jpeg" alt="Pacman Game" class="game-image">
                         <div class="game-content">
-                            <h3 class="game-title">Coming Soon</h3>
-                            <p class="game-description">Exciting action games will be available here soon!</p>
-                            <a href="#" class="play-button">Stay Tuned</a>
+                            <h3 class="game-title">Pacman</h3>
+                            <p class="game-description">Navigate through a maze while collecting dots and avoiding ghosts in this iconic arcade classic from the 1980s.</p>
+                            <a href="/games/pacman.html" class="play-button">Play Now</a>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Strategy Games Tab -->
-            <div id="strategy" class="tab-content">
-                <h2 class="category-title">Strategy Games</h2>
-                
-                <div class="games-grid">
-                    <!-- Strategy games would be added here -->
+                    
                     <div class="game-card">
-                        <img src="https://via.placeholder.com/300x180?text=Strategy+Game" alt="Strategy Game" class="game-image">
+                        <img src="images/经典H5小游戏 Pacman游戏、Connect 3的示意 (1).jpeg" alt="Connect3 Game" class="game-image">
                         <div class="game-content">
-                            <h3 class="game-title">Coming Soon</h3>
-                            <p class="game-description">Strategic challenges will be available here soon!</p>
-                            <a href="#" class="play-button">Stay Tuned</a>
+                            <h3 class="game-title">Connect 3</h3>
+                            <p class="game-description">Match three or more identical tiles to clear them from the board in this addictive puzzle game.</p>
+                            <a href="/games/connect3.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                 </div>
@@ -304,25 +378,5 @@
             </div>
         </footer>
     </div>
-    
-    <script>
-        function openTab(tabName) {
-            // Hide all tab contents
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
-            
-            // Remove active class from all tab buttons
-            const tabButtons = document.getElementsByClassName('tab-button');
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove('active');
-            }
-            
-            // Show the selected tab content and mark button as active
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
 </body>
-</html>
+</html> 
