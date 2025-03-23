@@ -1,9 +1,17 @@
 // 聊天框组件
-document.addEventListener('DOMContentLoaded', function() {
-    // 如果已经加载过聊天框，则不再重复加载
-    if (document.getElementById('chat-container')) {
+// 立即初始化变量以存储聊天框状态
+var chatInitialized = false;
+
+// 尝试立即添加聊天框
+function initializeChat() {
+    // 如果已经初始化过，不再重复
+    if (chatInitialized || document.getElementById('chat-container')) {
+        console.log('聊天框已初始化，跳过');
         return;
     }
+    
+    console.log('开始初始化聊天框');
+    chatInitialized = true;
     
     // 创建聊天框HTML结构
     const chatHtml = `
@@ -236,16 +244,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 将聊天框添加到DOM
     document.body.insertAdjacentHTML('beforeend', chatHtml);
-
+    console.log('聊天框HTML已添加到DOM');
+    
     // 确保聊天框显示，即使在页面加载后也要尝试添加
     setTimeout(function() {
         if (!document.getElementById('chat-container')) {
+            console.log('1秒后检查：聊天框不存在，重新添加');
             document.body.insertAdjacentHTML('beforeend', chatHtml);
+        } else {
+            console.log('1秒后检查：聊天框已存在');
         }
     }, 1000);
     
     // 获取聊天框元素
     const chatContainer = document.getElementById('chat-container');
+    if (!chatContainer) {
+        console.error('无法获取聊天框元素');
+        return;
+    }
+    
+    console.log('成功获取聊天框元素');
     const chatMessages = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
     const chatSend = document.getElementById('chat-send');
@@ -457,19 +475,44 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 页面加载和窗口大小改变时检测位置关系
     window.addEventListener('resize', checkPositionConflict);
-    window.addEventListener('load', checkPositionConflict);
+    
     // 定期检查位置关系
     setInterval(checkPositionConflict, 2000);
     
     // 初始检查一次
     setTimeout(checkPositionConflict, 1000);
+    
+    console.log('聊天框初始化完成');
+}
+
+// 主要初始化函数
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded事件触发，准备初始化聊天框');
+    initializeChat();
 });
 
-// 确保即使在页面加载后，仍然添加聊天框
+// 确保聊天框会被初始化，即使DOM已经加载完成
+if (document.readyState === 'loading') {
+    console.log('文档仍在加载中，等待DOMContentLoaded事件');
+} else {
+    console.log('文档已加载完成，立即初始化聊天框');
+    initializeChat();
+}
+
+// 额外的保障措施：在window load事件中也尝试初始化
+window.addEventListener('load', function() {
+    console.log('window load事件触发，检查聊天框是否已初始化');
+    if (!document.getElementById('chat-container')) {
+        console.log('window load: 聊天框不存在，重新初始化');
+        initializeChat();
+    }
+});
+
+// 延迟检查
 setTimeout(function() {
-    if (!document.getElementById('chat-container') && document.readyState === 'complete') {
-        // 如果页面已完全加载但聊天框不存在，手动触发初始化
-        const event = new Event('DOMContentLoaded');
-        document.dispatchEvent(event);
+    console.log('2秒后检查聊天框是否已初始化');
+    if (!document.getElementById('chat-container')) {
+        console.log('2秒检查: 聊天框不存在，重新初始化');
+        initializeChat();
     }
 }, 2000); 
