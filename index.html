@@ -294,6 +294,39 @@
             color: #FF6F00;
         }
         
+        /* Chat component styles */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 500px;
+        }
+        
+        /* Leaderboard component styles */
+        .leaderboard-container {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .leaderboard-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #0277BD;
+            text-align: center;
+        }
+        
         /* Responsive design */
         @media (max-width: 768px) {
             .main-title {
@@ -302,6 +335,11 @@
             
             .games-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .chat-container {
+                width: 300px;
+                max-height: 400px;
             }
         }
     </style>
@@ -313,13 +351,13 @@
             <div class="nav-dropdown">
                 <span class="nav-button">Game Navigation</span>
                 <div class="nav-content">
-                    <a href="games/2048.html">2048</a>
-                    <a href="games/adarkroom.html">A Dark Room</a>
-                    <a href="games/chess.html">Chess</a>
-                    <a href="games/connect3.html">Connect 3</a>
-                    <a href="games/pacman.html">Pacman</a>
-                    <a href="games/snake.html">Snake</a>
-                    <a href="games/tetris.html">Tetris</a>
+                    <a href="games/2048/">2048</a>
+                    <a href="games/adarkroom/">A Dark Room</a>
+                    <a href="games/chess/">Chess</a>
+                    <a href="games/connect3/">Connect 3</a>
+                    <a href="games/pacman/">Pacman</a>
+                    <a href="games/snake/">Snake</a>
+                    <a href="games/tetris/">Tetris</a>
                 </div>
             </div>
         </header>
@@ -335,6 +373,8 @@
                 </form>
             </div>
             
+            <!-- 排行榜组件将由 leaderboard.js 动态注入 -->
+            
             <div class="recently-added">
                 <h2 class="section-title">Newly Added Recently</h2>
                 
@@ -344,29 +384,25 @@
                         <div class="game-content">
                             <h3 class="game-title">Chess</h3>
                             <p class="game-description">The classic strategy board game. Challenge your mind and outsmart your opponent in this timeless battle of wits.</p>
-                            <a href="games/chess.html" class="play-button">Play Now</a>
+                            <a href="games/chess/" class="play-button">Play Now</a>
                         </div>
                     </div>
                     
                     <div class="game-card">
-                        <div class="game-image-container">
-                            <img src="images/pacman-demo.jpeg" alt="Pacman Game" class="game-image">
-                        </div>
+                        <img src="images/pacman-demo.jpeg" alt="Pacman Game" class="game-image">
                         <div class="game-content">
                             <h3 class="game-title">Pacman</h3>
                             <p class="game-description">Navigate through a maze while collecting dots and avoiding ghosts in this iconic arcade classic.</p>
-                            <a href="games/pacman.html" class="play-button">Play Now</a>
+                            <a href="games/pacman/" class="play-button">Play Now</a>
                         </div>
                     </div>
                     
                     <div class="game-card">
-                        <div class="game-image-container">
-                            <img src="images/connect3-demo.jpeg" alt="Connect3 Game" class="game-image">
-                        </div>
+                        <img src="images/connect3-demo.jpeg" alt="Connect3 Game" class="game-image">
                         <div class="game-content">
                             <h3 class="game-title">Connect 3</h3>
                             <p class="game-description">Match colorful gems in rows of three or more to score points in this addictive puzzle game.</p>
-                            <a href="games/connect3.html" class="play-button">Play Now</a>
+                            <a href="games/connect3/" class="play-button">Play Now</a>
                         </div>
                     </div>
                 </div>
@@ -375,15 +411,19 @@
         
         <footer class="footer">
             <div class="footer-links">
-                <a href="pages/privacy.html">Privacy</a>
-                <a href="pages/policy.html">Policy</a>
-                <a href="pages/terms.html">Terms of Service</a>
-                <a href="pages/contact.html">Contact Us</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="policy.html">Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
             </div>
         </footer>
     </div>
 
-    <!-- 聊天框组件 -->
-    <script src="js/chat-component.js"></script>
+    <!-- 聊天组件将由 chat-component.js 动态注入 -->
+
+    <!-- 组件脚本 -->
+    <script src="js/chat-component/chat-component.js"></script>
+    <script src="js/leaderboard/leaderboard.js"></script>
+    <script src="js/overlay-prevention.js"></script>
 </body>
-</html> 
+</html>
