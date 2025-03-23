@@ -144,13 +144,18 @@
             background-color: white;
             border-radius: 8px;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        .game-container iframe {
+        /* Chess游戏特定样式 */
+        #chess-board {
             width: 100%;
             height: 100%;
-            border: none;
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         /* Game information sections */
@@ -273,7 +278,21 @@
         <h1 class="game-title">Chess</h1>
         
         <div class="game-container">
-            <iframe src="game-content.html"></iframe>
+            <!-- 直接在这里放置游戏内容，不再使用iframe自引用 -->
+            <div id="chess-board">
+                <!-- 游戏将在这里加载 -->
+                <script>
+                    // 加载Chess游戏资源
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // 根据您的文件结构引入必要的脚本
+                        var script = document.createElement('script');
+                        script.src = 'chess.js';
+                        document.head.appendChild(script);
+                        
+                        // 如果有其他需要加载的资源，可以在这里添加
+                    });
+                </script>
+            </div>
         </div>
         
         <div class="info-container">
