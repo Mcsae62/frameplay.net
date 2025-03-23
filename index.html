@@ -296,7 +296,8 @@
             color: #FF6F00;
         }
         
-        /* 在小屏幕上调整聊天和排行榜位置 */
+        /* 聊天组件和排行榜组件样式 */
+        /* 确保组件不会遮挡主要内容 */
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2rem;
@@ -368,8 +369,6 @@
                 </form>
             </div>
             
-            <!-- 排行榜组件将由 leaderboard.js 动态注入 -->
-            
             <div class="recently-added">
                 <h2 class="section-title">Newly Added Recently</h2>
                 
@@ -384,7 +383,9 @@
                     </div>
                     
                     <div class="game-card">
-                        <img src="images/pacman-demo.jpeg" alt="Pacman Game" class="game-image">
+                        <div class="game-image-container">
+                            <img src="images/pacman-demo.jpeg" alt="Pacman Game" class="game-image">
+                        </div>
                         <div class="game-content">
                             <h3 class="game-title">Pacman</h3>
                             <p class="game-description">Navigate through a maze while collecting dots and avoiding ghosts in this iconic arcade classic.</p>
@@ -393,7 +394,9 @@
                     </div>
                     
                     <div class="game-card">
-                        <img src="images/connect3-demo.jpeg" alt="Connect3 Game" class="game-image">
+                        <div class="game-image-container">
+                            <img src="images/connect3-demo.jpeg" alt="Connect3 Game" class="game-image">
+                        </div>
                         <div class="game-content">
                             <h3 class="game-title">Connect 3</h3>
                             <p class="game-description">Match colorful gems in rows of three or more to score points in this addictive puzzle game.</p>
@@ -406,10 +409,10 @@
         
         <footer class="footer">
             <div class="footer-links">
-                <a href="privacy.html">Privacy</a>
-                <a href="policy.html">Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="contact.html">Contact Us</a>
+                <a href="pages/privacy.html">Privacy</a>
+                <a href="pages/policy.html">Policy</a>
+                <a href="pages/terms.html">Terms of Service</a>
+                <a href="pages/contact.html">Contact Us</a>
             </div>
         </footer>
     </div>
