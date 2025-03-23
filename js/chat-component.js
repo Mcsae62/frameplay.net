@@ -236,6 +236,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 将聊天框添加到DOM
     document.body.insertAdjacentHTML('beforeend', chatHtml);
+
+    // 确保聊天框显示，即使在页面加载后也要尝试添加
+    setTimeout(function() {
+        if (!document.getElementById('chat-container')) {
+            document.body.insertAdjacentHTML('beforeend', chatHtml);
+        }
+    }, 1000);
     
     // 获取聊天框元素
     const chatContainer = document.getElementById('chat-container');
@@ -456,4 +463,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始检查一次
     setTimeout(checkPositionConflict, 1000);
-}); 
+});
+
+// 确保即使在页面加载后，仍然添加聊天框
+setTimeout(function() {
+    if (!document.getElementById('chat-container') && document.readyState === 'complete') {
+        // 如果页面已完全加载但聊天框不存在，手动触发初始化
+        const event = new Event('DOMContentLoaded');
+        document.dispatchEvent(event);
+    }
+}, 2000); 

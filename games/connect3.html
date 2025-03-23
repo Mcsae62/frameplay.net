@@ -223,12 +223,47 @@
             }
             
             .game-container {
-                height: 550px;
+                height: 600px;
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .game-container iframe {
+                transform: scale(0.7) !important;
+                transform-origin: center center !important;
+                width: 140% !important;
+                height: 140% !important;
+                margin-left: -20% !important;
+                margin-top: -20px !important;
+            }
+            
+            .nav-secondary {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-secondary a {
+                margin: 5px;
+                font-size: 14px;
+            }
+            
+            .game-header h1 {
+                font-size: 24px;
             }
             
             .footer-links {
                 flex-direction: column;
                 gap: 10px;
+            }
+        }
+        
+        /* 适配超小屏幕 */
+        @media (max-width: 480px) {
+            .game-container iframe {
+                transform: scale(0.6) !important;
+                width: 160% !important;
+                height: 160% !important;
+                margin-left: -30% !important;
             }
         }
     </style>
@@ -273,7 +308,7 @@
         <h1 class="game-title">Connect 3</h1>
         
         <div class="game-container">
-            <iframe src="https://frameplay.net/games/connect3/" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen></iframe>
+            <iframe src="https://frameplay.net/games/connect3/" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen style="transform: scale(0.8); transform-origin: center center; width: 120%; height: 120%; margin-left: -10%;"></iframe>
         </div>
         
         <div class="info-container">
