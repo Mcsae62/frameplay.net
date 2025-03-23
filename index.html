@@ -212,6 +212,8 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
+            position: relative;
+            z-index: 1; /* 确保游戏卡片在正常文档流中 */
         }
         
         .game-card {
@@ -294,40 +296,7 @@
             color: #FF6F00;
         }
         
-        /* Chat component styles */
-        .chat-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 350px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            max-height: 500px;
-        }
-        
-        /* Leaderboard component styles */
-        .leaderboard-container {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
-        }
-        
-        .leaderboard-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #0277BD;
-            text-align: center;
-        }
-        
-        /* Responsive design */
+        /* 在小屏幕上调整聊天和排行榜位置 */
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2rem;
@@ -337,9 +306,35 @@
                 grid-template-columns: 1fr;
             }
             
+            /* 确保聊天框不会遮挡关键内容 */
             .chat-container {
-                width: 300px;
-                max-height: 400px;
+                max-height: 300px;
+                bottom: 10px;
+                right: 10px;
+                /* 透明度过渡效果 */
+                opacity: 0.8;
+                transition: opacity 0.3s ease;
+            }
+            
+            .chat-container:hover {
+                opacity: 1;
+            }
+            
+            /* 确保排行榜不会遮挡关键内容 */
+            .leaderboard-container {
+                max-height: 250px;
+                opacity: 0.8;
+                transition: opacity 0.3s ease;
+            }
+            
+            .leaderboard-container:hover {
+                opacity: 1;
+            }
+            
+            /* 减小排行榜和聊天框在最小化状态下的体积 */
+            .chat-container.minimized,
+            .leaderboard-container.minimized {
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             }
         }
     </style>
