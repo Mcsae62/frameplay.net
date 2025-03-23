@@ -1,351 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play Tetris online for free at FramePlay.net. Stack falling blocks and clear lines in this addictive classic puzzle game.">
-    <title>Tetris - FramePlay.net</title>
-    <style>
-        /* Base colors and styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #E0F7FA; /* 浅蓝色背景 */
-            color: #333333;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header styles */
-        header {
-            background-color: #4FC3F7;
-            padding: 15px 0;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        
-        /* Search bar */
-        .search-container {
-            display: flex;
-            margin: 0 20px;
-        }
-        
-        .search-input {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-            width: 250px;
-        }
-        
-        .search-button {
-            background-color: #4CAF50; /* 绿色按钮 */
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        /* Game navigation dropdown */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .dropdown-button {
-            background-color: #4CAF50; /* 绿色按钮 */
-            color: white;
-            padding: 8px 16px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 4px;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dropdown-content a {
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .dropdown-content a:hover {
-            background-color: #B3E5FC;
-        }
-        
-        .dropdown-content a.active {
-            background-color: #E0F7FA;
-            color: #FF6F00;
-            font-weight: bold;
-        }
-        
-        /* Back button */
-        .back-button {
-            background-color: #0277BD;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        
-        .back-button:hover {
-            background-color: #01579B;
-        }
-        
-        /* Game title */
-        .game-title {
-            color: #FF6F00; /* 经典暖色标题 */
-            text-align: center;
-            margin: 30px 0;
-            font-size: 32px;
-        }
-        
-        /* Game container */
-        .game-container {
-            margin: 20px auto;
-            max-width: 800px;
-            height: 600px;
-            border: 2px solid #B3E5FC;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .game-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-        
-        /* Game information sections */
-        .info-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .info-box {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .info-title {
-            color: #FF6F00; /* 经典暖色标题 */
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #4FC3F7;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        
-        .list-item {
-            margin-bottom: 8px;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .search-container {
-                margin: 15px 0;
-                width: 100%;
-            }
-            
-            .search-input {
-                width: 100%;
-            }
-            
-            .info-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .game-container {
-                height: 450px;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
+<html>
+  <head>
+    <title>TwitchTetris</title>
+    <link href="//fonts.googleapis.com/css?family=VT323" rel="stylesheet" type="text/css" />
+
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+
+    <script src="cookie.js"></script>
+    <script src="gameControls.js"></script>
+
+    <script src="jawsjs.js"></script>
+    <script src="Block.js"></script>
+    <script src="Shapes.js"></script>
+    <script src="WallKicks.js"></script>
+    <script src="ControlGroup.js"></script>
+    <script src="Background.js"></script>
+    <script src="RandomBag.js"></script>
+    <script src="PreviewGroup.js"></script>
+    <script src="ScoreTracker.js"></script>
+    <script src="TtyBlock.js"></script>
+    <script src="Game.js"></script>
+    <script src="Game_Logic.js"></script>
+    <script src="Button.js"></script>
+    <script src="tetris.js"></script>
+
+
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-LXKH7CR53S');
+      function onClickEvent(event){
+      if (Tetris.currentInstance) {
+      Tetris.currentInstance.mouseClicked(event.layerX, event.layerY);
+      }
+      }
     </script>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="../index.html" class="logo">frameplay.net</a>
-                
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Search games...">
-                    <button class="search-button">Search</button>
-                </div>
-                
-                <div class="dropdown">
-                    <button class="dropdown-button">Game Navigation</button>
-                    <div class="dropdown-content">
-                        <a href="2048.html">2048</a>
-                        <a href="adarkroom.html">A Dark Room</a>
-                        <a href="chess.html">Chess</a>
-                        <a href="connect3.html">Connect 3</a>
-                        <a href="pacman.html">Pacman</a>
-                        <a href="snake.html">Snake</a>
-                        <a href="tetris.html" class="active">Tetris</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <div class="container">
-        <h1 class="game-title">Tetris</h1>
-        
-        <div class="game-container">
-            <iframe src="http://frameplay.net/games/tetris/"></iframe>
-        </div>
-        
-        <div class="info-container">
-            <div class="info-box">
-                <h2 class="info-title">Game Description</h2>
-                <p>Tetris is a classic puzzle game invented by Russian programmer Alexey Pajitnov in 1984. The core gameplay involves controlling different shaped blocks (called Tetriminos) that fall from the top of the screen. Players need to rotate and move these blocks to arrange them into complete horizontal lines. When a line is completed, it disappears and the player scores points. As the game progresses, the blocks fall faster, increasing the difficulty. Tetris has become one of the most popular games in electronic gaming history due to its simple yet addictive gameplay.</p>
-            </div>
-            
-            <div class="info-box">
-                <h2 class="info-title">How to Play</h2>
-                <p>Tetris rules are simple and straightforward:</p>
-                <ul>
-                    <li class="list-item">Control seven different shaped blocks falling from the top of the screen</li>
-                    <li class="list-item">Use arrow keys to move and rotate blocks for optimal arrangement</li>
-                    <li class="list-item">When a complete row of blocks is formed, that row disappears and scores points</li>
-                    <li class="list-item">As the game progresses, blocks fall faster</li>
-                    <li class="list-item">The game ends when stacked blocks reach the top of the screen</li>
-                </ul>
-                <p>Controls:</p>
-                <ul>
-                    <li class="list-item">Left/Right arrow keys: Move block horizontally</li>
-                    <li class="list-item">Up arrow key: Rotate block</li>
-                    <li class="list-item">Down arrow key: Accelerate block falling</li>
-                    <li class="list-item">Space bar: Drop block instantly to the bottom (hard drop)</li>
-                    <li class="list-item">P key: Pause game</li>
-                </ul>
-            </div>
-            
-            <div class="info-box">
-                <h2 class="info-title">Game Features</h2>
-                <ul>
-                    <li class="list-item">Classic Tetris gaming experience</li>
-                    <li class="list-item">Seven different block shapes, each presenting unique arrangement challenges</li>
-                    <li class="list-item">Increasing game difficulty with level progression</li>
-                    <li class="list-item">Score system and achievement tracking</li>
-                    <li class="list-item">Simple to learn but difficult to master gameplay mechanics</li>
-                    <li class="list-item">Classic game music and sound effects</li>
-                </ul>
-            </div>
-            
-            <div class="info-box">
-                <h2 class="info-title">Tips & Strategies</h2>
-                <ul>
-                    <li class="list-item">Try to keep the playing field as flat as possible, avoiding "peaks" and "valleys"</li>
-                    <li class="list-item">Reserve space for the I-shaped block (long bar), as it's key for clearing multiple rows</li>
-                    <li class="list-item">Learn the rotation properties of each block to quickly determine optimal placement</li>
-                    <li class="list-item">Use the "hard drop" (space bar) function to place blocks faster, but ensure correct positioning</li>
-                    <li class="list-item">Plan multiple steps ahead, not just the currently falling block</li>
-                    <li class="list-item">At faster game speeds, prioritize stability over scoring</li>
-                    <li class="list-item">Practice advanced techniques like "T-spin" for advantages in high-level play</li>
-                </ul>
-            </div>
-        </div>
-        
-        <a href="../index.html" class="back-button">Back to Home</a>
-    </div>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/policy">Usage Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="/contact">Contact Us</a>
-            </div>
-        </div>
-    </footer>
 
-    <!-- 聊天框组件 -->
-    <script src="../js/chat-component.js"></script>
+  </head>
+  <body>
+    <table border="0" class="mainTable">
+      <tr>
+	<td class="menuCell">
+	  <div class="menu">
+	    <img class="menuLogo" src="media/background/logo.png"></img>
+	    <br/><br/>
+
+	    <a href="index.html" class="bareLink">
+	      <div class="menuItem selectedMenuItem">Play TwitchTetris</div>
+	    </a>
+	    <br/>
+	    <a href="controls.html" class="bareLink">
+	      <div class="menuItem">Controls Options</div>
+	    </a>
+	    <br/>
+	    <a href="highScores.html" class="bareLink">
+	      <div class="menuItem">High Scores</div>
+	    </a>
+	    <br/>
+	    <a href="about.html" class="bareLink">
+	      <div class="menuItem">About TwitchTetris</div>
+	    </a>
+	    <br/>
+	    <a href="http://www.leighpauls.com" class="bareLink">
+	      <div class="menuItem">About the Developer</div>
+	    </a>
+	    <br/>
+
+	    <div class="instructions">
+	      <b> &gt TwitchTetris --help </b>
+	      <p>Use the keyboard controls to rotate and move the blocks as they fall</p>
+	      <p>Place the blocks to form horizontal lines, which will be removed and make all the blocks above fall down. If the blocks reach the top of the screen, the game is over!</p>
+	      <p>Clear multiple lines at a time, or clear lines in consective moves to earn more points.</p>
+	    </div>
+
+	  </div>
+	</td>
+	<td class="contentCell">
+	  <div class="gamePanel">
+	
+	    <div class="gameElements">
+	      <div class="ttyOutput scoreOutput" id="scoreDiv"></div>
+	      <div class="ttyOutput linesOutput" id="linesDiv"></div>
+	      <div class="ttyOutput levelOutput" id="levelDiv"></div>
+	      <div class="ttyOutput tickerOutput" id="tickerDiv"></div>
+	      
+	      <div class="gameEndOutputHidden" id="gameEndContainer">
+		<div style="padding:5px;" id="gameEndDiv"></div>
+	      </div>
+	      
+	      <canvas class="gameCanvas" id="gameCanvas" width="600" height="500" onclick="onClickEvent(event)" class="gameCanvas">Your browser does not natively support Html5, or the Canvas Tag. Using this browser is slowing the progress of the web. Please get a modern browser, such as Google Chrome or Mozzila FireFox</canvas>
+	    </div>
+	    <div class="controlsTitle">
+	      <br/>
+	      <b>Controls:</b><br/>
+	      <table border="1" cellpadding="3" class="controlsTable">
+		<tr class="controlsTableHeader">
+		  <td width="80">Move Block</td>
+		  <td width="80">Soft Drop</td>
+		  <td width="80">Rotate</td>
+		  <td width="80">Save Piece</td>
+		  <td width="80">Hard Drop</td>
+		  <td width="80">Pause</td>
+		</tr>
+
+		<tr>
+		  <td><span id="shiftLeft">Left</span>, <span id="shiftRight">Right</span></td>
+		  <td><span id="softDrop">Down</span></td>
+		  <td><span id="rotateLeft">Z</span>, <span id="rotateRight">X, Up</span></td>
+		  <td><span id="swap">C, Shift</span></td>
+		  <td><span id="hardDrop">Space</span></td>
+		  <td>Esc</td>
+		</tr>
+
+	      </table>
+	    </div>
+	    <br/>
+	    <a href="controls.html" class="bareLink">
+	      <div class="menuItem">Controls Options</div>
+	    </a>
+
+	  </div>
+	</td>
+      </tr>
+    </table>
     
-    <!-- 排行榜组件 -->
-    <script src="../js/leaderboard.js"></script>
-</body>
-</html> 
+  </body>
+</html>
