@@ -309,17 +309,17 @@
 <body>
     <div class="container">
         <header class="header">
-            <a href="/" class="text-blue-800 text-xl font-bold">frameplay.net</a>
+            <a href="." class="text-blue-800 text-xl font-bold">frameplay.net</a>
             <div class="nav-dropdown">
                 <span class="nav-button">Game Navigation</span>
                 <div class="nav-content">
-                    <a href="/games/2048.html">2048</a>
-                    <a href="/games/adarkroom.html">A Dark Room</a>
-                    <a href="/games/chess.html">Chess</a>
-                    <a href="/games/connect3.html">Connect 3</a>
-                    <a href="/games/pacman.html">Pacman</a>
-                    <a href="/games/snake.html">Snake</a>
-                    <a href="/games/tetris.html">Tetris</a>
+                    <a href="games/2048.html">2048</a>
+                    <a href="games/adarkroom.html">A Dark Room</a>
+                    <a href="games/chess.html">Chess</a>
+                    <a href="games/connect3.html">Connect 3</a>
+                    <a href="games/pacman.html">Pacman</a>
+                    <a href="games/snake.html">Snake</a>
+                    <a href="games/tetris.html">Tetris</a>
                 </div>
             </div>
         </header>
@@ -344,25 +344,29 @@
                         <div class="game-content">
                             <h3 class="game-title">Chess</h3>
                             <p class="game-description">The classic strategy board game. Challenge your mind and outsmart your opponent in this timeless battle of wits.</p>
-                            <a href="/games/chess.html" class="play-button">Play Now</a>
+                            <a href="games/chess.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                     
                     <div class="game-card">
-                        <img src="images/经典H5小游戏 Pacman游戏、Connect 3的示意.jpeg" alt="Pacman Game" class="game-image">
+                        <div class="game-image-container">
+                            <img src="images/pacman-demo.jpeg" alt="Pacman Game" class="game-image">
+                        </div>
                         <div class="game-content">
                             <h3 class="game-title">Pacman</h3>
-                            <p class="game-description">Navigate through a maze while collecting dots and avoiding ghosts in this iconic arcade classic from the 1980s.</p>
-                            <a href="/games/pacman.html" class="play-button">Play Now</a>
+                            <p class="game-description">Navigate through a maze while collecting dots and avoiding ghosts in this iconic arcade classic.</p>
+                            <a href="games/pacman.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                     
                     <div class="game-card">
-                        <img src="images/经典H5小游戏 Pacman游戏、Connect 3的示意 (1).jpeg" alt="Connect3 Game" class="game-image">
+                        <div class="game-image-container">
+                            <img src="images/connect3-demo.jpeg" alt="Connect3 Game" class="game-image">
+                        </div>
                         <div class="game-content">
                             <h3 class="game-title">Connect 3</h3>
-                            <p class="game-description">Match three or more identical tiles to clear them from the board in this addictive puzzle game.</p>
-                            <a href="/games/connect3.html" class="play-button">Play Now</a>
+                            <p class="game-description">Match colorful gems in rows of three or more to score points in this addictive puzzle game.</p>
+                            <a href="games/connect3.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                 </div>
@@ -371,12 +375,15 @@
         
         <footer class="footer">
             <div class="footer-links">
-                <a href="/privacy">Privacy</a>
-                <a href="/policy">Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="/contact">Contact Us</a>
+                <a href="pages/privacy.html">Privacy</a>
+                <a href="pages/policy.html">Policy</a>
+                <a href="pages/terms.html">Terms of Service</a>
+                <a href="pages/contact.html">Contact Us</a>
             </div>
         </footer>
     </div>
+
+    <!-- 聊天框组件 -->
+    <script src="js/chat-component.js"></script>
 </body>
 </html> 
