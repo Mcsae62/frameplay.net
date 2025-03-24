@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play 8 Ball Billiards Classic online for free at FramePlay.net. Experience realistic physics and smooth gameplay in this classic pool game.">
-    <title>8 Ball Billiards Classic - FramePlay.net</title>
+    <meta name="description" content="Play 8 Ball Billiards online for free! Experience realistic pool physics and challenge friends or computer opponents in this classic billiards game.">
+    <title>8 Ball Billiards - Free Online Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         /* Base colors and styles */
         body {
@@ -21,45 +22,231 @@
             padding: 0 15px;
         }
         
+        /* Header styles */
         header {
+            background-color: #4FC3F7;
             padding: 15px 0;
-            background-color: #B3E5FC;
-            border-bottom: 2px solid #81D4FA;
         }
         
-        .nav-primary {
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
+            color: white;
             font-size: 24px;
             font-weight: bold;
-            color: #0277BD;
             text-decoration: none;
         }
         
-        .nav-secondary {
+        /* Search bar */
+        .search-container {
             display: flex;
-            justify-content: center;
-            padding: 10px 0;
+            margin: 0 auto;  /* 修改为auto实现居中 */
+            flex: 1;        /* 添加flex:1使其占据剩余空间 */
+            max-width: 500px;  /* 增加最大宽度 */
+        }
+        
+        .search-input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            width: 100%;    /* 修改为100%填充容器 */
+        }
+        
+        .search-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        /* Language dropdown */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 5px;  /* 减小右边距 */
+        }
+        
+        .language-content {
+            display: none;
+            position: absolute;
+            right: 0;
             background-color: white;
-            border-radius: 8px;
-            margin: 10px 0;
-        }
-        
-        .nav-secondary a {
-            margin: 0 15px;
-            color: #0288D1;
-            text-decoration: none;
-            padding: 5px 10px;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
             border-radius: 4px;
-            transition: background-color 0.3s;
         }
         
-        .nav-secondary a:hover {
-            background-color: #E1F5FE;
+        .language-dropdown:hover .language-content {
+            display: block;
+        }
+        
+        .language-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .language-content a:hover {
+            background-color: #B3E5FC;
+        }
+        
+        /* Game navigation dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .dropdown-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #B3E5FC;
+        }
+        
+        .dropdown-content a.active {
+            background-color: #E0F7FA;
+            color: #FF6F00;
+            font-weight: bold;
+        }
+        
+        /* Game navigation dropdown */
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+        
+        .dropdown-arrow {
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            margin-top: -4px;
+        }
+        
+        /* Game navigation dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-button {
+            background-color: #4CAF50; /* 绿色按钮 */
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #B3E5FC;
+        }
+        
+        .dropdown-content a.active {
+            background-color: #E0F7FA;
+            color: #FF6F00;
+            font-weight: bold;
+        }
+        
+        /* Back button */
+        .back-button {
+            background-color: #0277BD;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 20px 0;
+            max-width: 1200px;
+            margin-left: calc((100% - 1200px) / 2);
+        }
+        
+        .back-button:hover {
+            background-color: #01579B;
+        }
+        
+        /* Game title */
+        .game-title {
+            color: #FF6F00; /* 经典暖色标题 */
+            text-align: center;
+            margin: 30px 0;
+            font-size: 32px;
         }
         
         /* Game container */
@@ -73,129 +260,92 @@
             overflow: hidden;
         }
         
-        /* Game information */
-        .game-header {
-            text-align: center;
-            margin: 20px 0;
+        .game-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
         
-        .game-header h1 {
-            color: #0277BD;
-            margin-bottom: 10px;
-        }
-        
-        .game-description {
-            color: #01579B;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        /* Game details */
-        .game-details {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        /* Game information sections */
+        .info-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
             margin: 30px auto;
-            max-width: 900px;
+            max-width: 1200px;  /* 修改为与container相同的宽度 */
+            padding: 0 15px;
         }
         
         .info-box {
             background-color: white;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 15px;
-            margin-bottom: 20px;
-            flex-basis: calc(50% - 20px);
+            max-width: 580px;  /* 增加最大宽度 */
         }
         
         .info-title {
-            color: #0277BD;
-            margin-top: 0;
-            border-bottom: 1px solid #E1F5FE;
-            padding-bottom: 10px;
+            color: #FF6F00; /* 经典暖色标题 */
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #4FC3F7;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
         }
         
         .list-item {
             margin-bottom: 8px;
         }
         
-        /* Back button */
-        .back-button {
-            display: inline-block;
-            background-color: #0288D1;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 20px 0;
-            transition: background-color 0.3s;
-        }
-        
-        .back-button:hover {
-            background-color: #0277BD;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #B3E5FC;
-            padding: 20px 0;
-            margin-top: 30px;
-        }
-        
-        .footer-links {
-            text-align: center;
-        }
-        
-        .footer-links a {
-            margin: 0 10px;
-            color: #01579B;
-            text-decoration: none;
-        }
-        
-        /* Responsive adjustments */
+        /* Responsive design */
         @media (max-width: 768px) {
-            .game-container {
-                height: 600px;
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-container {
+                margin: 15px 0;
                 width: 100%;
-                max-width: 500px;
             }
             
-            .game-container iframe {
-                transform: scale(0.7) !important;
-                transform-origin: center center !important;
-                width: 140% !important;
-                height: 140% !important;
-                margin-left: -20% !important;
-                margin-top: -20px !important;
+            .search-input {
+                width: 100%;
             }
             
-            .nav-secondary {
-                flex-wrap: wrap;
-                justify-content: center;
+            .info-container {
+                grid-template-columns: 1fr;
             }
             
-            .nav-secondary a {
-                margin: 5px;
-                font-size: 14px;
+            .game-container {
+                height: 550px;
             }
             
-            .game-header h1 {
-                font-size: 24px;
-            }
-            
-            .info-box {
-                flex-basis: 100%;
-            }
-        }
-        
-        /* 适配超小屏幕 */
-        @media (max-width: 480px) {
-            .game-container iframe {
-                transform: scale(0.6) !important;
-                width: 160% !important;
-                height: 160% !important;
-                margin-left: -30% !important;
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -212,95 +362,102 @@
 <body>
     <header>
         <div class="container">
-            <div class="nav-primary">
-                <a href="../index.html" class="logo">FramePlay.net</a>
+            <div class="header-content">
+                <a href="../index.html" class="logo">frameplay.net</a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search games...">
+                    <button class="search-button">Search</button>
+                </div>
+                
+                <div class="language-dropdown">
+                    <button class="dropdown-button">Language</button>
+                    <div class="language-content">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="it">Italiano</a>
+                        <a href="#" data-lang="de">Deutsch</a>
+                        <a href="#" data-lang="es">Español</a>
+                        <a href="#" data-lang="ru">Русский</a>
+                        <a href="#" data-lang="zh">繁體中文</a>
+                        <a href="#" data-lang="fr">Français</a>
+                        <a href="#" data-lang="ja">日本語</a>
+                        <a href="#" data-lang="ko">한국어</a>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <button class="dropdown-button">Game Navigation</button>
+                    <div class="dropdown-content">
+                        <a href="/pages/casual.html">Casual Games</a>
+                        <a href="/pages/brain.html">Brain Games</a>
+                        <a href="/pages/fast-paced.html">Fast-Paced Games</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
     
-    <div class="container">
-        <nav class="nav-secondary">
-            <a href="2048.html">2048</a>
-            <a href="adarkroom.html">A Dark Room</a>
-            <a href="chess.html">Chess</a>
-            <a href="connect3.html">Connect 3</a>
-            <a href="pacman.html">Pacman</a>
-            <a href="snake.html">Snake</a>
-            <a href="tetris.html">Tetris</a>
-            <a href="train-miner.html">Train Miner</a>
-            <a href="8-ball-billiards.html">8 Ball Billiards</a>
-            <a href="western-sniper.html">Western Sniper</a>
-        </nav>
-        
-        <div class="game-header">
-            <h1>8 Ball Billiards Classic</h1>
-            <p class="game-description">Experience realistic physics and smooth gameplay in this classic pool game. Play against the computer or challenge your friends!</p>
-        </div>
-        
-        <div class="game-container">
-            <iframe src="https://play.famobi.com/8-ball-billiards-classic" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen style="transform: scale(0.8); transform-origin: center center; width: 120%; height: 120%; margin-left: -10%;"></iframe>
-        </div>
-        
-        <div class="game-details">
-            <div class="info-box">
-                <h2 class="info-title">How to Play</h2>
-                <ul>
-                    <li class="list-item">Aim using your mouse or touch</li>
-                    <li class="list-item">Adjust power by dragging back further</li>
-                    <li class="list-item">Try to pocket all of your assigned balls (solid or striped)</li>
-                    <li class="list-item">Pocket the 8-ball last to win the game</li>
-                    <li class="list-item">Be careful not to pot the 8-ball early or you lose</li>
-                    <li class="list-item">Avoid scratching (pocketing the cue ball)</li>
-                </ul>
-            </div>
-            
-            <div class="info-box">
-                <h2 class="info-title">Game Features</h2>
-                <ul>
-                    <li class="list-item">Realistic physics simulation</li>
-                    <li class="list-item">Smooth and precise ball control</li>
-                    <li class="list-item">Single player against AI opponent</li>
-                    <li class="list-item">Beautiful table graphics and effects</li>
-                    <li class="list-item">Official 8-ball pool rules</li>
-                    <li class="list-item">Intuitive aiming and power system</li>
-                </ul>
-            </div>
-            
-            <div class="info-box">
-                <h2 class="info-title">Tips & Strategies</h2>
-                <ul>
-                    <li class="list-item">Plan your shots ahead - think about positioning for your next shot</li>
-                    <li class="list-item">Use gentle power for better control</li>
-                    <li class="list-item">Try to leave the cue ball in a good position after each shot</li>
-                    <li class="list-item">Sometimes it's better to play defensively than to attempt a difficult shot</li>
-                    <li class="list-item">Learn to use spin (english) to control where the cue ball goes</li>
-                    <li class="list-item">Pay attention to blocking your opponent's shots</li>
-                </ul>
-            </div>
-            
-            <div class="info-box">
-                <h2 class="info-title">About the Game</h2>
-                <ul>
-                    <li class="list-item">8 Ball Billiards Classic is a realistic pool simulation game</li>
-                    <li class="list-item">Based on the official rules of 8-ball pool</li>
-                    <li class="list-item">Perfect for both casual players and billiards enthusiasts</li>
-                    <li class="list-item">Runs smoothly on all devices</li>
-                    <li class="list-item">No download required - play instantly in your browser</li>
-                    <li class="list-item">Test your skills against challenging AI opponents</li>
-                </ul>
-            </div>
-        </div>
-        
-        <a href="../index.html" class="back-button">Back to Home</a>
+    <h1 class="game-title">8 Ball Billiards</h1>
+    
+    <div class="game-container">
+        <iframe src="https://play.famobi.com/8-ball-billiards-classic" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen></iframe>
     </div>
+    
+    <div class="info-container">
+        <div class="info-box">
+            <h2 class="info-title">Game Description</h2>
+            <p>Experience the ultimate billiards simulation with 8 Ball Billiards! This highly realistic pool game brings the excitement of the pool hall right to your screen, featuring incredibly accurate ball physics and authentic gameplay mechanics. Challenge the computer AI across 5 different difficulty levels, or enjoy a friendly match against another player on the same device. Master the art of angles and ball spin as you aim to pocket your assigned balls - either stripes or solids - before taking on the crucial 8 ball shot. With realistic physics that accurately simulate ball movement, spin effects, and rebounds, every shot delivers the satisfying feel of real billiards. Whether you're a casual player or a pool shark, the game's intuitive controls and optional guidance system make it accessible while maintaining the depth that billiards enthusiasts love.</p>
+        </div>
+        
+        <div class="info-box">
+            <h2 class="info-title">How to Play</h2>
+            <ul>
+                <li class="list-item">Aim your shot using the cue stick</li>
+                <li class="list-item">Choose between stripes or solid-colored balls</li>
+                <li class="list-item">Pocket all your assigned balls before the 8 ball</li>
+                <li class="list-item">Use spin and angles strategically</li>
+                <li class="list-item">Toggle reference lines for shot assistance</li>
+                <li class="list-item">Avoid pocketing the 8 ball too early</li>
+                <li class="list-item">Win by legally pocketing the 8 ball last</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h2 class="info-title">Game Features</h2>
+            <ul>
+                <li class="list-item">Realistic billiards physics engine</li>
+                <li class="list-item">Single-player vs AI with 5 difficulty levels</li>
+                <li class="list-item">Two-player mode on the same device</li>
+                <li class="list-item">Optional shot guidance system</li>
+                <li class="list-item">Authentic ball spin mechanics</li>
+                <li class="list-item">Easy-to-use controls</li>
+                <li class="list-item">Classic 8 ball pool rules</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h2 class="info-title">Tips & Strategies</h2>
+            <ul>
+                <li class="list-item">Plan your shots several moves ahead</li>
+                <li class="list-item">Master the use of spin for better control</li>
+                <li class="list-item">Consider position play for your next shot</li>
+                <li class="list-item">Use the reference lines while learning</li>
+                <li class="list-item">Practice without guidance for real skill development</li>
+                <li class="list-item">Study angles for better shot selection</li>
+                <li class="list-item">Keep the cue ball under control</li>
+            </ul>
+        </div>
+    </div>
+    
+    <a href="../index.html" class="back-button">Back to Home</a>
     
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="../pages/privacy.html">Privacy Policy</a>
-                <a href="../pages/policy.html">Usage Policy</a>
-                <a href="../pages/terms.html">Terms of Service</a>
-                <a href="../pages/contact.html">Contact Us</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/policy">Usage Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact Us</a>
             </div>
         </div>
     </footer>

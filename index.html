@@ -34,6 +34,52 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 74px;
+        }
+        
+        .nav-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .nav-button-common {
+            background-color: #0277BD;
+            color: white;
+            padding: 0.75rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 42px;
+            line-height: 1;
+        }
+        
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-button {
+            composes: nav-button-common;
+        }
+        
+        .language-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
         }
         
         .nav-dropdown {
@@ -42,43 +88,51 @@
         }
         
         .nav-button {
-            background-color: #0277BD;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
+            composes: nav-button-common;
         }
         
         .nav-content {
             display: none;
             position: absolute;
-            right: 0;
+            left: 0;
+            top: 100%;
             background-color: white;
             min-width: 180px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             z-index: 1000;
             padding: 0.5rem 0;
+            margin-top: 0.5rem;
         }
         
+        .dropdown-item {
+            display: block;
+            color: #0277BD;
+            padding: 0.75rem 1.2rem;
+            text-decoration: none;
+            text-align: left;
+            transition: background-color 0.2s;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #E0F7FA;
+            color: #FF6F00;
+        }
+        
+        .language-dropdown:hover .language-content,
         .nav-dropdown:hover .nav-content {
             display: block;
         }
         
-        .nav-content a {
-            display: block;
-            color: #0277BD;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            text-align: left;
-            transition: background-color 0.2s;
-        }
-        
-        .nav-content a:hover {
-            background-color: #E0F7FA;
-            color: #FF6F00;
+        .dropdown-arrow {
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            margin-top: -4px;
         }
         
         .main-title {
@@ -310,17 +364,35 @@
 <body>
     <div class="container">
         <header class="header">
-            <a href="." class="text-blue-800 text-xl font-bold">frameplay.net</a>
-            <div class="nav-dropdown">
-                <span class="nav-button">Game Navigation</span>
-                <div class="nav-content">
-                    <a href="games/2048.html">2048</a>
-                    <a href="games/adarkroom.html">A Dark Room</a>
-                    <a href="games/chess.html">Chess</a>
-                    <a href="games/connect3.html">Connect 3</a>
-                    <a href="games/pacman.html">Pacman</a>
-                    <a href="games/snake.html">Snake</a>
-                    <a href="games/tetris.html">Tetris</a>
+            <a href="." class="nav-button-common">frameplay.net</a>
+            <div class="nav-container">
+                <div class="language-dropdown">
+                    <button class="nav-button-common">
+                        Language
+                        <span class="dropdown-arrow"></span>
+                    </button>
+                    <div class="language-content">
+                        <a href="#" class="dropdown-item" data-lang="en">English</a>
+                        <a href="#" class="dropdown-item" data-lang="it">Italiano</a>
+                        <a href="#" class="dropdown-item" data-lang="de">Deutsch</a>
+                        <a href="#" class="dropdown-item" data-lang="es">Español</a>
+                        <a href="#" class="dropdown-item" data-lang="ru">Русский</a>
+                        <a href="#" class="dropdown-item" data-lang="zh">繁體中文</a>
+                        <a href="#" class="dropdown-item" data-lang="fr">Français</a>
+                        <a href="#" class="dropdown-item" data-lang="ja">日本語</a>
+                        <a href="#" class="dropdown-item" data-lang="ko">한국어</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-button-common">
+                        Game Navigation
+                        <span class="dropdown-arrow"></span>
+                    </button>
+                    <div class="nav-content">
+                        <a href="/pages/casual.html" class="dropdown-item">Casual Games</a>
+                        <a href="/pages/brain.html" class="dropdown-item">Brain Games</a>
+                        <a href="/pages/fast-paced.html" class="dropdown-item">Fast-Paced Games</a>
+                    </div>
                 </div>
             </div>
         </header>
@@ -336,42 +408,120 @@
                 </form>
             </div>
             
-            <div class="recently-added">
-                <h2 class="section-title">Newly Added Recently</h2>
-                
+            <section class="recently-added">
+                <h2 class="section-title">BEST</h2>
                 <div class="games-grid">
+                    <!-- Om Nom Run -->
                     <div class="game-card">
-                        <img src="https://images.unsplash.com/photo-1586165368502-1bad197a6461?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chess Game" class="game-image">
+                        <img src="/images/games/om-nom-run.jpg" alt="Om Nom Run" class="game-image">
                         <div class="game-content">
-                            <h3 class="game-title">Chess</h3>
-                            <p class="game-description">The classic strategy board game. Challenge your mind and outsmart your opponent in this timeless battle of wits.</p>
-                            <a href="games/chess.html" class="play-button">Play Now</a>
+                            <h2 class="game-title">Om Nom Run</h2>
+                            <p class="game-description">Join Om Nom in this exciting endless runner! Dodge obstacles, collect candies, and see how far you can run.</p>
+                            <a href="/games/om-nom-run.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                     
+                    <!-- Onet Connect Classic -->
                     <div class="game-card">
-                        <div class="game-image-container">
-                            <img src="images/pacman-demo.jpeg" alt="Pacman Game" class="game-image">
-                        </div>
+                        <img src="/images/games/onet-connect.jpg" alt="Onet Connect Classic" class="game-image">
                         <div class="game-content">
-                            <h3 class="game-title">Pacman</h3>
-                            <p class="game-description">Navigate through a maze while collecting dots and avoiding ghosts in this iconic arcade classic.</p>
-                            <a href="games/pacman.html" class="play-button">Play Now</a>
+                            <h2 class="game-title">Onet Connect Classic</h2>
+                            <p class="game-description">Connect matching tiles in this cute Mahjong alternative. Clear the board by finding pairs.</p>
+                            <a href="/games/onet-connect.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                     
+                    <!-- Zoo Boom -->
                     <div class="game-card">
-                        <div class="game-image-container">
-                            <img src="images/connect3-demo.jpeg" alt="Connect3 Game" class="game-image">
-                        </div>
+                        <img src="/images/games/zoo-boom.jpg" alt="Zoo Boom" class="game-image">
                         <div class="game-content">
-                            <h3 class="game-title">Connect 3</h3>
-                            <p class="game-description">Match colorful gems in rows of three or more to score points in this addictive puzzle game.</p>
-                            <a href="games/connect3.html" class="play-button">Play Now</a>
+                            <h2 class="game-title">Zoo Boom</h2>
+                            <p class="game-description">Match cute animal cubes and complete tasks in this adorable puzzle adventure with over 1250 levels!</p>
+                            <a href="/games/zoo-boom.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Totemia Cursed Marbels -->
+                    <div class="game-card">
+                        <img src="/images/games/totemia.jpg" alt="Totemia Cursed Marbels" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">Totemia Cursed Marbels</h2>
+                            <p class="game-description">Race against time in this exciting marble shooter with power-ups and special abilities.</p>
+                            <a href="/games/totemia.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Bubble Tower 3D -->
+                    <div class="game-card">
+                        <img src="/images/games/bubble-tower.jpg" alt="Bubble Tower 3D" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">Bubble Tower 3D</h2>
+                            <p class="game-description">Experience classic bubble shooting in a new dimension with amazing aztec setting!</p>
+                            <a href="/games/bubble-tower.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Solitaire Klondike -->
+                    <div class="game-card">
+                        <img src="/images/games/solitaire.jpg" alt="Solitaire Klondike" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">Solitaire Klondike</h2>
+                            <p class="game-description">The classic patience game reimagined for HTML5. Sort cards and build foundations in this timeless favorite.</p>
+                            <a href="/games/solitaire.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+
+                    <!-- 3D Free Kick -->
+                    <div class="game-card">
+                        <img src="/images/games/free-kick.jpg" alt="3D Free Kick" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">3D Free Kick</h2>
+                            <p class="game-description">Take amazing free kicks in this realistic 3D soccer game. Curve the ball and score spectacular goals!</p>
+                            <a href="/games/free-kick.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Table Tennis World Tour -->
+                    <div class="game-card">
+                        <img src="/images/games/table-tennis.jpg" alt="Table Tennis World Tour" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">Table Tennis World Tour</h2>
+                            <p class="game-description">Compete in intense table tennis matches against players from around the world.</p>
+                            <a href="/games/table-tennis.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Pirate Cards -->
+                    <div class="game-card">
+                        <img src="/images/games/pirate-cards.jpg" alt="Pirate Cards" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">Pirate Cards</h2>
+                            <p class="game-description">Set sail for adventure in this pirate-themed card game. Collect treasures and battle other pirates!</p>
+                            <a href="/games/pirate-cards.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Reversi -->
+                    <div class="game-card">
+                        <img src="/images/games/reversi.jpg" alt="Reversi" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">Reversi</h2>
+                            <p class="game-description">Classic board game of strategy and tactics. Outthink your opponent and dominate the board.</p>
+                            <a href="/games/reversi.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+
+                    <!-- TNT Bomb -->
+                    <div class="game-card">
+                        <img src="/images/games/tnt-bomb.jpg" alt="TNT Bomb" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">TNT Bomb</h2>
+                            <p class="game-description">Explosions, explosions and even more explosions! Destroy buildings and structures with mighty power-ups.</p>
+                            <a href="/games/tnt-bomb.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
         
         <footer class="footer">
@@ -386,5 +536,34 @@
 
     <!-- 聊天框组件 -->
     <script src="js/chat-component.js"></script>
+    <script>
+        // 添加语言切换功能
+        document.querySelectorAll('.language-content a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                // 保存语言选择
+                localStorage.setItem('preferred_language', lang);
+                // 切换网站语言
+                changeLanguage(lang);
+            });
+        });
+
+        // 语言切换函数
+        function changeLanguage(lang) {
+            // 这里将添加实际的语言切换逻辑
+            console.log('Changing language to: ' + lang);
+            // TODO: 实现实际的语言切换功能
+        }
+
+        // 游戏分类导航
+        document.querySelectorAll('.category-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const category = this.textContent;
+                window.location.href = `/pages/${category.toLowerCase()}.html`;
+            });
+        });
+    </script>
 </body>
 </html> 

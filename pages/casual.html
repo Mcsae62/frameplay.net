@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casual Games - FramePlay.net</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* 复用主页的样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E0F7FA;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 74px;
+        }
+        
+        .nav-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .nav-button-common {
+            background-color: #0277BD;
+            color: white;
+            padding: 0.75rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 42px;
+            line-height: 1;
+        }
+        
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+        
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+        
+        .dropdown-item {
+            display: block;
+            color: #0277BD;
+            padding: 0.75rem 1.2rem;
+            text-decoration: none;
+            text-align: left;
+            transition: background-color 0.2s;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #E0F7FA;
+            color: #FF6F00;
+        }
+        
+        .language-dropdown:hover .language-content,
+        .nav-dropdown:hover .nav-content {
+            display: block;
+        }
+        
+        .dropdown-arrow {
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            margin-top: -4px;
+        }
+        
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: #FF6F00;
+            margin: 2rem 0;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .game-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        .game-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 210px;
+        }
+        
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #FF6F00;
+        }
+        
+        .game-description {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .play-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        
+        .play-button:hover {
+            background-color: #388E3C;
+        }
+        
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid #B2EBF2;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .footer a {
+            color: #0277BD;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+            color: #FF6F00;
+        }
+        
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="nav-button-common">frameplay.net</a>
+            <div class="nav-container">
+                <div class="language-dropdown">
+                    <button class="nav-button-common">
+                        Language
+                        <span class="dropdown-arrow"></span>
+                    </button>
+                    <div class="language-content">
+                        <a href="#" class="dropdown-item" data-lang="en">English</a>
+                        <a href="#" class="dropdown-item" data-lang="it">Italiano</a>
+                        <a href="#" class="dropdown-item" data-lang="de">Deutsch</a>
+                        <a href="#" class="dropdown-item" data-lang="es">Español</a>
+                        <a href="#" class="dropdown-item" data-lang="ru">Русский</a>
+                        <a href="#" class="dropdown-item" data-lang="zh">繁體中文</a>
+                        <a href="#" class="dropdown-item" data-lang="fr">Français</a>
+                        <a href="#" class="dropdown-item" data-lang="ja">日本語</a>
+                        <a href="#" class="dropdown-item" data-lang="ko">한국어</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-button-common">
+                        Game Navigation
+                        <span class="dropdown-arrow"></span>
+                    </button>
+                    <div class="nav-content">
+                        <a href="/pages/casual.html" class="dropdown-item">Casual Games</a>
+                        <a href="/pages/brain.html" class="dropdown-item">Brain Games</a>
+                        <a href="/pages/fast-paced.html" class="dropdown-item">Fast-Paced Games</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h1 class="category-title">Casual Games</h1>
+            <div class="games-grid">
+                <!-- TNT Bomb -->
+                <div class="game-card">
+                    <img src="/images/games/tnt-bomb.jpg" alt="TNT Bomb" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">TNT Bomb</h2>
+                        <p class="game-description">Exciting puzzle game where you need to strategically place and detonate TNT to clear obstacles.</p>
+                        <a href="/games/tnt-bomb.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Onet Connect Classic -->
+                <div class="game-card">
+                    <img src="/images/games/onet-connect.jpg" alt="Onet Connect Classic" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Onet Connect Classic</h2>
+                        <p class="game-description">The cute mahjong alternative - match and connect pairs of tiles to clear the board.</p>
+                        <a href="/games/onet-connect.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Fruit Party -->
+                <div class="game-card">
+                    <img src="/images/games/fruit-party.jpg" alt="Fruit Party" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Fruit Party</h2>
+                        <p class="game-description">Match and combine colorful fruits in this delightful puzzle game.</p>
+                        <a href="/games/fruit-party.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Zoo Boom -->
+                <div class="game-card">
+                    <img src="/images/games/zoo-boom.jpg" alt="Zoo Boom" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Zoo Boom</h2>
+                        <p class="game-description">Match and clear zoo animals in this exciting puzzle adventure.</p>
+                        <a href="/games/zoo-boom.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Bubble Woods -->
+                <div class="game-card">
+                    <img src="/images/games/bubble-woods.jpg" alt="Bubble Woods" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Bubble Woods</h2>
+                        <p class="game-description">Pop bubbles in this forest-themed puzzle game.</p>
+                        <a href="/games/bubble-woods.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Garden Bloom -->
+                <div class="game-card">
+                    <img src="/images/games/garden-bloom.jpg" alt="Garden Bloom" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Garden Bloom</h2>
+                        <p class="game-description">Create a beautiful garden by matching and growing flowers.</p>
+                        <a href="/games/garden-bloom.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Diamond Rush 2 -->
+                <div class="game-card">
+                    <img src="/images/games/diamond-rush-2.jpg" alt="Diamond Rush 2" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Diamond Rush 2</h2>
+                        <p class="game-description">Collect diamonds and solve puzzles in this exciting sequel.</p>
+                        <a href="/games/diamond-rush-2.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Candy Bubble -->
+                <div class="game-card">
+                    <img src="/images/games/candy-bubble.jpg" alt="Candy Bubble" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Candy Bubble</h2>
+                        <p class="game-description">Match and pop colorful candy bubbles in this sweet puzzle game.</p>
+                        <a href="/games/candy-bubble.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Kitchen Mahjong Classic -->
+                <div class="game-card">
+                    <img src="/images/games/kitchen-mahjong.jpg" alt="Kitchen Mahjong Classic" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Kitchen Mahjong Classic</h2>
+                        <p class="game-description">Match kitchen-themed tiles in this unique mahjong variant.</p>
+                        <a href="/games/kitchen-mahjong.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Bubble Tower 3D -->
+                <div class="game-card">
+                    <img src="/images/games/bubble-tower-3d.jpg" alt="Bubble Tower 3D" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Bubble Tower 3D</h2>
+                        <p class="game-description">Pop bubbles in this exciting 3D tower puzzle game.</p>
+                        <a href="/games/bubble-tower-3d.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Cannon Balls 3D -->
+                <div class="game-card">
+                    <img src="/images/games/cannon-balls-3d.jpg" alt="Cannon Balls 3D" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Cannon Balls 3D</h2>
+                        <p class="game-description">Launch cannon balls and solve physics-based puzzles.</p>
+                        <a href="/games/cannon-balls-3d.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Pirates Of Islets -->
+                <div class="game-card">
+                    <img src="/images/games/pirates-of-islets.jpg" alt="Pirates Of Islets" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Pirates Of Islets</h2>
+                        <p class="game-description">Join the pirates in this exciting island adventure game.</p>
+                        <a href="/games/pirates-of-islets.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Zoo Pinball -->
+                <div class="game-card">
+                    <img src="/images/games/zoo-pinball.jpg" alt="Zoo Pinball" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Zoo Pinball</h2>
+                        <p class="game-description">Play pinball with zoo animals in this fun arcade game.</p>
+                        <a href="/games/zoo-pinball.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Pets Rush -->
+                <div class="game-card">
+                    <img src="/images/games/pets-rush.jpg" alt="Pets Rush" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Pets Rush</h2>
+                        <p class="game-description">Help adorable pets rush through exciting levels.</p>
+                        <a href="/games/pets-rush.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- 3 Mice -->
+                <div class="game-card">
+                    <img src="/images/games/3-mice.jpg" alt="3 Mice" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">3 Mice</h2>
+                        <p class="game-description">Help three clever mice solve puzzles and collect cheese.</p>
+                        <a href="/games/3-mice.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Gold Miner Tom -->
+                <div class="game-card">
+                    <img src="/images/games/gold-miner-tom.jpg" alt="Gold Miner Tom" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Gold Miner Tom</h2>
+                        <p class="game-description">Dig for gold in this classic mining adventure.</p>
+                        <a href="/games/gold-miner-tom.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Gold Mine -->
+                <div class="game-card">
+                    <img src="/images/games/gold-mine.jpg" alt="Gold Mine" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Gold Mine</h2>
+                        <p class="game-description">The connect game for gold diggers - match and collect gold.</p>
+                        <a href="/games/gold-mine.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Totemia Cursed Marbles -->
+                <div class="game-card">
+                    <img src="/images/games/totemia-cursed-marbles.jpg" alt="Totemia Cursed Marbles" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Totemia Cursed Marbles</h2>
+                        <p class="game-description">Race against time in this cursed marble adventure.</p>
+                        <a href="/games/totemia-cursed-marbles.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Love Tester -->
+                <div class="game-card">
+                    <img src="/images/games/love-tester.jpg" alt="Love Tester" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Love Tester</h2>
+                        <p class="game-description">Test your love compatibility in this fun interactive game.</p>
+                        <a href="/games/love-tester.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Wedding Lily -->
+                <div class="game-card">
+                    <img src="/images/games/wedding-lily.jpg" alt="Wedding Lily" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Wedding Lily</h2>
+                        <p class="game-description">Help Lily prepare for her perfect wedding day.</p>
+                        <a href="/games/wedding-lily.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Pirate Cards -->
+                <div class="game-card">
+                    <img src="/images/games/pirate-cards.jpg" alt="Pirate Cards" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Pirate Cards</h2>
+                        <p class="game-description">Match pirate-themed cards in this exciting card game.</p>
+                        <a href="/games/pirate-cards.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Pizza Realife Cooking -->
+                <div class="game-card">
+                    <img src="/images/games/pizza-realife-cooking.jpg" alt="Pizza Realife Cooking" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Pizza Realife Cooking</h2>
+                        <p class="game-description">Create delicious pizzas in this realistic cooking game.</p>
+                        <a href="/games/pizza-realife-cooking.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Pie Realife Cooking -->
+                <div class="game-card">
+                    <img src="/images/games/pie-realife-cooking.jpg" alt="Pie Realife Cooking" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Pie Realife Cooking</h2>
+                        <p class="game-description">Bake perfect pies in this realistic cooking simulation.</p>
+                        <a href="/games/pie-realife-cooking.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Emily's New Beginning -->
+                <div class="game-card">
+                    <img src="/images/games/emilys-new-beginning.jpg" alt="Emily's New Beginning" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Emily's New Beginning</h2>
+                        <p class="game-description">Help Emily start fresh in this life simulation game.</p>
+                        <a href="/games/emilys-new-beginning.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Train Miner -->
+                <div class="game-card">
+                    <img src="/images/games/train-miner.jpg" alt="Train Miner" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Train Miner</h2>
+                        <p class="game-description">Mine resources and manage your train in this adventure game.</p>
+                        <a href="/games/train-miner.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Wanderlust -->
+                <div class="game-card">
+                    <img src="/images/games/wanderlust.jpg" alt="Wanderlust" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Wanderlust</h2>
+                        <p class="game-description">Explore the world in this exciting adventure game.</p>
+                        <a href="/games/wanderlust.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Hippo Pizza Chef -->
+                <div class="game-card">
+                    <img src="/images/games/hippo-pizza-chef.jpg" alt="Hippo Pizza Chef" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Hippo Pizza Chef</h2>
+                        <p class="game-description">Help the hippo chef create perfect pizzas.</p>
+                        <a href="/games/hippo-pizza-chef.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Pocket RPG -->
+                <div class="game-card">
+                    <img src="/images/games/pocket-rpg.jpg" alt="Pocket RPG" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Pocket RPG</h2>
+                        <p class="game-description">Embark on an epic RPG adventure in your pocket.</p>
+                        <a href="/games/pocket-rpg.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Matching Card Heroes -->
+                <div class="game-card">
+                    <img src="/images/games/matching-card-heroes.jpg" alt="Matching Card Heroes" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Matching Card Heroes</h2>
+                        <p class="game-description">Match cards and collect heroes in this exciting card game.</p>
+                        <a href="/games/matching-card-heroes.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Civilizations Wars Master Edition -->
+                <div class="game-card">
+                    <img src="/images/games/civilizations-wars.jpg" alt="Civilizations Wars Master Edition" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Civilizations Wars Master Edition</h2>
+                        <p class="game-description">Build and expand your civilization in this strategy game.</p>
+                        <a href="/games/civilizations-wars.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Color Pixel Art Classic -->
+                <div class="game-card">
+                    <img src="/images/games/color-pixel-art.jpg" alt="Color Pixel Art Classic" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Color Pixel Art Classic</h2>
+                        <p class="game-description">Create beautiful pixel art by painting by numbers.</p>
+                        <a href="/games/color-pixel-art.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- A Dark Room -->
+                <div class="game-card">
+                    <img src="/images/games/a-dark-room.jpg" alt="A Dark Room" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">A Dark Room</h2>
+                        <p class="game-description">A mysterious text-based adventure game that unfolds in darkness.</p>
+                        <a href="/games/a-dark-room.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Connect3 -->
+                <div class="game-card">
+                    <img src="/images/games/connect3.jpg" alt="Connect3" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Connect3</h2>
+                        <p class="game-description">Match three or more items in this classic puzzle game.</p>
+                        <a href="/games/connect3.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Snake -->
+                <div class="game-card">
+                    <img src="/images/games/snake.jpg" alt="Snake" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">Snake</h2>
+                        <p class="game-description">The classic snake game - grow longer by eating food and avoid hitting yourself.</p>
+                        <a href="/games/snake.html" class="play-button">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/pages/privacy.html">Privacy Policy</a>
+                <a href="/pages/policy.html">Usage Policy</a>
+                <a href="/pages/terms.html">Terms of Service</a>
+                <a href="/pages/contact.html">Contact Us</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 添加语言切换功能
+        document.querySelectorAll('.language-content a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                localStorage.setItem('preferred_language', lang);
+                changeLanguage(lang);
+            });
+        });
+
+        function changeLanguage(lang) {
+            console.log('Changing language to: ' + lang);
+            // TODO: 实现实际的语言切换功能
+        }
+    </script>
+</body>
+</html> 
