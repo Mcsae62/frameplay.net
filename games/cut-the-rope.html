@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Cut The Rope online for free at FramePlay.net. Feed candy to Om Nom by cutting ropes in this physics-based puzzle game.">
+    <title>Cut The Rope - FramePlay.net</title>
+    <style>
+        /* Base colors and styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E8F5E9; /* 淡绿色背景，符合游戏主题 */
+            color: #33691E;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            padding: 15px 0;
+            background-color: #C8E6C9;
+            border-bottom: 2px solid #A5D6A7;
+        }
+        
+        .nav-primary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2E7D32;
+            text-decoration: none;
+        }
+        
+        .nav-secondary {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background-color: white;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .nav-secondary a {
+            margin: 0 15px;
+            color: #43A047;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-secondary a:hover {
+            background-color: #F1F8E9;
+        }
+        
+        /* Game container */
+        .game-container {
+            margin: 20px auto;
+            max-width: 900px;
+            height: 700px;
+            border: 2px solid #A5D6A7;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        /* Game information */
+        .game-header {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .game-header h1 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        .game-description {
+            color: #33691E;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Game details */
+        .game-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px auto;
+            max-width: 900px;
+        }
+        
+        .info-box {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            flex-basis: calc(50% - 20px);
+        }
+        
+        .info-title {
+            color: #2E7D32;
+            margin-top: 0;
+            border-bottom: 1px solid #E8F5E9;
+            padding-bottom: 10px;
+        }
+        
+        .list-item {
+            margin-bottom: 8px;
+        }
+        
+        /* Back button */
+        .back-button {
+            display: inline-block;
+            background-color: #43A047;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #2E7D32;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #C8E6C9;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+        
+        .footer-links {
+            text-align: center;
+        }
+        
+        .footer-links a {
+            margin: 0 10px;
+            color: #33691E;
+            text-decoration: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .game-container {
+                height: 600px;
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .game-container iframe {
+                transform: scale(0.7) !important;
+                transform-origin: center center !important;
+                width: 140% !important;
+                height: 140% !important;
+                margin-left: -20% !important;
+                margin-top: -20px !important;
+            }
+            
+            .nav-secondary {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-secondary a {
+                margin: 5px;
+                font-size: 14px;
+            }
+            
+            .game-header h1 {
+                font-size: 24px;
+            }
+            
+            .info-box {
+                flex-basis: 100%;
+            }
+        }
+        
+        /* 适配超小屏幕 */
+        @media (max-width: 480px) {
+            .game-container iframe {
+                transform: scale(0.6) !important;
+                width: 160% !important;
+                height: 160% !important;
+                margin-left: -30% !important;
+            }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LXKH7CR53S');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-primary">
+                <a href="../index.html" class="logo">FramePlay.net</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <nav class="nav-secondary">
+            <a href="2048.html">2048</a>
+            <a href="adarkroom.html">A Dark Room</a>
+            <a href="chess.html">Chess</a>
+            <a href="connect3.html">Connect 3</a>
+            <a href="pacman.html">Pacman</a>
+            <a href="snake.html">Snake</a>
+            <a href="tetris.html">Tetris</a>
+            <a href="train-miner.html">Train Miner</a>
+            <a href="8-ball-billiards.html">8 Ball Billiards</a>
+            <a href="cut-the-rope.html">Cut The Rope</a>
+        </nav>
+        
+        <div class="game-header">
+            <h1>Cut The Rope</h1>
+            <p class="game-description">Feed the cute monster Om Nom with candy by cutting ropes and solving challenging physics puzzles. Collect stars and discover the perfect timing in this addictive puzzle game!</p>
+        </div>
+        
+        <div class="game-container">
+            <iframe src="https://play.famobi.com/cut-the-rope" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen style="transform: scale(0.8); transform-origin: center center; width: 120%; height: 120%; margin-left: -10%;"></iframe>
+        </div>
+        
+        <div class="game-details">
+            <div class="info-box">
+                <h2 class="info-title">How to Play</h2>
+                <ul>
+                    <li class="list-item">Swipe or click to cut the ropes</li>
+                    <li class="list-item">Guide the candy into Om Nom's mouth</li>
+                    <li class="list-item">Collect as many stars as possible in each level</li>
+                    <li class="list-item">Use physics elements like air cushions, bubbles, and spikes to your advantage</li>
+                    <li class="list-item">Complete levels to unlock new boxes with more challenges</li>
+                    <li class="list-item">Try to collect all three stars in each level for a perfect score</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h2 class="info-title">Game Features</h2>
+                <ul>
+                    <li class="list-item">Engaging physics-based gameplay</li>
+                    <li class="list-item">Cute character and colorful graphics</li>
+                    <li class="list-item">Multiple boxes with unique level themes</li>
+                    <li class="list-item">Progressive difficulty and new gameplay elements</li>
+                    <li class="list-item">Various obstacles and puzzle mechanisms</li>
+                    <li class="list-item">Challenging star collection system</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h2 class="info-title">Tips & Strategies</h2>
+                <ul>
+                    <li class="list-item">Observe the level before cutting any ropes</li>
+                    <li class="list-item">Plan your sequence of cuts carefully</li>
+                    <li class="list-item">Timing is crucial for many puzzles</li>
+                    <li class="list-item">Use momentum to swing the candy where you need it</li>
+                    <li class="list-item">Some stars require very specific rope cutting sequences</li>
+                    <li class="list-item">Don't be afraid to retry levels to perfect your strategy</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h2 class="info-title">About the Game</h2>
+                <ul>
+                    <li class="list-item">Cut the Rope is a popular physics puzzle game originally developed by ZeptoLab</li>
+                    <li class="list-item">The game has won multiple awards for its innovative gameplay</li>
+                    <li class="list-item">Perfect for all ages with its intuitive controls and charming design</li>
+                    <li class="list-item">Runs smoothly on all devices</li>
+                    <li class="list-item">No download required - play instantly in your browser</li>
+                    <li class="list-item">Challenge yourself to achieve three stars on every level</li>
+                </ul>
+            </div>
+        </div>
+        
+        <a href="../index.html" class="back-button">Back to Home</a>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../pages/privacy.html">Privacy Policy</a>
+                <a href="../pages/policy.html">Usage Policy</a>
+                <a href="../pages/terms.html">Terms of Service</a>
+                <a href="../pages/contact.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 聊天框组件 -->
+    <script src="../js/chat-component.js"></script>
+    
+    <!-- 排行榜组件 -->
+    <script src="../js/leaderboard.js"></script>
+</body>
+</html> 
