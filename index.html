@@ -114,6 +114,8 @@
             transition: background-color 0.2s;
             font-size: 0.95rem;
             white-space: nowrap;
+            cursor: pointer;
+            line-height: 1.5;
         }
         
         .dropdown-item:hover {
@@ -124,6 +126,27 @@
         .language-dropdown:hover .language-content,
         .nav-dropdown:hover .nav-content {
             display: block;
+        }
+        
+        /* 添加一个小的过渡区域，使下拉菜单更容易操作 */
+        .nav-dropdown::after,
+        .language-dropdown::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 20px;
+            bottom: -20px;
+        }
+        
+        .nav-content::before,
+        .language-content::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 20px;
+            top: -20px;
         }
         
         .dropdown-arrow {
@@ -275,6 +298,8 @@
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
         }
         
         .game-card:hover {
@@ -284,42 +309,44 @@
         
         .game-image {
             width: 100%;
-            height: 180px;
+            height: 260px;
             object-fit: cover;
+            object-position: center 70%;  /* 调整图片显示位置，尽量避开顶部水印 */
             border-bottom: 1px solid #E0E0E0;
         }
         
         .game-content {
-            padding: 1.5rem;
+            padding: 0.8rem;
             display: flex;
             flex-direction: column;
-            height: 210px; /* 固定高度确保按钮对齐 */
+            height: 120px;
         }
         
         .game-title {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
             color: #FF6F00;
         }
         
         .game-description {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            color: #616161;
-            flex-grow: 1; /* 让描述部分占据剩余空间 */
+            flex-grow: 1;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
         
         .play-button {
-            display: inline-block;
-            background-color: #4CAF50; /* 绿色按钮 */
+            background-color: #4CAF50;
             color: white;
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem;
             border-radius: 4px;
-            font-weight: 600;
+            text-align: center;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            font-size: 0.85rem;
         }
         
         .play-button:hover {
@@ -364,34 +391,29 @@
 <body>
     <div class="container">
         <header class="header">
-            <a href="." class="nav-button-common">frameplay.net</a>
+            <a href="index.html" class="nav-button-common">frameplay.net</a>
             <div class="nav-container">
                 <div class="language-dropdown">
-                    <button class="nav-button-common">
+                    <button class="nav-button-common" id="language-button">
                         Language
                         <span class="dropdown-arrow"></span>
                     </button>
                     <div class="language-content">
                         <a href="#" class="dropdown-item" data-lang="en">English</a>
-                        <a href="#" class="dropdown-item" data-lang="it">Italiano</a>
                         <a href="#" class="dropdown-item" data-lang="de">Deutsch</a>
                         <a href="#" class="dropdown-item" data-lang="es">Español</a>
-                        <a href="#" class="dropdown-item" data-lang="ru">Русский</a>
-                        <a href="#" class="dropdown-item" data-lang="zh">繁體中文</a>
-                        <a href="#" class="dropdown-item" data-lang="fr">Français</a>
-                        <a href="#" class="dropdown-item" data-lang="ja">日本語</a>
-                        <a href="#" class="dropdown-item" data-lang="ko">한국어</a>
+                        <a href="#" class="dropdown-item" data-lang="zh">简体中文</a>
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <button class="nav-button-common">
+                    <button class="nav-button-common" id="game-nav-button">
                         Game Navigation
                         <span class="dropdown-arrow"></span>
                     </button>
                     <div class="nav-content">
-                        <a href="/pages/casual.html" class="dropdown-item">Casual Games</a>
-                        <a href="/pages/brain.html" class="dropdown-item">Brain Games</a>
-                        <a href="/pages/fast-paced.html" class="dropdown-item">Fast-Paced Games</a>
+                        <a href="pages/casual.html" class="dropdown-item" data-category="casual">Casual Games</a>
+                        <a href="pages/brain.html" class="dropdown-item" data-category="brain">Brain Games</a>
+                        <a href="pages/fast-paced.html" class="dropdown-item" data-category="fast-paced">Fast-Paced Games</a>
                     </div>
                 </div>
             </div>
@@ -411,113 +433,111 @@
             <section class="recently-added">
                 <h2 class="section-title">BEST</h2>
                 <div class="games-grid">
-                    <!-- Om Nom Run -->
                     <div class="game-card">
-                        <img src="/images/games/om-nom-run.jpg" alt="Om Nom Run" class="game-image">
+                        <img src="resized_images/Om Nom Run-demo.jpeg" alt="Om Nom Run" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Om Nom Run</h2>
-                            <p class="game-description">Join Om Nom in this exciting endless runner! Dodge obstacles, collect candies, and see how far you can run.</p>
-                            <a href="/games/om-nom-run.html" class="play-button">Play Now</a>
+                            <p class="game-description">Run and collect candies in this exciting adventure!</p>
+                            <a href="games/om-nom-run.html" class="play-button">Play Now</a>
                         </div>
                     </div>
-                    
-                    <!-- Onet Connect Classic -->
+
                     <div class="game-card">
-                        <img src="/images/games/onet-connect.jpg" alt="Onet Connect Classic" class="game-image">
+                        <img src="resized_images/Onet Connect Classic-demo.jpeg" alt="Onet Connect Classic" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Onet Connect Classic</h2>
-                            <p class="game-description">Connect matching tiles in this cute Mahjong alternative. Clear the board by finding pairs.</p>
-                            <a href="/games/onet-connect.html" class="play-button">Play Now</a>
+                            <p class="game-description">Test your memory in this classic matching game!</p>
+                            <a href="games/onet-connect-classic.html" class="play-button">Play Now</a>
                         </div>
                     </div>
-                    
-                    <!-- Zoo Boom -->
+
                     <div class="game-card">
-                        <img src="/images/games/zoo-boom.jpg" alt="Zoo Boom" class="game-image">
+                        <img src="resized_images/Perfect Piano-demo.jpeg" alt="Perfect Piano" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">Perfect Piano</h2>
+                            <p class="game-description">Test your rhythm in this musical challenge!</p>
+                            <a href="games/perfect-piano.html" class="play-button">Play Now</a>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <img src="resized_images/Zoo Boom-demo.jpeg" alt="Zoo Boom" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Zoo Boom</h2>
-                            <p class="game-description">Match cute animal cubes and complete tasks in this adorable puzzle adventure with over 1250 levels!</p>
-                            <a href="/games/zoo-boom.html" class="play-button">Play Now</a>
+                            <p class="game-description">Match cute animals in this adorable puzzle adventure!</p>
+                            <a href="games/zoo-boom.html" class="play-button">Play Now</a>
                         </div>
                     </div>
-                    
-                    <!-- Totemia Cursed Marbels -->
+
                     <div class="game-card">
-                        <img src="/images/games/totemia.jpg" alt="Totemia Cursed Marbels" class="game-image">
+                        <img src="resized_images/Totemia Cursed Marbles-demo.jpeg" alt="Totemia Cursed Marbels" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Totemia Cursed Marbels</h2>
-                            <p class="game-description">Race against time in this exciting marble shooter with power-ups and special abilities.</p>
-                            <a href="/games/totemia.html" class="play-button">Play Now</a>
+                            <p class="game-description">Shoot marbles in this mystical totem challenge!</p>
+                            <a href="games/totemia-cursed-marbels.html" class="play-button">Play Now</a>
                         </div>
                     </div>
-                    
-                    <!-- Bubble Tower 3D -->
+
                     <div class="game-card">
-                        <img src="/images/games/bubble-tower.jpg" alt="Bubble Tower 3D" class="game-image">
+                        <img src="resized_images/Bubble Tower 3D-demo.jpeg" alt="Bubble Tower 3D" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Bubble Tower 3D</h2>
-                            <p class="game-description">Experience classic bubble shooting in a new dimension with amazing aztec setting!</p>
-                            <a href="/games/bubble-tower.html" class="play-button">Play Now</a>
+                            <p class="game-description">Experience bubble shooting in a new dimension!</p>
+                            <a href="games/bubble-tower-3d.html" class="play-button">Play Now</a>
                         </div>
                     </div>
 
-                    <!-- Solitaire Klondike -->
                     <div class="game-card">
-                        <img src="/images/games/solitaire.jpg" alt="Solitaire Klondike" class="game-image">
+                        <img src="resized_images/Solitaire Klondike-demo.jpeg" alt="Solitaire Klondike" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Solitaire Klondike</h2>
-                            <p class="game-description">The classic patience game reimagined for HTML5. Sort cards and build foundations in this timeless favorite.</p>
-                            <a href="/games/solitaire.html" class="play-button">Play Now</a>
+                            <p class="game-description">Classic solitaire with a modern twist!</p>
+                            <a href="games/solitaire-klondike.html" class="play-button">Play Now</a>
                         </div>
                     </div>
 
-                    <!-- 3D Free Kick -->
                     <div class="game-card">
-                        <img src="/images/games/free-kick.jpg" alt="3D Free Kick" class="game-image">
+                        <img src="resized_images/3D Free Kick-demo.jpeg" alt="3D Free Kick" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">3D Free Kick</h2>
-                            <p class="game-description">Take amazing free kicks in this realistic 3D soccer game. Curve the ball and score spectacular goals!</p>
-                            <a href="/games/free-kick.html" class="play-button">Play Now</a>
+                            <p class="game-description">Experience realistic 3D soccer free kicks!</p>
+                            <a href="games/3d-free-kick.html" class="play-button">Play Now</a>
                         </div>
                     </div>
 
-                    <!-- Table Tennis World Tour -->
                     <div class="game-card">
-                        <img src="/images/games/table-tennis.jpg" alt="Table Tennis World Tour" class="game-image">
+                        <img src="resized_images/able Tennis World Tour-demo.jpeg" alt="Table Tennis World Tour" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Table Tennis World Tour</h2>
-                            <p class="game-description">Compete in intense table tennis matches against players from around the world.</p>
-                            <a href="/games/table-tennis.html" class="play-button">Play Now</a>
+                            <p class="game-description">Compete in exciting table tennis matches!</p>
+                            <a href="games/table-tennis-world-tour.html" class="play-button">Play Now</a>
                         </div>
                     </div>
 
-                    <!-- Pirate Cards -->
                     <div class="game-card">
-                        <img src="/images/games/pirate-cards.jpg" alt="Pirate Cards" class="game-image">
+                        <img src="resized_images/Pirate Cards-demo.jpeg" alt="Pirate Cards" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Pirate Cards</h2>
-                            <p class="game-description">Set sail for adventure in this pirate-themed card game. Collect treasures and battle other pirates!</p>
-                            <a href="/games/pirate-cards.html" class="play-button">Play Now</a>
+                            <p class="game-description">Embark on a pirate-themed card adventure!</p>
+                            <a href="games/pirate-cards.html" class="play-button">Play Now</a>
                         </div>
                     </div>
 
-                    <!-- Reversi -->
                     <div class="game-card">
-                        <img src="/images/games/reversi.jpg" alt="Reversi" class="game-image">
+                        <img src="resized_images/Reversi-demo.jpeg" alt="Reversi" class="game-image">
                         <div class="game-content">
                             <h2 class="game-title">Reversi</h2>
-                            <p class="game-description">Classic board game of strategy and tactics. Outthink your opponent and dominate the board.</p>
-                            <a href="/games/reversi.html" class="play-button">Play Now</a>
+                            <p class="game-description">Classic board game of strategy and tactics!</p>
+                            <a href="games/reversi.html" class="play-button">Play Now</a>
                         </div>
                     </div>
 
-                    <!-- TNT Bomb -->
                     <div class="game-card">
-                        <img src="/images/games/tnt-bomb.jpg" alt="TNT Bomb" class="game-image">
+                        <img src="resized_images/Garden Bloom-demo.jpeg" alt="Garden Bloom" class="game-image">
                         <div class="game-content">
-                            <h2 class="game-title">TNT Bomb</h2>
-                            <p class="game-description">Explosions, explosions and even more explosions! Destroy buildings and structures with mighty power-ups.</p>
-                            <a href="/games/tnt-bomb.html" class="play-button">Play Now</a>
+                            <h2 class="game-title">Garden Bloom</h2>
+                            <p class="game-description">Create your dream garden in this magical puzzle!</p>
+                            <a href="games/garden-bloom.html" class="play-button">Play Now</a>
                         </div>
                     </div>
                 </div>
@@ -536,6 +556,8 @@
 
     <!-- 聊天框组件 -->
     <script src="js/chat-component.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/language.js"></script>
     <script>
         // 添加语言切换功能
         document.querySelectorAll('.language-content a').forEach(link => {

@@ -137,6 +137,8 @@
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
         }
         
         .game-card:hover {
@@ -146,41 +148,43 @@
         
         .game-image {
             width: 100%;
-            height: 180px;
+            height: 260px;
             object-fit: cover;
             border-bottom: 1px solid #E0E0E0;
         }
         
         .game-content {
-            padding: 1.5rem;
+            padding: 0.8rem;
             display: flex;
             flex-direction: column;
-            height: 210px;
+            height: 120px;
         }
         
         .game-title {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
             color: #FF6F00;
         }
         
         .game-description {
             flex-grow: 1;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
         
         .play-button {
             background-color: #4CAF50;
             color: white;
-            padding: 0.75rem;
+            padding: 0.5rem;
             border-radius: 4px;
             text-align: center;
             text-decoration: none;
             font-weight: 600;
             transition: background-color 0.2s;
+            font-size: 0.85rem;
         }
         
         .play-button:hover {
@@ -215,39 +219,55 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* 添加一个小的过渡区域，使下拉菜单更容易操作 */
+        .nav-dropdown::after,
+        .language-dropdown::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 20px;
+            bottom: -20px;
+        }
+        
+        .nav-content::before,
+        .language-content::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 20px;
+            top: -20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <a href="/" class="nav-button-common">frameplay.net</a>
+            <a href="../index.html" class="nav-button-common">frameplay.net</a>
             <div class="nav-container">
                 <div class="language-dropdown">
-                    <button class="nav-button-common">
+                    <button class="nav-button-common" id="language-button">
                         Language
                         <span class="dropdown-arrow"></span>
                     </button>
                     <div class="language-content">
                         <a href="#" class="dropdown-item" data-lang="en">English</a>
-                        <a href="#" class="dropdown-item" data-lang="it">Italiano</a>
                         <a href="#" class="dropdown-item" data-lang="de">Deutsch</a>
                         <a href="#" class="dropdown-item" data-lang="es">Español</a>
-                        <a href="#" class="dropdown-item" data-lang="ru">Русский</a>
-                        <a href="#" class="dropdown-item" data-lang="zh">繁體中文</a>
-                        <a href="#" class="dropdown-item" data-lang="fr">Français</a>
-                        <a href="#" class="dropdown-item" data-lang="ja">日本語</a>
-                        <a href="#" class="dropdown-item" data-lang="ko">한국어</a>
+                        <a href="#" class="dropdown-item" data-lang="zh">简体中文</a>
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <button class="nav-button-common">
+                    <button class="nav-button-common" id="game-nav-button">
                         Game Navigation
                         <span class="dropdown-arrow"></span>
                     </button>
                     <div class="nav-content">
-                        <a href="/pages/casual.html" class="dropdown-item">Casual Games</a>
-                        <a href="/pages/brain.html" class="dropdown-item">Brain Games</a>
-                        <a href="/pages/fast-paced.html" class="dropdown-item">Fast-Paced Games</a>
+                        <a href="casual.html" class="dropdown-item" data-category="casual">Casual Games</a>
+                        <a href="brain.html" class="dropdown-item" data-category="brain">Brain Games</a>
+                        <a href="fast-paced.html" class="dropdown-item" data-category="fast-paced">Fast-Paced Games</a>
                     </div>
                 </div>
             </div>
@@ -256,443 +276,399 @@
         <main>
             <h1 class="category-title">Brain Games</h1>
             <div class="games-grid">
-                <!-- Reversi -->
                 <div class="game-card">
-                    <img src="/images/games/reversi.jpg" alt="Reversi" class="game-image">
+                    <img src="../resized_images/Reversi-demo.jpeg" alt="Reversi" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Reversi</h2>
-                        <p class="game-description">Classic strategy game where you flip your opponent's pieces to win.</p>
-                        <a href="/games/reversi.html" class="play-button">Play Now</a>
+                        <p class="game-description">Flip opponent's pieces to win!</p>
+                        <a href="../games/reversi.html" class="play-button">Play Now</a>
                     </div>
                 </div>
-                
-                <!-- 3D Chess -->
+
                 <div class="game-card">
-                    <img src="/images/games/3d-chess.jpg" alt="3D Chess" class="game-image">
+                    <img src="../resized_images/3D Chess-demo.jpeg" alt="3D Chess" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">3D Chess</h2>
-                        <p class="game-description">The HTML5 strategy game for thinkers - play chess in stunning 3D graphics.</p>
-                        <a href="/games/3d-chess.html" class="play-button">Play Now</a>
+                        <p class="game-description">Play chess in three dimensions!</p>
+                        <a href="../games/3d-chess.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Backgammon Classic -->
                 <div class="game-card">
-                    <img src="/images/games/backgammon.jpg" alt="Backgammon Classic" class="game-image">
+                    <img src="../resized_images/Backgammon-demo.jpeg" alt="Backgammon" class="game-image">
                     <div class="game-content">
-                        <h2 class="game-title">Backgammon Classic</h2>
-                        <p class="game-description">The ancient game of strategy and luck, now in HTML5.</p>
-                        <a href="/games/backgammon.html" class="play-button">Play Now</a>
+                        <h2 class="game-title">Backgammon</h2>
+                        <p class="game-description">Classic board game of strategy!</p>
+                        <a href="../games/backgammon.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Cross Over 21 -->
                 <div class="game-card">
-                    <img src="/images/games/cross-over-21.jpg" alt="Cross Over 21" class="game-image">
+                    <img src="../resized_images/Cross Over 21-demo.jpeg" alt="Cross Over 21" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Cross Over 21</h2>
-                        <p class="game-description">A challenging puzzle game where you need to cross numbers to reach 21.</p>
-                        <a href="/games/cross-over-21.html" class="play-button">Play Now</a>
+                        <p class="game-description">Strategic card game with numbers!</p>
+                        <a href="../games/cross-over-21.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Gin Rummy Plus -->
                 <div class="game-card">
-                    <img src="/images/games/gin-rummy.jpg" alt="Gin Rummy Plus" class="game-image">
+                    <img src="../resized_images/Gin Rummy Plus-demo.jpeg" alt="Gin Rummy Plus" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Gin Rummy Plus</h2>
-                        <p class="game-description">The HTML5 card game classic - match sets and runs to win.</p>
-                        <a href="/games/gin-rummy.html" class="play-button">Play Now</a>
+                        <p class="game-description">Classic card game with AI opponents!</p>
+                        <a href="../games/gin-rummy-plus.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Blocks Puzzle Zoo -->
                 <div class="game-card">
-                    <img src="/images/games/blocks-puzzle-zoo.jpg" alt="Blocks Puzzle Zoo" class="game-image">
+                    <img src="../resized_images/Blocks Puzzle Zoo-demo.jpeg" alt="Blocks Puzzle Zoo" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Blocks Puzzle Zoo</h2>
-                        <p class="game-description">Arrange zoo-themed blocks to clear lines and solve puzzles.</p>
-                        <a href="/games/blocks-puzzle-zoo.html" class="play-button">Play Now</a>
+                        <p class="game-description">Arrange animal blocks to clear lines!</p>
+                        <a href="../games/blocks-puzzle-zoo.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Sudoku Classic -->
                 <div class="game-card">
-                    <img src="/images/games/sudoku.jpg" alt="Sudoku Classic" class="game-image">
+                    <img src="../resized_images/Sudoku Classic-demo.jpeg" alt="Sudoku Classic" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Sudoku Classic</h2>
-                        <p class="game-description">Fill the grid with numbers following classic Sudoku rules.</p>
-                        <a href="/games/sudoku.html" class="play-button">Play Now</a>
+                        <p class="game-description">Fill numbers in this logic puzzle!</p>
+                        <a href="../games/sudoku-classic.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Miner Block -->
                 <div class="game-card">
-                    <img src="/images/games/miner-block.jpg" alt="Miner Block" class="game-image">
+                    <img src="../resized_images/Miner Block-demo.jpeg" alt="Miner Block" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Miner Block</h2>
-                        <p class="game-description">Mine blocks and solve puzzles in this brain-teasing game.</p>
-                        <a href="/games/miner-block.html" class="play-button">Play Now</a>
+                        <p class="game-description">Mine blocks and collect treasures!</p>
+                        <a href="../games/miner-block.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Little Shop Of Treasures -->
                 <div class="game-card">
-                    <img src="/images/games/little-shop.jpg" alt="Little Shop Of Treasures" class="game-image">
+                    <img src="../resized_images/Little Shop Of Treasures-demo.jpeg" alt="Little Shop Of Treasures" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Little Shop Of Treasures</h2>
-                        <p class="game-description">Find hidden treasures in this challenging puzzle game.</p>
-                        <a href="/games/little-shop.html" class="play-button">Play Now</a>
+                        <p class="game-description">Find hidden treasures in the shop!</p>
+                        <a href="../games/little-shop-of-treasures.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Words of Wonders -->
                 <div class="game-card">
-                    <img src="/images/games/words-of-wonders.jpg" alt="Words of Wonders" class="game-image">
+                    <img src="../resized_images/Words of Wonders-demo.jpeg" alt="Words of Wonders" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Words of Wonders</h2>
-                        <p class="game-description">Find words and solve puzzles in this word game.</p>
-                        <a href="/games/words-of-wonders.html" class="play-button">Play Now</a>
+                        <p class="game-description">Find words in beautiful locations!</p>
+                        <a href="../games/words-of-wonders.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Cut The Rope -->
                 <div class="game-card">
-                    <img src="/images/games/cut-the-rope.jpg" alt="Cut The Rope" class="game-image">
+                    <img src="../resized_images/Cut The Rope-demo.jpeg" alt="Cut The Rope" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Cut The Rope</h2>
-                        <p class="game-description">Cut ropes strategically to feed the hungry monster.</p>
-                        <a href="/games/cut-the-rope.html" class="play-button">Play Now</a>
+                        <p class="game-description">Cut ropes to feed the monster!</p>
+                        <a href="../games/cut-the-rope.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Spot The Cat -->
                 <div class="game-card">
-                    <img src="/images/games/spot-the-cat.jpg" alt="Spot The Cat" class="game-image">
+                    <img src="../resized_images/Spot The Cat-demo.jpeg" alt="Spot The Cat" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Spot The Cat</h2>
-                        <p class="game-description">Find the hidden cat in each challenging scene.</p>
-                        <a href="/games/spot-the-cat.html" class="play-button">Play Now</a>
+                        <p class="game-description">Find the hidden cat in scenes!</p>
+                        <a href="../games/spot-the-cat.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Kiba & Kumba Jigsaw Puzzle -->
                 <div class="game-card">
-                    <img src="/images/games/kiba-kumba.jpg" alt="Kiba & Kumba Jigsaw Puzzle" class="game-image">
+                    <img src="../resized_images/Kiba & Kumba Jigsaw-demo.jpeg" alt="Kiba & Kumba Jigsaw Puzzle" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Kiba & Kumba Jigsaw Puzzle</h2>
-                        <p class="game-description">Solve jigsaw puzzles featuring adorable characters.</p>
-                        <a href="/games/kiba-kumba.html" class="play-button">Play Now</a>
+                        <p class="game-description">Solve puzzles with cute animals!</p>
+                        <a href="../games/kiba-kumba-jigsaw.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Jigsaw Puzzle Classic -->
                 <div class="game-card">
-                    <img src="/images/games/jigsaw-classic.jpg" alt="Jigsaw Puzzle Classic" class="game-image">
+                    <img src="../resized_images/Jigsaw Puzzle Classic-demo.jpeg" alt="Jigsaw Puzzle Classic" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Jigsaw Puzzle Classic</h2>
-                        <p class="game-description">The timeless puzzle game with beautiful images.</p>
-                        <a href="/games/jigsaw-classic.html" class="play-button">Play Now</a>
+                        <p class="game-description">Classic jigsaw puzzle experience!</p>
+                        <a href="../games/jigsaw-puzzle-classic.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Puzzletag -->
                 <div class="game-card">
-                    <img src="/images/games/puzzletag.jpg" alt="Puzzletag" class="game-image">
+                    <img src="../resized_images/Puzzletag-demo.jpeg" alt="Puzzletag" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Puzzletag</h2>
-                        <p class="game-description">Match and connect puzzle pieces in this unique game.</p>
-                        <a href="/games/puzzletag.html" class="play-button">Play Now</a>
+                        <p class="game-description">Connect puzzle pieces to complete!</p>
+                        <a href="../games/puzzletag.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Jigsaw Puzzle Deluxe -->
                 <div class="game-card">
-                    <img src="/images/games/jigsaw-deluxe.jpg" alt="Jigsaw Puzzle Deluxe" class="game-image">
+                    <img src="../resized_images/Jigsaw Puzzle Deluxe-demo.jpeg" alt="Jigsaw Puzzle Deluxe" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Jigsaw Puzzle Deluxe</h2>
-                        <p class="game-description">Enhanced jigsaw puzzle experience with special features.</p>
-                        <a href="/games/jigsaw-deluxe.html" class="play-button">Play Now</a>
+                        <p class="game-description">Enhanced jigsaw puzzle experience!</p>
+                        <a href="../games/jigsaw-puzzle-deluxe.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Color Water Sort 3D -->
                 <div class="game-card">
-                    <img src="/images/games/color-water-sort.jpg" alt="Color Water Sort 3D" class="game-image">
+                    <img src="../resized_images/Color Water Sort 3D-demo.jpeg" alt="Color Water Sort 3D" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Color Water Sort 3D</h2>
-                        <p class="game-description">Sort colored water in 3D tubes to solve puzzles.</p>
-                        <a href="/games/color-water-sort.html" class="play-button">Play Now</a>
+                        <p class="game-description">Sort colored water in 3D tubes!</p>
+                        <a href="../games/color-water-sort-3d.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Toilet Run -->
                 <div class="game-card">
-                    <img src="/images/games/toilet-run.jpg" alt="Toilet Run" class="game-image">
+                    <img src="../resized_images/Toilet Run-demo.jpeg" alt="Toilet Run" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Toilet Run</h2>
-                        <p class="game-description">Solve puzzles to help the toilet paper reach its destination.</p>
-                        <a href="/games/toilet-run.html" class="play-button">Play Now</a>
+                        <p class="game-description">Fun puzzle game with unique theme!</p>
+                        <a href="../games/toilet-run.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Sort It -->
                 <div class="game-card">
-                    <img src="/images/games/sort-it.jpg" alt="Sort It" class="game-image">
+                    <img src="../resized_images/Sort It-demo.jpeg" alt="Sort It" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Sort It</h2>
-                        <p class="game-description">Sort items into their correct categories in this puzzle game.</p>
-                        <a href="/games/sort-it.html" class="play-button">Play Now</a>
+                        <p class="game-description">Organize items in this brain teaser!</p>
+                        <a href="../games/sort-it.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Cube Match -->
                 <div class="game-card">
-                    <img src="/images/games/cube-match.jpg" alt="Cube Match" class="game-image">
+                    <img src="../resized_images/Cube Match-demo.jpeg" alt="Cube Match" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Cube Match</h2>
-                        <p class="game-description">Match and combine cubes to solve puzzles.</p>
-                        <a href="/games/cube-match.html" class="play-button">Play Now</a>
+                        <p class="game-description">Match cubes to create bigger numbers!</p>
+                        <a href="../games/cube-match.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Parking Jam -->
                 <div class="game-card">
-                    <img src="/images/games/parking-jam.jpg" alt="Parking Jam" class="game-image">
+                    <img src="../resized_images/Parking Jam-demo.jpeg" alt="Parking Jam" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Parking Jam</h2>
-                        <p class="game-description">Solve traffic puzzles by moving cars to clear the exit.</p>
-                        <a href="/games/parking-jam.html" class="play-button">Play Now</a>
+                        <p class="game-description">Move cars to clear the exit!</p>
+                        <a href="../games/parking-jam.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Tile Journey -->
                 <div class="game-card">
-                    <img src="/images/games/tile-journey.jpg" alt="Tile Journey" class="game-image">
+                    <img src="../resized_images/Tile Journey-demo.jpeg" alt="Tile Journey" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Tile Journey</h2>
-                        <p class="game-description">Guide tiles through a maze to their correct positions.</p>
-                        <a href="/games/tile-journey.html" class="play-button">Play Now</a>
+                        <p class="game-description">Slide and match tiles in this puzzle!</p>
+                        <a href="../games/tile-journey.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Train 2048 -->
                 <div class="game-card">
-                    <img src="/images/games/train-2048.jpg" alt="Train 2048" class="game-image">
+                    <img src="../resized_images/Train 2048-demo.jpeg" alt="Train 2048" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Train 2048</h2>
-                        <p class="game-description">Combine train cars to reach the 2048 tile.</p>
-                        <a href="/games/train-2048.html" class="play-button">Play Now</a>
+                        <p class="game-description">Combine train cars to reach high numbers!</p>
+                        <a href="../games/train-2048.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Giant 2048 -->
                 <div class="game-card">
-                    <img src="/images/games/giant-2048.jpg" alt="Giant 2048" class="game-image">
+                    <img src="../resized_images/Giant 2048-demo.jpeg" alt="Giant 2048" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Giant 2048</h2>
-                        <p class="game-description">Play 2048 on a larger grid for an extra challenge.</p>
-                        <a href="/games/giant-2048.html" class="play-button">Play Now</a>
+                        <p class="game-description">Large-scale number sliding puzzle!</p>
+                        <a href="../games/giant-2048.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Brain Trainer -->
                 <div class="game-card">
-                    <img src="/images/games/brain-trainer.jpg" alt="Brain Trainer" class="game-image">
+                    <img src="../resized_images/Brain Trainer-demo.jpeg" alt="Brain Trainer" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Brain Trainer</h2>
-                        <p class="game-description">Exercise your brain with various cognitive challenges.</p>
-                        <a href="/games/brain-trainer.html" class="play-button">Play Now</a>
+                        <p class="game-description">Train your brain with various exercises!</p>
+                        <a href="../games/brain-trainer.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Word Search Classic -->
                 <div class="game-card">
-                    <img src="/images/games/word-search.jpg" alt="Word Search Classic" class="game-image">
+                    <img src="../resized_images/Word Search Classic-demo.jpeg" alt="Word Search Classic" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Word Search Classic</h2>
-                        <p class="game-description">Find hidden words in this classic word search game.</p>
-                        <a href="/games/word-search.html" class="play-button">Play Now</a>
+                        <p class="game-description">Find hidden words in the grid!</p>
+                        <a href="../games/word-search-classic.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- 7 Words -->
                 <div class="game-card">
-                    <img src="/images/games/7-words.jpg" alt="7 Words" class="game-image">
+                    <img src="../resized_images/7 Words-demo.jpeg" alt="7 Words" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">7 Words</h2>
-                        <p class="game-description">Create words using exactly 7 letters in this word puzzle.</p>
-                        <a href="/games/7-words.html" class="play-button">Play Now</a>
+                        <p class="game-description">Create words with seven letters!</p>
+                        <a href="../games/7-words.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Jungle Roller -->
                 <div class="game-card">
-                    <img src="/images/games/jungle-roller.jpg" alt="Jungle Roller" class="game-image">
+                    <img src="../resized_images/Jungle Roller-demo.jpeg" alt="Jungle Roller" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Jungle Roller</h2>
-                        <p class="game-description">Roll through the jungle while solving puzzles.</p>
-                        <a href="/games/jungle-roller.html" class="play-button">Play Now</a>
+                        <p class="game-description">Roll through jungle obstacles!</p>
+                        <a href="../games/jungle-roller.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Find In Mind -->
                 <div class="game-card">
-                    <img src="/images/games/find-in-mind.jpg" alt="Find In Mind" class="game-image">
+                    <img src="../resized_images/Find In Mind-demo.jpeg" alt="Find In Mind" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Find In Mind</h2>
-                        <p class="game-description">Test your memory and observation skills.</p>
-                        <a href="/games/find-in-mind.html" class="play-button">Play Now</a>
+                        <p class="game-description">Test your memory and observation!</p>
+                        <a href="../games/find-in-mind.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Solitaire Classic Easter -->
                 <div class="game-card">
-                    <img src="/images/games/solitaire-easter.jpg" alt="Solitaire Classic Easter" class="game-image">
+                    <img src="../resized_images/Solitaire Classic-demo.jpeg" alt="Solitaire Classic" class="game-image">
                     <div class="game-content">
-                        <h2 class="game-title">Solitaire Classic Easter</h2>
-                        <p class="game-description">Easter-themed solitaire with special cards and bonuses.</p>
-                        <a href="/games/solitaire-easter.html" class="play-button">Play Now</a>
+                        <h2 class="game-title">Solitaire Classic</h2>
+                        <p class="game-description">Classic card game of patience!</p>
+                        <a href="../games/solitaire-classic.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Hiddentastic Mansion -->
                 <div class="game-card">
-                    <img src="/images/games/hiddentastic-mansion.jpg" alt="Hiddentastic Mansion" class="game-image">
+                    <img src="../resized_images/Hiddentastic Mansion-demo.jpeg" alt="Hiddentastic Mansion" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Hiddentastic Mansion</h2>
-                        <p class="game-description">Find hidden objects in this mysterious mansion.</p>
-                        <a href="/games/hiddentastic-mansion.html" class="play-button">Play Now</a>
+                        <p class="game-description">Find hidden objects in the mansion!</p>
+                        <a href="../games/hiddentastic-mansion.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Monster Snack Time -->
                 <div class="game-card">
-                    <img src="/images/games/monster-snack.jpg" alt="Monster Snack Time" class="game-image">
+                    <img src="../resized_images/Monster Snack Time-demo.jpeg" alt="Monster Snack Time" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Monster Snack Time</h2>
-                        <p class="game-description">Feed the monsters while solving puzzles.</p>
-                        <a href="/games/monster-snack.html" class="play-button">Play Now</a>
+                        <p class="game-description">Feed hungry monsters in this puzzle!</p>
+                        <a href="../games/monster-snack-time.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Spider Solitaire -->
                 <div class="game-card">
-                    <img src="/images/games/spider-solitaire.jpg" alt="Spider Solitaire" class="game-image">
+                    <img src="../resized_images/Spider Solitaire-demo.jpeg" alt="Spider Solitaire" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Spider Solitaire</h2>
-                        <p class="game-description">The classic spider solitaire card game.</p>
-                        <a href="/games/spider-solitaire.html" class="play-button">Play Now</a>
+                        <p class="game-description">Classic spider solitaire card game!</p>
+                        <a href="../games/spider-solitaire.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Mahjong World -->
                 <div class="game-card">
-                    <img src="/images/games/mahjong-world.jpg" alt="Mahjong World" class="game-image">
+                    <img src="../resized_images/Mahjong World-demo.jpeg" alt="Mahjong World" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Mahjong World</h2>
-                        <p class="game-description">Match tiles in this traditional Chinese game.</p>
-                        <a href="/games/mahjong-world.html" class="play-button">Play Now</a>
+                        <p class="game-description">Traditional Chinese tile-matching game!</p>
+                        <a href="../games/mahjong-world.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Pull Pins -->
                 <div class="game-card">
-                    <img src="/images/games/pull-pins.jpg" alt="Pull Pins" class="game-image">
+                    <img src="../resized_images/Pull Pins-demo.jpeg" alt="Pull Pins" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Pull Pins</h2>
-                        <p class="game-description">Remove pins strategically to solve puzzles.</p>
-                        <a href="/games/pull-pins.html" class="play-button">Play Now</a>
+                        <p class="game-description">Remove pins in the correct order!</p>
+                        <a href="../games/pull-pins.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Gold Rush -->
                 <div class="game-card">
-                    <img src="/images/games/gold-rush.jpg" alt="Gold Rush" class="game-image">
+                    <img src="../resized_images/Gold Rush-demo.jpeg" alt="Gold Rush" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Gold Rush</h2>
-                        <p class="game-description">Mine for gold while solving puzzles.</p>
-                        <a href="/games/gold-rush.html" class="play-button">Play Now</a>
+                        <p class="game-description">Match and mine for gold!</p>
+                        <a href="../games/gold-rush.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Wordguess 2 Heavy -->
                 <div class="game-card">
-                    <img src="/images/games/wordguess-2.jpg" alt="Wordguess 2 Heavy" class="game-image">
+                    <img src="../resized_images/Wordguess 2 Heavy-demo.jpeg" alt="Wordguess 2 Heavy" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Wordguess 2 Heavy</h2>
-                        <p class="game-description">Advanced word guessing game with challenging puzzles.</p>
-                        <a href="/games/wordguess-2.html" class="play-button">Play Now</a>
+                        <p class="game-description">Advanced word guessing challenge!</p>
+                        <a href="../games/wordguess-2-heavy.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Guess Their Answer -->
                 <div class="game-card">
-                    <img src="/images/games/guess-answer.jpg" alt="Guess Their Answer" class="game-image">
+                    <img src="../resized_images/Guess Their Answer-demo.jpeg" alt="Guess Their Answer" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Guess Their Answer</h2>
-                        <p class="game-description">Guess what others are thinking in this social puzzle game.</p>
-                        <a href="/games/guess-answer.html" class="play-button">Play Now</a>
+                        <p class="game-description">Test your knowledge in trivia!</p>
+                        <a href="../games/guess-their-answer.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Shards -->
                 <div class="game-card">
-                    <img src="/images/games/shards.jpg" alt="Shards" class="game-image">
+                    <img src="../resized_images/Shards-demo.jpeg" alt="Shards" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Shards</h2>
-                        <p class="game-description">Collect and arrange shards to solve puzzles.</p>
-                        <a href="/games/shards.html" class="play-button">Play Now</a>
+                        <p class="game-description">Break blocks with power-ups!</p>
+                        <a href="../games/shards.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- 8 Ball Billiards Classic -->
                 <div class="game-card">
-                    <img src="/images/games/8-ball-billiards.jpg" alt="8 Ball Billiards Classic" class="game-image">
+                    <img src="../resized_images/8 Ball Billiards-demo.jpeg" alt="8 Ball Billiards" class="game-image">
                     <div class="game-content">
-                        <h2 class="game-title">8 Ball Billiards Classic</h2>
-                        <p class="game-description">The HTML5 pool game with realistic physics.</p>
-                        <a href="/games/8-ball-billiards.html" class="play-button">Play Now</a>
+                        <h2 class="game-title">8 Ball Billiards</h2>
+                        <p class="game-description">Classic pool game with realistic physics!</p>
+                        <a href="../games/8-ball-billiards.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Find 500 Differences -->
                 <div class="game-card">
-                    <img src="/images/games/find-differences.jpg" alt="Find 500 Differences" class="game-image">
+                    <img src="../resized_images/Find 500 Differences-demo.jpeg" alt="Find 500 Differences" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Find 500 Differences</h2>
-                        <p class="game-description">Spot the differences between similar images.</p>
-                        <a href="/games/find-differences.html" class="play-button">Play Now</a>
+                        <p class="game-description">Spot differences between similar images!</p>
+                        <a href="../games/find-500-differences.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Solitaire Klondike -->
                 <div class="game-card">
-                    <img src="/images/games/solitaire-klondike.jpg" alt="Solitaire Klondike" class="game-image">
+                    <img src="../resized_images/Solitaire Klondike-demo.jpeg" alt="Solitaire Klondike" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Solitaire Klondike</h2>
-                        <p class="game-description">The HTML5 patience game with classic rules.</p>
-                        <a href="/games/solitaire-klondike.html" class="play-button">Play Now</a>
+                        <p class="game-description">Traditional Klondike solitaire game!</p>
+                        <a href="../games/solitaire-klondike.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- 2048 -->
                 <div class="game-card">
-                    <img src="/images/games/2048.jpg" alt="2048" class="game-image">
+                    <img src="../resized_images/2048-demo.jpeg" alt="2048" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">2048</h2>
-                        <p class="game-description">Slide numbered tiles to combine them and reach the 2048 tile.</p>
-                        <a href="/games/2048.html" class="play-button">Play Now</a>
+                        <p class="game-description">Classic number sliding puzzle!</p>
+                        <a href="../games/2048.html" class="play-button">Play Now</a>
                     </div>
                 </div>
 
-                <!-- Chess -->
                 <div class="game-card">
-                    <img src="/images/games/chess.jpg" alt="Chess" class="game-image">
+                    <img src="../resized_images/Chess-demo.jpeg" alt="Chess" class="game-image">
                     <div class="game-content">
                         <h2 class="game-title">Chess</h2>
-                        <p class="game-description">The classic game of strategy and tactics.</p>
-                        <a href="/games/chess.html" class="play-button">Play Now</a>
+                        <p class="game-description">Classic chess with AI opponents!</p>
+                        <a href="../games/chess.html" class="play-button">Play Now</a>
                     </div>
                 </div>
             </div>
@@ -700,10 +676,10 @@
 
         <footer class="footer">
             <div class="footer-links">
-                <a href="/pages/privacy.html">Privacy Policy</a>
-                <a href="/pages/policy.html">Usage Policy</a>
-                <a href="/pages/terms.html">Terms of Service</a>
-                <a href="/pages/contact.html">Contact Us</a>
+                <a href="../pages/privacy.html">Privacy Policy</a>
+                <a href="../pages/policy.html">Usage Policy</a>
+                <a href="../pages/terms.html">Terms of Service</a>
+                <a href="../pages/contact.html">Contact Us</a>
             </div>
         </footer>
     </div>
