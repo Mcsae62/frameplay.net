@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Emily's New Beginning online for free! Help Emily balance her restaurant business and family life. Serve customers, prepare food, and take care of her baby daughter in this exciting time management game!">
+    <title>Emily's New Beginning - FramePlay.net</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Base colors and styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E0F7FA; /* 浅蓝色背景 */
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #4FC3F7;
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        /* Search bar */
+        .search-container {
+            display: flex;
+            margin: 0 auto;  /* 修改为auto实现居中 */
+            flex: 1;        /* 添加flex:1使其占据剩余空间 */
+            max-width: 500px;  /* 增加最大宽度 */
+        }
+        
+        .search-input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            width: 100%;    /* 修改为100%填充容器 */
+        }
+        
+        .search-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        /* Language dropdown */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 5px;  /* 减小右边距 */
+        }
+        
+        .language-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        
+        .language-dropdown:hover .language-content {
+            display: block;
+        }
+        
+        .language-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .language-content a:hover {
+            background-color: #B3E5FC;
+        }
+        
+        /* Game navigation dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .dropdown-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #B3E5FC;
+        }
+        
+        .dropdown-content a.active {
+            background-color: #E0F7FA;
+            color: #FF6F00;
+            font-weight: bold;
+        }
+        
+        /* Game navigation dropdown */
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+        
+        .dropdown-arrow {
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            margin-top: -4px;
+        }
+        
+        /* Game navigation dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-button {
+            background-color: #4CAF50; /* 绿色按钮 */
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #B3E5FC;
+        }
+        
+        .dropdown-content a.active {
+            background-color: #E0F7FA;
+            color: #FF6F00;
+            font-weight: bold;
+        }
+        
+        /* Back button */
+        .back-button {
+            background-color: #0277BD;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 20px 0;
+            max-width: 1200px;
+            margin-left: calc((100% - 1200px) / 2);
+        }
+        
+        .back-button:hover {
+            background-color: #01579B;
+        }
+        
+        /* Game title */
+        .game-title {
+            color: #FF6F00; /* 经典暖色标题 */
+            text-align: center;
+            margin: 30px 0;
+            font-size: 32px;
+        }
+        
+        /* Game container */
+        .game-container {
+            margin: 20px auto;
+            max-width: 900px;
+            height: 700px;
+            border: 2px solid #B3E5FC;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .game-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        /* Game information sections */
+        .info-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px auto;
+            max-width: 1200px;  /* 修改为与container相同的宽度 */
+            padding: 0 15px;
+        }
+        
+        .info-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 580px;  /* 增加最大宽度 */
+        }
+        
+        .info-title {
+            color: #FF6F00; /* 经典暖色标题 */
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #4FC3F7;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .list-item {
+            margin-bottom: 8px;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-container {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .info-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-container {
+                height: 550px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LXKH7CR53S');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">frameplay.net</a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search games...">
+                    <button class="search-button">Search</button>
+                </div>
+                
+                <div class="language-dropdown">
+                    <button class="dropdown-button">Language</button>
+                    <div class="language-content">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="it">Italiano</a>
+                        <a href="#" data-lang="de">Deutsch</a>
+                        <a href="#" data-lang="es">Español</a>
+                        <a href="#" data-lang="ru">Русский</a>
+                        <a href="#" data-lang="zh">繁體中文</a>
+                        <a href="#" data-lang="fr">Français</a>
+                        <a href="#" data-lang="ja">日本語</a>
+                        <a href="#" data-lang="ko">한국어</a>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <button class="dropdown-button">Game Navigation</button>
+                    <div class="dropdown-content">
+                        <a href="/pages/casual.html">Casual Games</a>
+                        <a href="/pages/brain.html">Brain Games</a>
+                        <a href="/pages/fast-paced.html">Fast-Paced Games</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <h1 class="game-title">Emily's New Beginning</h1>
+    
+    <div class="game-container">
+        <iframe src="https://play.famobi.com/emilys-new-beginning" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen></iframe>
+    </div>
+    
+    <div class="info-container">
+        <div class="info-box">
+            <h2 class="info-title">Game Description</h2>
+            <p>Emily's New Beginning is an engaging time management game that puts you in the shoes of Emily, a restaurant owner who's also a new mother. As Emily, you'll face the daily challenge of balancing your restaurant business with family life. From serving customers and preparing delicious food to taking care of your adorable baby daughter, this game offers a realistic and heartwarming experience of managing both work and family responsibilities. With its intuitive gameplay and relatable storyline, Emily's New Beginning provides an entertaining and meaningful gaming experience for players of all ages!</p>
+        </div>
+        
+        <div class="info-box">
+            <h2 class="info-title">How to Play</h2>
+            <ul>
+                <li class="list-item">Serve customers in the restaurant</li>
+                <li class="list-item">Prepare and cook various dishes</li>
+                <li class="list-item">Take care of your baby daughter</li>
+                <li class="list-item">Manage your time efficiently</li>
+                <li class="list-item">Handle multiple tasks simultaneously</li>
+                <li class="list-item">Keep customers satisfied</li>
+                <li class="list-item">Balance work and family life</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h2 class="info-title">Game Features</h2>
+            <ul>
+                <li class="list-item">Time management gameplay</li>
+                <li class="list-item">Restaurant management mechanics</li>
+                <li class="list-item">Family care elements</li>
+                <li class="list-item">Multiple customer types</li>
+                <li class="list-item">Various food preparation tasks</li>
+                <li class="list-item">Baby care activities</li>
+                <li class="list-item">Progressive difficulty levels</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h2 class="info-title">Tips & Strategies</h2>
+            <ul>
+                <li class="list-item">Prioritize tasks based on urgency</li>
+                <li class="list-item">Prepare food in advance when possible</li>
+                <li class="list-item">Keep an eye on your baby's needs</li>
+                <li class="list-item">Manage customer wait times efficiently</li>
+                <li class="list-item">Use time-saving shortcuts</li>
+                <li class="list-item">Balance attention between work and family</li>
+                <li class="list-item">Stay organized to maximize productivity</li>
+            </ul>
+        </div>
+    </div>
+    
+    <a href="../index.html" class="back-button">Back to Home</a>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/policy">Usage Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 聊天框组件 -->
+    <script src="../js/chat-component.js"></script>
+    
+    <!-- 排行榜组件 -->
+    <script src="../js/leaderboard.js"></script>
+</body>
+</html> 
