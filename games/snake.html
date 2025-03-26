@@ -10,7 +10,7 @@
         /* Base colors and styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #E0F7FA;
+            background-color: #E0F7FA; /* 浅蓝色背景 */
             color: #333333;
             margin: 0;
             padding: 0;
@@ -19,22 +19,18 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 15px;
         }
         
         /* Header styles */
         header {
             background-color: #4FC3F7;
-            padding: 1rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 74px;
+            padding: 15px 0;
         }
         
         .header-content {
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
             align-items: center;
         }
         
@@ -48,14 +44,18 @@
         /* Search bar */
         .search-container {
             display: flex;
-            margin: 0 20px;
+            margin: 0 auto;  /* 修改为auto实现居中 */
+            flex: 1;        /* 添加flex:1使其占据剩余空间 */
+            max-width: 500px;  /* 增加最大宽度 */
         }
         
         .search-input {
             padding: 8px 12px;
             border: none;
             border-radius: 4px 0 0 4px;
-            width: 250px;
+            width: 100%;    /* 修改为100%填充容器 */
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
         }
         
         .search-button {
@@ -65,23 +65,101 @@
             padding: 8px 16px;
             border-radius: 0 4px 4px 0;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        
+        .search-button:hover {
+            background-color: #388E3C;
+        }
+        
+        /* Language dropdown */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .language-dropdown .dropdown-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+        
+        .language-dropdown .dropdown-button:hover {
+            background-color: #388E3C;
+        }
+        
+        .language-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .language-dropdown:hover .language-content {
+            display: block;
+        }
+        
+        .language-content a {
+            color: #333;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+        
+        .language-content a:hover {
+            background-color: #E0F7FA;
+            color: #FF6F00;
         }
         
         /* Game navigation dropdown */
         .dropdown {
             position: relative;
             display: inline-block;
+            margin-left: 10px;
         }
         
-        .dropdown-button {
+        .dropdown .dropdown-button {
             background-color: #4CAF50;
             color: white;
-            padding: 8px 16px;
-            font-size: 16px;
             border: none;
+            padding: 8px 16px;
             border-radius: 4px;
             cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+        
+        .dropdown .dropdown-button:hover {
+            background-color: #388E3C;
         }
         
         .dropdown-content {
@@ -89,10 +167,11 @@
             position: absolute;
             right: 0;
             background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            min-width: 180px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
             border-radius: 4px;
+            border: 1px solid #ddd;
         }
         
         .dropdown:hover .dropdown-content {
@@ -101,13 +180,17 @@
         
         .dropdown-content a {
             color: #333;
-            padding: 12px 16px;
+            padding: 8px 12px;
             text-decoration: none;
             display: block;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
         }
         
         .dropdown-content a:hover {
-            background-color: #B3E5FC;
+            background-color: #E0F7FA;
+            color: #FF6F00;
         }
         
         .dropdown-content a.active {
@@ -115,7 +198,7 @@
             color: #FF6F00;
             font-weight: bold;
         }
-        
+
         /* Back button */
         .back-button {
             background-color: #0277BD;
@@ -125,7 +208,9 @@
             text-decoration: none;
             font-weight: 600;
             display: inline-block;
-            margin-top: 20px;
+            margin: 20px 0;
+            max-width: 1200px;
+            margin-left: calc((100% - 1200px) / 2);
         }
         
         .back-button:hover {
@@ -134,68 +219,52 @@
         
         /* Game title */
         .game-title {
-            color: #FF6F00;
+            color: #FF6F00; /* 经典暖色标题 */
             text-align: center;
-            margin: 2rem 0;
-            font-size: 2.5rem;
-            font-weight: 700;
+            margin: 30px 0;
+            font-size: 32px;
         }
         
         /* Game container */
         .game-container {
-            margin: 2rem 0;
-            padding: 2rem;
+            margin: 20px auto;
+            max-width: 900px;
+            height: 700px;
+            border: 2px solid #B3E5FC;
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         
-        .game-description {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        .game-controls {
-            background-color: #F5F5F5;
-            padding: 1.5rem;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-        }
-        
-        .game-controls h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-        
-        .game-controls ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .game-controls li {
-            margin-bottom: 0.5rem;
-            color: #666;
-        }
-        
-        .game-area {
+        .game-container iframe {
             width: 100%;
-            height: 600px;
-            background-color: #F5F5F5;
-            border-radius: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
+            height: 100%;
+            border: none;
+            display: block;
         }
         
-        #gameCanvas {
-            background-color: #000;
-            border: 2px solid #333;
-            border-radius: 4px;
+        /* Game information sections */
+        .info-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px auto;
+            max-width: 1200px;  /* 修改为与container相同的宽度 */
+            padding: 0 15px;
+        }
+        
+        .info-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 580px;  /* 增加最大宽度 */
+        }
+        
+        .info-title {
+            color: #FF6F00; /* 经典暖色标题 */
+            font-size: 20px;
+            margin-bottom: 15px;
         }
         
         /* Footer */
@@ -203,25 +272,27 @@
             background-color: #4FC3F7;
             color: white;
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid #B2EBF2;
+            padding: 20px 0;
+            margin-top: 50px;
         }
         
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 20px;
         }
         
         .footer-links a {
-            color: #0277BD;
+            color: white;
             text-decoration: none;
         }
         
         .footer-links a:hover {
             text-decoration: underline;
-            color: #FF6F00;
+        }
+        
+        .list-item {
+            margin-bottom: 8px;
         }
         
         /* Responsive design */
@@ -240,8 +311,12 @@
                 width: 100%;
             }
             
+            .info-container {
+                grid-template-columns: 1fr;
+            }
+            
             .game-container {
-                height: 600px;
+                height: 550px;
             }
             
             .footer-links {
@@ -249,31 +324,80 @@
                 gap: 10px;
             }
         }
-    /* Discord invite link style */
-.discord-invite {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
 
-.discord-invite:hover {
-    background-color: #388E3C;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-</style>
+        /* Discord invite link style */
+        .discord-invite {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .discord-invite:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+            
+            .search-container {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .search-input {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+            
+            .search-button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .language-dropdown {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .language-dropdown .dropdown-button {
+                width: 100%;
+                text-align: center;
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .language-content {
+                width: 100%;
+                position: static;
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-top: 5px;
+                display: none;
+            }
+            
+            .language-dropdown:hover .language-content {
+                display: block;
+            }
+        }</style>
 </head>
 <body>
     <header>
@@ -311,12 +435,12 @@
             <div class="game-controls">
                 <h3>游戏控制</h3>
                 <ul>
-                    <li>�?向上移动</li>
-                    <li>�?向下移动</li>
-                    <li>�?向左移动</li>
-                    <li>�?向右移动</li>
-                    <li>空格�?- 开�?暂停游戏</li>
-                    <li>R�?- 重新开始游�?/li>
+                    <li>�?向上移动</li>
+                    <li>�?向下移动</li>
+                    <li>�?向左移动</li>
+                    <li>�?向右移动</li>
+                    <li>空格�?- 开�?暂停游戏</li>
+                    <li>R�?- 重新开始游�?/li>
                 </ul>
             </div>
             
@@ -340,173 +464,120 @@
     </footer>
 
     <script>
-        class Snake {
-            constructor() {
-                this.canvas = document.getElementById('gameCanvas');
-                this.ctx = this.canvas.getContext('2d');
-                this.gridSize = 20;
-                this.snake = [{x: 10, y: 10}];
-                this.food = this.generateFood();
-                this.direction = 'right';
-                this.nextDirection = 'right';
-                this.score = 0;
-                this.gameOver = false;
-                this.paused = false;
-                
-                this.setupEventListeners();
-                this.gameLoop();
-            }
-            
-            generateFood() {
-                const x = Math.floor(Math.random() * (this.canvas.width / this.gridSize));
-                const y = Math.floor(Math.random() * (this.canvas.height / this.gridSize));
-                return {x, y};
-            }
-            
-            setupEventListeners() {
-                document.addEventListener('keydown', (e) => {
-                    switch(e.key) {
-                        case 'ArrowUp':
-                            if (this.direction !== 'down') this.nextDirection = 'up';
-                            break;
-                        case 'ArrowDown':
-                            if (this.direction !== 'up') this.nextDirection = 'down';
-                            break;
-                        case 'ArrowLeft':
-                            if (this.direction !== 'right') this.nextDirection = 'left';
-                            break;
-                        case 'ArrowRight':
-                            if (this.direction !== 'left') this.nextDirection = 'right';
-                            break;
-                        case ' ':
-                            this.paused = !this.paused;
-                            break;
-                        case 'r':
-                        case 'R':
-                            this.reset();
-                            break;
+                document.addEventListener('DOMContentLoaded', function() {
+                    const searchInput = document.getElementById('search-input');
+                    const searchButton = document.getElementById('search-button');
+                    
+                    function performSearch(term) {
+                        if (term) {
+                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
+                        }
+                    }
+                    
+                    if (searchButton) {
+                        searchButton.addEventListener('click', function() {
+                            const term = searchInput.value.trim();
+                            performSearch(term);
+                        });
+                    }
+                    
+                    if (searchInput) {
+                        searchInput.addEventListener('keypress', function(e) {
+                            if (e.key === 'Enter') {
+                                const term = this.value.trim();
+                                performSearch(term);
+                            }
+                        });
                     }
                 });
-            }
-            
-            reset() {
-                this.snake = [{x: 10, y: 10}];
-                this.direction = 'right';
-                this.nextDirection = 'right';
-                this.food = this.generateFood();
-                this.score = 0;
-                this.gameOver = false;
-                this.paused = false;
-            }
-            
-            update() {
-                if (this.gameOver || this.paused) return;
-                
-                this.direction = this.nextDirection;
-                const head = {...this.snake[0]};
-                
-                switch(this.direction) {
-                    case 'up': head.y--; break;
-                    case 'down': head.y++; break;
-                    case 'left': head.x--; break;
-                    case 'right': head.x++; break;
-                }
-                
-                // 检查是否撞�?                if (head.x < 0 || head.x >= this.canvas.width / this.gridSize ||
-                    head.y < 0 || head.y >= this.canvas.height / this.gridSize) {
-                    this.gameOver = true;
-                    return;
-                }
-                
-                // 检查是否撞到自�?                for (let i = 1; i < this.snake.length; i++) {
-                    if (head.x === this.snake[i].x && head.y === this.snake[i].y) {
-                        this.gameOver = true;
-                        return;
-                    }
-                }
-                
-                this.snake.unshift(head);
-                
-                // 检查是否吃到食�?                if (head.x === this.food.x && head.y === this.food.y) {
-                    this.score += 10;
-                    this.food = this.generateFood();
-                } else {
-                    this.snake.pop();
-                }
-            }
-            
-            draw() {
-                // 清空画布
-                this.ctx.fillStyle = '#000';
-                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                // 绘制�?                this.ctx.fillStyle = '#4CAF50';
-                this.snake.forEach((segment, index) => {
-                    if (index === 0) {
-                        // 蛇头用不同的颜色
-                        this.ctx.fillStyle = '#388E3C';
-                    } else {
-                        this.ctx.fillStyle = '#4CAF50';
-                    }
-                    this.ctx.fillRect(
-                        segment.x * this.gridSize,
-                        segment.y * this.gridSize,
-                        this.gridSize - 1,
-                        this.gridSize - 1
-                    );
-                });
-                
-                // 绘制食物
-                this.ctx.fillStyle = '#FF5722';
-                this.ctx.fillRect(
-                    this.food.x * this.gridSize,
-                    this.food.y * this.gridSize,
-                    this.gridSize - 1,
-                    this.gridSize - 1
-                );
-                
-                // 绘制分数
-                this.ctx.fillStyle = '#FFF';
-                this.ctx.font = '20px Arial';
-                this.ctx.fillText(`Score: ${this.score}`, 10, 30);
-                
-                if (this.gameOver) {
-                    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-                    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-                    this.ctx.fillStyle = '#FFF';
-                    this.ctx.font = '30px Arial';
-                    this.ctx.textAlign = 'center';
-                    this.ctx.fillText('Game Over!', this.canvas.width / 2, this.canvas.height / 2);
-                    this.ctx.font = '20px Arial';
-                    this.ctx.fillText('Press R to restart', this.canvas.width / 2, this.canvas.height / 2 + 40);
-                }
-                
-                if (this.paused) {
-                    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-                    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-                    this.ctx.fillStyle = '#FFF';
-                    this.ctx.font = '30px Arial';
-                    this.ctx.textAlign = 'center';
-                    this.ctx.fillText('Paused', this.canvas.width / 2, this.canvas.height / 2);
-                }
-            }
-            
-            gameLoop() {
-                this.update();
-                this.draw();
-                setTimeout(() => this.gameLoop(), 100);
-            }
-        }
-        
-        // 初始化游�?        window.addEventListener('load', function() {
-            new Snake();
-        });
-    </script>
-        <!-- Discord invite link -->
+            </script>
+            <!-- Discord invite link -->
     <a href="https://discord.gg/cNqwCq4q7y" class="discord-invite" target="_blank">
         👉 Join Discord
     </a>
+
+    <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const searchInput = document.getElementById('search-input');
+                    const searchButton = document.getElementById('search-button');
+                    
+                    function performSearch(term) {
+                        if (term) {
+                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
+                        }
+                    }
+                    
+                    if (searchButton) {
+                        searchButton.addEventListener('click', function() {
+                            const term = searchInput.value.trim();
+                            performSearch(term);
+                        });
+                    }
+                    
+                    if (searchInput) {
+                        searchInput.addEventListener('keypress', function(e) {
+                            if (e.key === 'Enter') {
+                                const term = this.value.trim();
+                                performSearch(term);
+                            }
+                        });
+                    }
+                });
+            </script>
+
+    <script src="../js/games-data.js"></script>
+    <script>
+        function performSearch(term) {
+            if (!term) return;
+            // 从games目录跳转到主页
+            window.location.href = '../index.html?search=' + encodeURIComponent(term);
+        }
+
+        // 等待DOM加载完成
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeSearch);
+        } else {
+            initializeSearch();
+        }
+
+        function initializeSearch() {
+            const searchForm = document.querySelector('.search-form');
+            const searchInput = document.querySelector('.search-input');
+            const searchButton = document.querySelector('.search-button');
+            
+            // 添加表单提交事件
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    performSearch(searchInput.value.trim());
+                });
+            }
+            
+            // 添加按钮点击事件
+            if (searchButton) {
+                searchButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    performSearch(searchInput.value.trim());
+                });
+            }
+            
+            // 添加输入框回车事件
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        performSearch(this.value.trim());
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html> 
+
+
+
+
+
 
 

@@ -10,7 +10,7 @@
         /* Base colors and styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #E0F7FA; /* 浅蓝色背�?*/
+            background-color: #E0F7FA; /* 浅蓝色背景 */
             color: #333333;
             margin: 0;
             padding: 0;
@@ -44,16 +44,18 @@
         /* Search bar */
         .search-container {
             display: flex;
-            margin: 0 auto;
-            flex: 1;
-            max-width: 500px;
+            margin: 0 auto;  /* 修改为auto实现居中 */
+            flex: 1;        /* 添加flex:1使其占据剩余空间 */
+            max-width: 500px;  /* 增加最大宽度 */
         }
         
         .search-input {
             padding: 8px 12px;
             border: none;
             border-radius: 4px 0 0 4px;
-            width: 100%;
+            width: 100%;    /* 修改为100%填充容器 */
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
         }
         
         .search-button {
@@ -63,7 +65,14 @@
             padding: 8px 16px;
             border-radius: 0 4px 4px 0;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        
+        .search-button:hover {
+            background-color: #388E3C;
         }
         
         /* Language dropdown */
@@ -73,15 +82,37 @@
             margin-right: 5px;
         }
         
+        .language-dropdown .dropdown-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+        
+        .language-dropdown .dropdown-button:hover {
+            background-color: #388E3C;
+        }
+        
         .language-content {
             display: none;
             position: absolute;
             right: 0;
             background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            min-width: 180px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
             border-radius: 4px;
+            border: 1px solid #ddd;
         }
         
         .language-dropdown:hover .language-content {
@@ -90,13 +121,17 @@
         
         .language-content a {
             color: #333;
-            padding: 12px 16px;
+            padding: 8px 12px;
             text-decoration: none;
             display: block;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
         }
         
         .language-content a:hover {
-            background-color: #B3E5FC;
+            background-color: #E0F7FA;
+            color: #FF6F00;
         }
         
         /* Game navigation dropdown */
@@ -106,13 +141,25 @@
             margin-left: 10px;
         }
         
-        .dropdown-button {
+        .dropdown .dropdown-button {
             background-color: #4CAF50;
             color: white;
             border: none;
             padding: 8px 16px;
             border-radius: 4px;
             cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+        
+        .dropdown .dropdown-button:hover {
+            background-color: #388E3C;
         }
         
         .dropdown-content {
@@ -120,10 +167,11 @@
             position: absolute;
             right: 0;
             background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            min-width: 180px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
             border-radius: 4px;
+            border: 1px solid #ddd;
         }
         
         .dropdown:hover .dropdown-content {
@@ -132,19 +180,41 @@
         
         .dropdown-content a {
             color: #333;
-            padding: 12px 16px;
+            padding: 8px 12px;
             text-decoration: none;
             display: block;
+            transition: background-color 0.2s, color 0.2s;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
         }
         
         .dropdown-content a:hover {
-            background-color: #B3E5FC;
+            background-color: #E0F7FA;
+            color: #FF6F00;
         }
         
         .dropdown-content a.active {
             background-color: #E0F7FA;
             color: #FF6F00;
             font-weight: bold;
+        }
+
+        /* Back button */
+        .back-button {
+            background-color: #0277BD;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 20px 0;
+            max-width: 1200px;
+            margin-left: calc((100% - 1200px) / 2);
+        }
+        
+        .back-button:hover {
+            background-color: #01579B;
         }
         
         /* Game title */
@@ -179,7 +249,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin: 30px auto;
-            max-width: 1200px;
+            max-width: 1200px;  /* 修改为与container相同的宽度 */
             padding: 0 15px;
         }
         
@@ -188,31 +258,13 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            max-width: 580px;
+            max-width: 580px;  /* 增加最大宽度 */
         }
         
         .info-title {
-            color: #FF6F00;
+            color: #FF6F00; /* 经典暖色标题 */
             font-size: 20px;
             margin-bottom: 15px;
-        }
-        
-        /* Back button */
-        .back-button {
-            background-color: #0277BD;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin: 20px 0;
-            max-width: 1200px;
-            margin-left: calc((100% - 1200px) / 2);
-        }
-        
-        .back-button:hover {
-            background-color: #01579B;
         }
         
         /* Footer */
@@ -272,40 +324,110 @@
                 gap: 10px;
             }
         }
-    /* Discord invite link style */
-.discord-invite {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
 
-.discord-invite:hover {
-    background-color: #388E3C;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-</style>
+        /* Discord invite link style */
+        .discord-invite {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .discord-invite:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+            
+            .search-container {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .search-input {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+            
+            .search-button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .language-dropdown {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .language-dropdown .dropdown-button {
+                width: 100%;
+                text-align: center;
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .language-content {
+                width: 100%;
+                position: static;
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-top: 5px;
+                display: none;
+            }
+            
+            .language-dropdown:hover .language-content {
+                display: block;
+            }
+        }</style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-LXKH7CR53S');
-    </script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const searchInput = document.getElementById('search-input');
+                    const searchButton = document.getElementById('search-button');
+                    
+                    function performSearch(term) {
+                        if (term) {
+                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
+                        }
+                    }
+                    
+                    if (searchButton) {
+                        searchButton.addEventListener('click', function() {
+                            const term = searchInput.value.trim();
+                            performSearch(term);
+                        });
+                    }
+                    
+                    if (searchInput) {
+                        searchInput.addEventListener('keypress', function(e) {
+                            if (e.key === 'Enter') {
+                                const term = this.value.trim();
+                                performSearch(term);
+                            }
+                        });
+                    }
+                });
+            </script>
 </head>
 <body>
     <header>
@@ -322,23 +444,18 @@
                     <button class="dropdown-button">Language</button>
                     <div class="language-content">
                         <a href="#" data-lang="en">English</a>
-                        <a href="#" data-lang="it">Italiano</a>
                         <a href="#" data-lang="de">Deutsch</a>
                         <a href="#" data-lang="es">Español</a>
-                        <a href="#" data-lang="ru">Русский</a>
-                        <a href="#" data-lang="zh">繁體中文</a>
-                        <a href="#" data-lang="fr">Français</a>
-                        <a href="#" data-lang="ja">日本�?/a>
-                        <a href="#" data-lang="ko">한국�?/a>
+                        <a href="#" data-lang="zh">简体中文</a>
                     </div>
                 </div>
                 
                 <div class="dropdown">
                     <button class="dropdown-button">Game Navigation</button>
                     <div class="dropdown-content">
-                        <a href="/pages/casual.html">Casual Games</a>
-                        <a href="/pages/brain.html">Brain Games</a>
-                        <a href="/pages/fast-paced.html">Fast-Paced Games</a>
+                        <a href="../pages/casual.html">Casual Games</a>
+                        <a href="../pages/brain.html">Brain Games</a>
+                        <a href="../pages/fast-paced.html">Fast-Paced Games</a>
                     </div>
                 </div>
             </div>
@@ -414,16 +531,98 @@
         </div>
     </footer>
 
-    <!-- 聊天框组�?-->
+    <!-- 聊天框组�?-->
     <script src="../js/chat-component.js"></script>
     
-    <!-- 排行榜组�?-->
+    <!-- 排行榜组�?-->
     <script src="../js/leaderboard.js"></script>
-        <!-- Discord invite link -->
+            <!-- Discord invite link -->
     <a href="https://discord.gg/cNqwCq4q7y" class="discord-invite" target="_blank">
         👉 Join Discord
     </a>
+
+    <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const searchInput = document.getElementById('search-input');
+                    const searchButton = document.getElementById('search-button');
+                    
+                    function performSearch(term) {
+                        if (term) {
+                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
+                        }
+                    }
+                    
+                    if (searchButton) {
+                        searchButton.addEventListener('click', function() {
+                            const term = searchInput.value.trim();
+                            performSearch(term);
+                        });
+                    }
+                    
+                    if (searchInput) {
+                        searchInput.addEventListener('keypress', function(e) {
+                            if (e.key === 'Enter') {
+                                const term = this.value.trim();
+                                performSearch(term);
+                            }
+                        });
+                    }
+                });
+            </script>
+
+    <script src="../js/games-data.js"></script>
+    <script>
+        function performSearch(term) {
+            if (!term) return;
+            // 从games目录跳转到主页
+            window.location.href = '../index.html?search=' + encodeURIComponent(term);
+        }
+
+        // 等待DOM加载完成
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeSearch);
+        } else {
+            initializeSearch();
+        }
+
+        function initializeSearch() {
+            const searchForm = document.querySelector('.search-form');
+            const searchInput = document.querySelector('.search-input');
+            const searchButton = document.querySelector('.search-button');
+            
+            // 添加表单提交事件
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    performSearch(searchInput.value.trim());
+                });
+            }
+            
+            // 添加按钮点击事件
+            if (searchButton) {
+                searchButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    performSearch(searchInput.value.trim());
+                });
+            }
+            
+            // 添加输入框回车事件
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        performSearch(this.value.trim());
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html> 
+
+
+
+
+
 
 

@@ -375,14 +375,81 @@
             color: #FF6F00;
         }
         
-        /* Responsive design */
+        /* 移动端优化 */
         @media (max-width: 768px) {
-            .main-title {
-                font-size: 2rem;
+            .header {
+                height: auto;
+                padding: 0.5rem 0;
             }
             
-            .games-grid {
-                grid-template-columns: 1fr;
+            .nav-container {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
+            
+            .language-dropdown,
+            .nav-dropdown {
+                width: 100%;
+            }
+            
+            .nav-button-common,
+            .language-button,
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+                height: auto;
+                padding: 0.5rem 1rem;
+            }
+            
+            .language-content,
+            .nav-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-top: 0.25rem;
+            }
+            
+            .dropdown-item {
+                text-align: center;
+                padding: 0.5rem;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+                margin-top: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .game-nav {
+                width: 100%;
+                position: static;
+                margin-bottom: 1rem;
+            }
+            
+            .game-nav:hover {
+                width: 100%;
+            }
+            
+            .search-container {
+                padding: 0 1rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .search-input {
+                width: 100%;
             }
         }
         
@@ -658,6 +725,7 @@
         </div>
     </div>
 
+    <script src="js/games-data.js"></script>
     <script>
         // 添加语言切换功能
         document.querySelectorAll('.language-content a').forEach(link => {
@@ -684,49 +752,90 @@
             });
         });
 
+        // 检查URL参数并执行搜索
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('search');
+            if (searchTerm) {
+                // 设置搜索框的值
+                const searchInput = document.querySelector('.search-input');
+                if (searchInput) {
+                    searchInput.value = searchTerm;
+                }
+                // 执行搜索
+                handleSearch({ preventDefault: () => {} });
+            }
+        }
+
+        // 搜索功能
         function handleSearch(event) {
             event.preventDefault();
-            const searchTerm = document.querySelector('.search-input').value.trim().toLowerCase();
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase().trim();
             const gamesGrid = document.querySelector('.games-grid');
             
+            // 使用games-data.js中的游戏库数据进行搜索
+            const matchingGames = allGames.filter(game => 
+                game.title.toLowerCase().includes(searchTerm) || 
+                game.description.toLowerCase().includes(searchTerm)
+            );
+
             // 清空当前显示的游戏
             gamesGrid.innerHTML = '';
-            
-            // 搜索所有游戏
-            const matchingGames = allGames.filter(game => {
-                const titleMatch = game.title.toLowerCase().includes(searchTerm);
-                const descriptionMatch = game.description.toLowerCase().includes(searchTerm);
-                return titleMatch || descriptionMatch;
+
+            if (matchingGames.length > 0) {
+                // 显示匹配的游戏
+                matchingGames.forEach(game => {
+                    const gameCard = document.createElement('div');
+                    gameCard.className = 'game-card';
+                    gameCard.innerHTML = `
+                        <img src="${game.image}" alt="${game.title}" class="game-image">
+                        <div class="game-content">
+                            <h2 class="game-title">${game.title}</h2>
+                            <p class="game-description">${game.description}</p>
+                            <a href="${game.link}" class="play-button">Play Now</a>
+                        </div>
+                    `;
+                    gamesGrid.appendChild(gameCard);
+                });
+            } else {
+                // 显示无结果消息
+                gamesGrid.innerHTML = '<div class="game-card" style="text-align: center; padding: 2rem;"><p class="game-description">No games found matching your search.</p></div>';
+            }
+        }
+
+        // 等待DOM加载完成
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initializeSearch();
+                checkUrlParams();
             });
+        } else {
+            initializeSearch();
+            checkUrlParams();
+        }
+
+        function initializeSearch() {
+            const searchForm = document.querySelector('.search-form');
+            const searchInput = document.querySelector('.search-input');
+            const searchButton = document.querySelector('.search-button');
             
-            // 显示匹配的游戏
-            matchingGames.forEach(game => {
-                const gameCard = document.createElement('div');
-                gameCard.className = 'game-card';
-                gameCard.innerHTML = `
-                    <img src="${game.image}" alt="${game.title}" class="game-image">
-                    <div class="game-content">
-                        <h2 class="game-title">${game.title}</h2>
-                        <p class="game-description">${game.description}</p>
-                        <a href="${game.link}" class="play-button">Play Now</a>
-                    </div>
-                `;
-                gamesGrid.appendChild(gameCard);
-            });
-            
-            // 如果没有找到匹配的游戏，显示提示信息
-            if (matchingGames.length === 0) {
-                const noResults = document.createElement('div');
-                noResults.className = 'no-results';
-                noResults.style.textAlign = 'center';
-                noResults.style.padding = '2rem';
-                noResults.style.fontSize = '1.2rem';
-                noResults.style.color = '#666';
-                noResults.textContent = 'No games found matching your search.';
-                gamesGrid.appendChild(noResults);
+            if (searchForm) {
+                searchForm.onsubmit = handleSearch;
             }
             
-            return false;
+            if (searchButton) {
+                searchButton.addEventListener('click', function(e) {
+                    handleSearch(e);
+                });
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleSearch(e);
+                    }
+                });
+            }
         }
     </script>
 </body>

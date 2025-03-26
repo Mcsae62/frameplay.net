@@ -24,6 +24,93 @@ $discordStyle = @"
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .search-input {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    
+    .search-button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .language-dropdown {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .language-dropdown .dropdown-button {
+        width: 100%;
+        text-align: center;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .language-content {
+        width: 100%;
+        position: static;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        margin-top: 5px;
+        display: none;
+    }
+    
+    .language-dropdown:hover .language-content {
+        display: block;
+    }
+    
+    .language-content a {
+        padding: 8px 12px;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .dropdown {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .dropdown .dropdown-button {
+        width: 100%;
+        text-align: center;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .dropdown-content {
+        width: 100%;
+        position: static;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        margin-top: 5px;
+    }
+    
+    .dropdown-content a {
+        padding: 8px 12px;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .logo {
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+    }
+}
 "@
 
 # Discord invite link HTML

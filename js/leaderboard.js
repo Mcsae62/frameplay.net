@@ -10,10 +10,22 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="leaderboard-container" class="leaderboard-container">
         <div class="leaderboard-header">
             <span class="leaderboard-title">Leaderboard</span>
-            <button id="leaderboard-toggle" class="leaderboard-toggle">-</button>
+            <div class="leaderboard-controls">
+                <button id="discord-login" class="discord-login-btn">
+                    <img src="../images/discord-icon.png" alt="Discord" class="discord-icon">
+                    Login with Discord
+                </button>
+                <button id="leaderboard-toggle" class="leaderboard-toggle">-</button>
+            </div>
         </div>
         <div id="leaderboard-body" class="leaderboard-body">
+            <div class="leaderboard-tabs">
+                <button class="tab-btn active" data-tab="global">Global</button>
+                <button class="tab-btn" data-tab="friends">Friends</button>
+                <button class="tab-btn" data-tab="achievements">Achievements</button>
+            </div>
             <div id="leaderboard-content" class="leaderboard-content"></div>
+            <div id="achievements-content" class="achievements-content" style="display: none;"></div>
         </div>
     </div>
     `;
@@ -26,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         position: fixed;
         top: 100px;
         right: 20px;
-        width: 200px;
+        width: 300px;
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -58,6 +70,35 @@ document.addEventListener('DOMContentLoaded', function() {
         text-overflow: ellipsis;
     }
     
+    .leaderboard-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .discord-login-btn {
+        background-color: #7289DA;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        transition: background-color 0.2s;
+    }
+    
+    .discord-login-btn:hover {
+        background-color: #5b6eae;
+    }
+    
+    .discord-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
     .leaderboard-toggle {
         background: none;
         border: none;
@@ -77,6 +118,27 @@ document.addEventListener('DOMContentLoaded', function() {
         display: none;
     }
     
+    .leaderboard-tabs {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        padding: 5px;
+        border: none;
+        background: #f0f0f0;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    
+    .tab-btn.active {
+        background: #FF6F00;
+        color: white;
+    }
+    
     .leaderboard-content {
         max-height: 300px;
         overflow-y: auto;
@@ -86,22 +148,65 @@ document.addEventListener('DOMContentLoaded', function() {
         padding: 8px;
         border-bottom: 1px solid #eee;
         display: flex;
-        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .player-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
     }
     
     .leaderboard-rank {
         font-weight: bold;
         color: #FF6F00;
-        margin-right: 10px;
+        min-width: 24px;
     }
     
     .leaderboard-name {
         flex-grow: 1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
     
     .leaderboard-score {
         font-weight: bold;
         color: #0277BD;
+    }
+    
+    .achievements-content {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .achievement-item {
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .achievement-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+    }
+    
+    .achievement-info {
+        flex-grow: 1;
+    }
+    
+    .achievement-title {
+        font-weight: bold;
+        color: #FF6F00;
+    }
+    
+    .achievement-description {
+        font-size: 12px;
+        color: #666;
     }
     
     /* 响应式设计 */
@@ -110,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
             top: auto;
             bottom: 80px;
             right: 10px;
-            width: 180px;
+            width: 280px;
             transform-origin: bottom right;
         }
         
@@ -120,8 +225,14 @@ document.addEventListener('DOMContentLoaded', function() {
             height: 40px;
         }
         
-        .leaderboard-content {
+        .leaderboard-content,
+        .achievements-content {
             max-height: 200px;
+        }
+        
+        .discord-login-btn {
+            padding: 4px 8px;
+            font-size: 10px;
         }
     }
     
@@ -205,40 +316,105 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
     `;
+    
     document.body.insertAdjacentHTML('beforeend', scoreModalHTML);
     
-    // 添加排行榜切换功能
-    document.getElementById('leaderboard-toggle').addEventListener('click', function() {
-        const container = document.getElementById('leaderboard-container');
-        const toggleBtn = document.getElementById('leaderboard-toggle');
-        
-        if (container.classList.contains('minimized')) {
-            container.classList.remove('minimized');
-            toggleBtn.textContent = '-';
-        } else {
-            container.classList.add('minimized');
-            toggleBtn.textContent = '+';
-        }
+    // 初始化Discord登录
+    const discordLoginBtn = document.getElementById('discord-login');
+    discordLoginBtn.addEventListener('click', function() {
+        // 重定向到Discord OAuth2登录页面
+        window.location.href = 'https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=identify%20email';
+    });
+    
+    // 初始化标签页切换
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const leaderboardContent = document.getElementById('leaderboard-content');
+    const achievementsContent = document.getElementById('achievements-content');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // 移除所有活动状态
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            // 添加当前活动状态
+            this.classList.add('active');
+            
+            // 切换内容
+            if (this.dataset.tab === 'achievements') {
+                leaderboardContent.style.display = 'none';
+                achievementsContent.style.display = 'block';
+                loadAchievements();
+            } else {
+                leaderboardContent.style.display = 'block';
+                achievementsContent.style.display = 'none';
+                loadLeaderboard(this.dataset.tab);
+            }
+        });
     });
     
     // 初始化排行榜
     initLeaderboard();
     
-    // 检测屏幕尺寸，在小屏幕上默认最小化排行榜
-    function checkScreenSize() {
-        const container = document.getElementById('leaderboard-container');
-        const toggleBtn = document.getElementById('leaderboard-toggle');
-        
-        if (window.innerWidth <= 768) {
-            container.classList.add('minimized');
-            toggleBtn.textContent = '+';
+    // 设置实时更新
+    setInterval(() => {
+        const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
+        if (activeTab !== 'achievements') {
+            loadLeaderboard(activeTab);
         }
-    }
-    
-    // 页面加载和窗口大小改变时检测屏幕尺寸
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
+    }, 30000); // 每30秒更新一次
 });
+
+// 加载成就
+function loadAchievements() {
+    const achievementsContent = document.getElementById('achievements-content');
+    const gameType = getCurrentGameType();
+    
+    // 这里应该从服务器获取成就数据
+    const achievements = [
+        {
+            id: 'first_win',
+            title: 'First Victory',
+            description: 'Win your first game',
+            icon: '../images/achievements/first-win.png',
+            unlocked: true
+        },
+        {
+            id: 'high_score',
+            title: 'High Score Master',
+            description: 'Reach the top 10 on the leaderboard',
+            icon: '../images/achievements/high-score.png',
+            unlocked: false
+        },
+        // 添加更多成就...
+    ];
+    
+    achievementsContent.innerHTML = achievements.map(achievement => `
+        <div class="achievement-item ${achievement.unlocked ? 'unlocked' : 'locked'}">
+            <img src="${achievement.icon}" alt="${achievement.title}" class="achievement-icon">
+            <div class="achievement-info">
+                <div class="achievement-title">${achievement.title}</div>
+                <div class="achievement-description">${achievement.description}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// 加载排行榜
+function loadLeaderboard(type) {
+    const leaderboardContent = document.getElementById('leaderboard-content');
+    const gameType = getCurrentGameType();
+    
+    // 这里应该从服务器获取排行榜数据
+    const leaderboard = getLeaderboard(gameType);
+    
+    leaderboardContent.innerHTML = leaderboard.map((entry, index) => `
+        <div class="leaderboard-item">
+            <div class="leaderboard-rank">#${index + 1}</div>
+            <img src="${entry.avatar || '../images/default-avatar.png'}" alt="${entry.name}" class="player-avatar">
+            <div class="leaderboard-name">${entry.name}</div>
+            <div class="leaderboard-score">${entry.score}</div>
+        </div>
+    `).join('');
+}
 
 // 初始化排行榜
 function initLeaderboard() {
@@ -390,4 +566,25 @@ function showScoreModal(score) {
 function closeScoreModal() {
     document.getElementById('score-modal').style.display = 'none';
     document.getElementById('player-name').value = '';
-} 
+}
+
+// 搜索功能
+function performSearch(term) {
+    if (term) {
+        window.location.href = `search-results.html?q=${encodeURIComponent(term)}`;
+    }
+}
+
+// 搜索按钮点击事件
+document.getElementById('search-button').addEventListener('click', function() {
+    const term = document.getElementById('search-input').value.trim();
+    performSearch(term);
+});
+
+// 回车键搜索
+document.getElementById('search-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        const term = this.value.trim();
+        performSearch(term);
+    }
+}); 

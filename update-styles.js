@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play Soccer Champ 2018 online for free at FramePlay.net. Test your timing and precision in this exciting soccer game where perfect kicks earn bonus time and high scores.">
-    <title>Soccer Champ 2018 - FramePlay.net</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
+const fs = require('fs');
+const path = require('path');
+
+// 要更新的样式
+const newStyles = `
         /* Base colors and styles */
         body {
             font-family: 'Arial', sans-serif;
@@ -397,186 +393,15 @@
             .language-dropdown:hover .language-content {
                 display: block;
             }
-        }</style>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
-    <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const searchInput = document.getElementById('search-input');
-                    const searchButton = document.getElementById('search-button');
-                    
-                    function performSearch(term) {
-                        if (term) {
-                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
-                        }
-                    }
-                    
-                    if (searchButton) {
-                        searchButton.addEventListener('click', function() {
-                            const term = searchInput.value.trim();
-                            performSearch(term);
-                        });
-                    }
-                    
-                    if (searchInput) {
-                        searchInput.addEventListener('keypress', function(e) {
-                            if (e.key === 'Enter') {
-                                const term = this.value.trim();
-                                performSearch(term);
-                            }
-                        });
-                    }
-                });
-            </script>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="../index.html" class="logo">frameplay.net</a>
-                
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Search games...">
-                    <button class="search-button">Search</button>
-                </div>
-                
-                <div class="language-dropdown">
-                    <button class="dropdown-button">Language</button>
-                    <div class="language-content">
-                        <a href="#" data-lang="en">English</a>
-                        <a href="#" data-lang="de">Deutsch</a>
-                        <a href="#" data-lang="es">Español</a>
-                        <a href="#" data-lang="zh">简体中文</a>
-                    </div>
-                </div>
-                
-                <div class="dropdown">
-                    <button class="dropdown-button">Game Navigation</button>
-                    <div class="dropdown-content">
-                        <a href="../pages/casual.html">Casual Games</a>
-                        <a href="../pages/brain.html">Brain Games</a>
-                        <a href="../pages/fast-paced.html">Fast-Paced Games</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <h1 class="game-title">Soccer Champ 2018</h1>
-    
-    <div class="game-container">
-        <iframe 
-            src="https://play.famobi.com/soccer-champ-2018" 
-            title="Soccer Champ 2018"
-            class="game-frame"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-    
-    <div class="info-container">
-        <div class="info-box">
-            <h2 class="info-title">Game Description</h2>
-            <p>Wait for the perfect moment to kick the ball and become a true Soccer Champ! Score as many points as you can in this skill-based sports game and be quick as the time is limited. A perfect kick will give you bonus time, whereas missing a ball will give you a time penalty. How far can you go?</p>
-        </div>
-        
-        <div class="info-box">
-            <h2 class="info-title">How to Play</h2>
-            <ul>
-                <li>Click or tap at the right moment to kick the ball</li>
-                <li>Watch the timing indicator for perfect kicks</li>
-                <li>Score points by successfully kicking the ball</li>
-                <li>Earn bonus time with perfect kicks</li>
-                <li>Avoid missing the ball to prevent time penalties</li>
-                <li>Try to achieve the highest score possible</li>
-            </ul>
-        </div>
-        
-        <div class="info-box">
-            <h2 class="info-title">Game Features</h2>
-            <ul>
-                <li>Simple one-click gameplay mechanics</li>
-                <li>Timing-based scoring system</li>
-                <li>Bonus time rewards for perfect kicks</li>
-                <li>Time penalty system for missed shots</li>
-                <li>High score tracking</li>
-                <li>Quick and engaging matches</li>
-                <li>Suitable for all ages</li>
-            </ul>
-        </div>
-        
-        <div class="info-box">
-            <h2 class="info-title">Tips & Strategies</h2>
-            <ul>
-                <li>Focus on the timing indicator for perfect kicks</li>
-                <li>Practice your timing to maximize bonus time</li>
-                <li>Stay calm and don't rush your kicks</li>
-                <li>Watch for patterns in ball movement</li>
-                <li>Try to maintain a consistent rhythm</li>
-                <li>Use the sound cues to help with timing</li>
-                <li>Start slow and gradually increase your pace</li>
-            </ul>
-        </div>
-    </div>
-    
-    <a href="../index.html" class="back-button">Back to Home</a>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/policy">Usage Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="/contact">Contact Us</a>
-            </div>
-        </div>
-    </footer>
+        }`;
 
-    <!-- 聊天框组�?-->
-    <script src="../js/chat-component.js"></script>
-    
-    <!-- 排行榜组�?-->
-    <script src="../js/leaderboard.js"></script>
-            <!-- Discord invite link -->
-    <a href="https://discord.gg/cNqwCq4q7y" class="discord-invite" target="_blank">
-        👉 Join Discord
-    </a>
-
-    <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const searchInput = document.getElementById('search-input');
-                    const searchButton = document.getElementById('search-button');
-                    
-                    function performSearch(term) {
-                        if (term) {
-                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
-                        }
-                    }
-                    
-                    if (searchButton) {
-                        searchButton.addEventListener('click', function() {
-                            const term = searchInput.value.trim();
-                            performSearch(term);
-                        });
-                    }
-                    
-                    if (searchInput) {
-                        searchInput.addEventListener('keypress', function(e) {
-                            if (e.key === 'Enter') {
-                                const term = this.value.trim();
-                                performSearch(term);
-                            }
-                        });
-                    }
-                });
-            </script>
-
+const newScripts = `
     <script src="../js/games-data.js"></script>
     <script>
         function performSearch(term) {
             if (!term) return;
-            // 从games目录跳转到主页
-            window.location.href = '../index.html?search=' + encodeURIComponent(term);
+            // 修正路径，从games目录跳转到主页
+            window.location.href = '../../index.html?search=' + encodeURIComponent(term);
         }
 
         // 等待DOM加载完成
@@ -618,12 +443,73 @@
             }
         }
     </script>
-</body>
-</html> 
+`;
 
+// 读取并更新文件
+function updateFile(filePath) {
+    try {
+        let content = fs.readFileSync(filePath, 'utf8');
+        
+        // 找到样式开始和结束的位置
+        const styleStart = content.indexOf('<style>');
+        const styleEnd = content.indexOf('</style>');
+        
+        // 更新导航链接
+        content = content.replace(
+            /href="\/pages\/(casual|brain|fast-paced)\.html"/g,
+            'href="../pages/$1.html"'
+        );
+        
+        // 更新语言选项
+        content = content.replace(
+            /<div class="language-content">[\s\S]*?<\/div>/,
+            `<div class="language-content">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="de">Deutsch</a>
+                        <a href="#" data-lang="es">Español</a>
+                        <a href="#" data-lang="zh">简体中文</a>
+                    </div>`
+        );
+        
+        // 更新搜索功能
+        if (!content.includes('performSearch')) {
+            content = content.replace(
+                /<\/body>/,
+                newScripts + '</body>'
+            );
+        }
+        
+        if (styleStart !== -1 && styleEnd !== -1) {
+            // 获取原始内容中的游戏特定样式
+            const originalContent = content.substring(styleStart + 7, styleEnd);
+            const gameSpecificStyles = originalContent.match(/\/\* Game specific styles \*\/[\s\S]*?(?=\/\*|$)/);
+            
+            // 替换样式部分，保留游戏特定样式
+            content = content.substring(0, styleStart) + '<style>' + newStyles + 
+                     (gameSpecificStyles ? gameSpecificStyles[0] : '') + 
+                     '</style>' + content.substring(styleEnd + 8);
+            
+            fs.writeFileSync(filePath, content, 'utf8');
+            console.log(`Updated styles in ${filePath}`);
+        } else {
+            console.log(`No style section found in ${filePath}`);
+        }
+    } catch (error) {
+        console.error(`Error processing ${filePath}:`, error);
+    }
+}
 
+// 处理games目录下的所有HTML文件
+const gamesDir = path.join(__dirname, 'games');
+fs.readdir(gamesDir, (err, files) => {
+    if (err) {
+        console.error('Error reading games directory:', err);
+        return;
+    }
 
-
-
-
-
+    files.forEach(file => {
+        if (file.endsWith('.html') && file !== '2048.html' && file !== 'tetris.html') {
+            updateFile(path.join(gamesDir, file));
+        }
+    });
+}); 
