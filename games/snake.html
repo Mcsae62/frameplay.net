@@ -249,7 +249,31 @@
                 gap: 10px;
             }
         }
-    </style>
+    /* Discord invite link style */
+.discord-invite {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.discord-invite:hover {
+    background-color: #388E3C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+</style>
 </head>
 <body>
     <header>
@@ -287,12 +311,12 @@
             <div class="game-controls">
                 <h3>游戏控制</h3>
                 <ul>
-                    <li>↑ 向上移动</li>
-                    <li>↓ 向下移动</li>
-                    <li>← 向左移动</li>
-                    <li>→ 向右移动</li>
-                    <li>空格键 - 开始/暂停游戏</li>
-                    <li>R键 - 重新开始游戏</li>
+                    <li>�?向上移动</li>
+                    <li>�?向下移动</li>
+                    <li>�?向左移动</li>
+                    <li>�?向右移动</li>
+                    <li>空格�?- 开�?暂停游戏</li>
+                    <li>R�?- 重新开始游�?/li>
                 </ul>
             </div>
             
@@ -388,15 +412,13 @@
                     case 'right': head.x++; break;
                 }
                 
-                // 检查是否撞墙
-                if (head.x < 0 || head.x >= this.canvas.width / this.gridSize ||
+                // 检查是否撞�?                if (head.x < 0 || head.x >= this.canvas.width / this.gridSize ||
                     head.y < 0 || head.y >= this.canvas.height / this.gridSize) {
                     this.gameOver = true;
                     return;
                 }
                 
-                // 检查是否撞到自己
-                for (let i = 1; i < this.snake.length; i++) {
+                // 检查是否撞到自�?                for (let i = 1; i < this.snake.length; i++) {
                     if (head.x === this.snake[i].x && head.y === this.snake[i].y) {
                         this.gameOver = true;
                         return;
@@ -405,8 +427,7 @@
                 
                 this.snake.unshift(head);
                 
-                // 检查是否吃到食物
-                if (head.x === this.food.x && head.y === this.food.y) {
+                // 检查是否吃到食�?                if (head.x === this.food.x && head.y === this.food.y) {
                     this.score += 10;
                     this.food = this.generateFood();
                 } else {
@@ -419,8 +440,7 @@
                 this.ctx.fillStyle = '#000';
                 this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
                 
-                // 绘制蛇
-                this.ctx.fillStyle = '#4CAF50';
+                // 绘制�?                this.ctx.fillStyle = '#4CAF50';
                 this.snake.forEach((segment, index) => {
                     if (index === 0) {
                         // 蛇头用不同的颜色
@@ -478,10 +498,15 @@
             }
         }
         
-        // 初始化游戏
-        window.addEventListener('load', function() {
+        // 初始化游�?        window.addEventListener('load', function() {
             new Snake();
         });
     </script>
+        <!-- Discord invite link -->
+    <a href="https://discord.gg/cNqwCq4q7y" class="discord-invite" target="_blank">
+        👉 Join Discord
+    </a>
 </body>
 </html> 
+
+

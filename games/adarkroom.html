@@ -9,7 +9,7 @@
         /* Base colors and styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #E0F7FA; /* 浅蓝色背景 */
+            background-color: #E0F7FA; /* 浅蓝色背�?*/
             color: #333333;
             margin: 0;
             padding: 0;
@@ -231,7 +231,31 @@
                 gap: 10px;
             }
         }
-    </style>
+    /* Discord invite link style */
+.discord-invite {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.discord-invite:hover {
+    background-color: #388E3C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+</style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
     <script>
@@ -339,10 +363,16 @@
         </div>
     </footer>
 
-    <!-- 聊天框组件 -->
+    <!-- 聊天框组�?-->
     <script src="../js/chat-component.js"></script>
     
-    <!-- 排行榜组件 -->
+    <!-- 排行榜组�?-->
     <script src="../js/leaderboard.js"></script>
+        <!-- Discord invite link -->
+    <a href="https://discord.gg/cNqwCq4q7y" class="discord-invite" target="_blank">
+        👉 Join Discord
+    </a>
 </body>
 </html> 
+
+

@@ -385,6 +385,93 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* 添加 Discord Widget 样式 */
+        .discord-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background: white;
+            padding: 15px;
+            max-width: 280px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            border: 1px solid #E0E0E0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .discord-widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .discord-widget h2 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #FF6F00;
+            font-weight: 600;
+        }
+        
+        .discord-widget p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        
+        .discord-widget a {
+            display: inline-block;
+            margin: 8px 0;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+        
+        .discord-widget a:hover {
+            background-color: #388E3C;
+        }
+        
+        .discord-widget .footer-text {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            .discord-widget {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                max-width: 100%;
+                border-radius: 8px 8px 0 0;
+                margin: 0;
+                transform: translateY(calc(100% - 60px));
+                transition: transform 0.3s ease;
+            }
+            
+            .discord-widget:hover {
+                transform: translateY(0);
+            }
+            
+            .discord-widget .content {
+                display: none;
+            }
+            
+            .discord-widget:hover .content {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -551,13 +638,26 @@
                 <a href="pages/contact.html">Contact Us</a>
             </div>
         </footer>
+        
+        <!-- Discord Widget -->
+        <div class="discord-widget">
+            <div class="content">
+                <h2>💬 Join Frame Quest Lounge</h2>
+                <p>
+                    A cozy side-quest lounge for gamers, creatives, and curious minds.<br>
+                    Whether you're here to chat, explore, or simply vibe — Lillian's waiting 🐾
+                </p>
+                <a href="https://discord.gg/cNqwCq4q7y" target="_blank">
+                    👉 Join the Lounge Now
+                </a>
+                <p class="footer-text">
+                    No signup needed. Just one click to enter.<br>
+                    Warm wishes from Lillian 🐾
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- 聊天框组件 -->
-    <script src="js/chat-component.js"></script>
-    <script src="js/translations.js"></script>
-    <script src="js/language.js"></script>
-    <script src="js/games-data.js"></script>
     <script>
         // 添加语言切换功能
         document.querySelectorAll('.language-content a').forEach(link => {
