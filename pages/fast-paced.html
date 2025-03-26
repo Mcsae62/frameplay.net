@@ -275,6 +275,12 @@
 
         <main>
             <h1 class="category-title">Fast-Paced Games</h1>
+            <div class="search-container">
+                <form class="search-form" onsubmit="return handleSearch(event)">
+                    <input type="text" class="search-input" placeholder="Search games...">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>
             <div class="games-grid">
                 <div class="game-card">
                     <img src="../resized_images/Om Nom Run-demo.jpeg" alt="Om Nom Run" class="game-image">
@@ -576,6 +582,8 @@
         </footer>
     </div>
 
+    <script src="../js/translations.js"></script>
+    <script src="../js/language.js"></script>
     <script>
         // 添加语言切换功能
         document.querySelectorAll('.language-content a').forEach(link => {
@@ -590,6 +598,25 @@
         function changeLanguage(lang) {
             console.log('Changing language to: ' + lang);
             // TODO: 实现实际的语言切换功能
+        }
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const searchTerm = document.querySelector('.search-input').value.trim().toLowerCase();
+            const gameCards = document.querySelectorAll('.game-card');
+            
+            gameCards.forEach(card => {
+                const title = card.querySelector('.game-title').textContent.toLowerCase();
+                const description = card.querySelector('.game-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            return false;
         }
     </script>
 </body>

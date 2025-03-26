@@ -424,8 +424,8 @@
             <p class="subtitle">Enjoy Free Classic Online Puzzle Games</p>
             
             <div class="search-container">
-                <form class="search-form" action="/search" method="GET">
-                    <input type="text" class="search-input" name="q" placeholder="Search games...">
+                <form class="search-form" onsubmit="return handleSearch(event)">
+                    <input type="text" class="search-input" placeholder="Search games...">
                     <button type="submit" class="search-button">Search</button>
                 </form>
             </div>
@@ -558,22 +558,20 @@
     <script src="js/chat-component.js"></script>
     <script src="js/translations.js"></script>
     <script src="js/language.js"></script>
+    <script src="js/games-data.js"></script>
     <script>
         // 添加语言切换功能
         document.querySelectorAll('.language-content a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const lang = this.getAttribute('data-lang');
-                // 保存语言选择
                 localStorage.setItem('preferred_language', lang);
-                // 切换网站语言
                 changeLanguage(lang);
             });
         });
 
         // 语言切换函数
         function changeLanguage(lang) {
-            // 这里将添加实际的语言切换逻辑
             console.log('Changing language to: ' + lang);
             // TODO: 实现实际的语言切换功能
         }
@@ -586,6 +584,51 @@
                 window.location.href = `/pages/${category.toLowerCase()}.html`;
             });
         });
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const searchTerm = document.querySelector('.search-input').value.trim().toLowerCase();
+            const gamesGrid = document.querySelector('.games-grid');
+            
+            // 清空当前显示的游戏
+            gamesGrid.innerHTML = '';
+            
+            // 搜索所有游戏
+            const matchingGames = allGames.filter(game => {
+                const titleMatch = game.title.toLowerCase().includes(searchTerm);
+                const descriptionMatch = game.description.toLowerCase().includes(searchTerm);
+                return titleMatch || descriptionMatch;
+            });
+            
+            // 显示匹配的游戏
+            matchingGames.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.innerHTML = `
+                    <img src="${game.image}" alt="${game.title}" class="game-image">
+                    <div class="game-content">
+                        <h2 class="game-title">${game.title}</h2>
+                        <p class="game-description">${game.description}</p>
+                        <a href="${game.link}" class="play-button">Play Now</a>
+                    </div>
+                `;
+                gamesGrid.appendChild(gameCard);
+            });
+            
+            // 如果没有找到匹配的游戏，显示提示信息
+            if (matchingGames.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.style.textAlign = 'center';
+                noResults.style.padding = '2rem';
+                noResults.style.fontSize = '1.2rem';
+                noResults.style.color = '#666';
+                noResults.textContent = 'No games found matching your search.';
+                gamesGrid.appendChild(noResults);
+            }
+            
+            return false;
+        }
     </script>
 </body>
 </html> 
