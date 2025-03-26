@@ -11,21 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="leaderboard-header">
             <span class="leaderboard-title">Leaderboard</span>
             <div class="leaderboard-controls">
-                <button id="discord-login" class="discord-login-btn">
-                    <img src="../images/discord-icon.png" alt="Discord" class="discord-icon">
-                    Login with Discord
-                </button>
                 <button id="leaderboard-toggle" class="leaderboard-toggle">-</button>
             </div>
         </div>
         <div id="leaderboard-body" class="leaderboard-body">
             <div class="leaderboard-tabs">
-                <button class="tab-btn active" data-tab="global">Global</button>
-                <button class="tab-btn" data-tab="friends">Friends</button>
-                <button class="tab-btn" data-tab="achievements">Achievements</button>
+                <button class="tab-btn active" data-tab="all-time">All Time</button>
+                <button class="tab-btn" data-tab="today">Today</button>
             </div>
             <div id="leaderboard-content" class="leaderboard-content"></div>
-            <div id="achievements-content" class="achievements-content" style="display: none;"></div>
         </div>
     </div>
     `;
@@ -74,29 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         display: flex;
         align-items: center;
         gap: 10px;
-    }
-    
-    .discord-login-btn {
-        background-color: #7289DA;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 12px;
-        transition: background-color 0.2s;
-    }
-    
-    .discord-login-btn:hover {
-        background-color: #5b6eae;
-    }
-    
-    .discord-icon {
-        width: 16px;
-        height: 16px;
     }
     
     .leaderboard-toggle {
@@ -176,39 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
         color: #0277BD;
     }
     
-    .achievements-content {
-        max-height: 300px;
-        overflow-y: auto;
-    }
-    
-    .achievement-item {
-        padding: 8px;
-        border-bottom: 1px solid #eee;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .achievement-icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 4px;
-    }
-    
-    .achievement-info {
-        flex-grow: 1;
-    }
-    
-    .achievement-title {
-        font-weight: bold;
-        color: #FF6F00;
-    }
-    
-    .achievement-description {
-        font-size: 12px;
-        color: #666;
-    }
-    
     /* 响应式设计 */
     @media (max-width: 768px) {
         .leaderboard-container {
@@ -225,8 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
             height: 40px;
         }
         
-        .leaderboard-content,
-        .achievements-content {
+        .leaderboard-content {
             max-height: 200px;
         }
         
@@ -238,16 +175,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     /* 弹出框样式 */
     .score-modal {
-        display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
+        display: none;
         justify-content: center;
         align-items: center;
+        z-index: 1000;
     }
     
     .score-modal-content {
@@ -255,18 +192,15 @@ document.addEventListener('DOMContentLoaded', function() {
         padding: 20px;
         border-radius: 8px;
         width: 300px;
-        max-width: 90%;
         text-align: center;
     }
     
     .score-modal-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 15px;
         color: #FF6F00;
+        margin-bottom: 15px;
     }
     
-    .score-modal-input {
+    .player-name-input {
         width: 100%;
         padding: 8px;
         margin-bottom: 15px;
@@ -274,27 +208,32 @@ document.addEventListener('DOMContentLoaded', function() {
         border-radius: 4px;
     }
     
-    .score-modal-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .score-modal-submit, .score-modal-cancel {
-        padding: 8px 16px;
+    .submit-score-btn {
+        background-color: #FF6F00;
+        color: white;
         border: none;
+        padding: 8px 16px;
         border-radius: 4px;
         cursor: pointer;
+        transition: background-color 0.2s;
     }
     
-    .score-modal-submit {
-        background-color: #4CAF50;
-        color: white;
+    .submit-score-btn:hover {
+        background-color: #F57C00;
     }
     
-    .score-modal-cancel {
-        background-color: #f44336;
-        color: white;
+    .leaderboard-date {
+        font-size: 11px;
+        color: #666;
+        margin-left: auto;
+        padding-left: 8px;
+    }
+    
+    .leaderboard-empty {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-style: italic;
     }
     `;
     
@@ -319,17 +258,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.body.insertAdjacentHTML('beforeend', scoreModalHTML);
     
-    // 初始化Discord登录
-    const discordLoginBtn = document.getElementById('discord-login');
-    discordLoginBtn.addEventListener('click', function() {
-        // 重定向到Discord OAuth2登录页面
-        window.location.href = 'https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=identify%20email';
-    });
-    
     // 初始化标签页切换
     const tabButtons = document.querySelectorAll('.tab-btn');
     const leaderboardContent = document.getElementById('leaderboard-content');
-    const achievementsContent = document.getElementById('achievements-content');
     
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -339,15 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             
             // 切换内容
-            if (this.dataset.tab === 'achievements') {
-                leaderboardContent.style.display = 'none';
-                achievementsContent.style.display = 'block';
-                loadAchievements();
-            } else {
-                leaderboardContent.style.display = 'block';
-                achievementsContent.style.display = 'none';
-                loadLeaderboard(this.dataset.tab);
-            }
+            loadLeaderboard(this.dataset.tab);
         });
     });
     
@@ -357,63 +280,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // 设置实时更新
     setInterval(() => {
         const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
-        if (activeTab !== 'achievements') {
-            loadLeaderboard(activeTab);
-        }
+        loadLeaderboard(activeTab);
     }, 30000); // 每30秒更新一次
 });
-
-// 加载成就
-function loadAchievements() {
-    const achievementsContent = document.getElementById('achievements-content');
-    const gameType = getCurrentGameType();
-    
-    // 这里应该从服务器获取成就数据
-    const achievements = [
-        {
-            id: 'first_win',
-            title: 'First Victory',
-            description: 'Win your first game',
-            icon: '../images/achievements/first-win.png',
-            unlocked: true
-        },
-        {
-            id: 'high_score',
-            title: 'High Score Master',
-            description: 'Reach the top 10 on the leaderboard',
-            icon: '../images/achievements/high-score.png',
-            unlocked: false
-        },
-        // 添加更多成就...
-    ];
-    
-    achievementsContent.innerHTML = achievements.map(achievement => `
-        <div class="achievement-item ${achievement.unlocked ? 'unlocked' : 'locked'}">
-            <img src="${achievement.icon}" alt="${achievement.title}" class="achievement-icon">
-            <div class="achievement-info">
-                <div class="achievement-title">${achievement.title}</div>
-                <div class="achievement-description">${achievement.description}</div>
-            </div>
-        </div>
-    `).join('');
-}
 
 // 加载排行榜
 function loadLeaderboard(type) {
     const leaderboardContent = document.getElementById('leaderboard-content');
     const gameType = getCurrentGameType();
     
-    // 这里应该从服务器获取排行榜数据
-    const leaderboard = getLeaderboard(gameType);
+    // 获取所有记录
+    const allRecords = getLeaderboard(gameType);
     
-    leaderboardContent.innerHTML = leaderboard.map((entry, index) => `
-        <div class="leaderboard-item">
-            <div class="leaderboard-rank">#${index + 1}</div>
-            <img src="${entry.avatar || '../images/default-avatar.png'}" alt="${entry.name}" class="player-avatar">
-            <div class="leaderboard-name">${entry.name}</div>
-            <div class="leaderboard-score">${entry.score}</div>
-        </div>
-    `).join('');
+    // 根据类型筛选数据
+    let displayRecords = [];
+    if (type === 'today') {
+        const today = new Date().toLocaleDateString();
+        displayRecords = allRecords.filter(record => 
+            new Date(record.date).toLocaleDateString() === today
+        );
+    } else {
+        // all-time显示所有记录
+        displayRecords = allRecords;
+    }
+    
+    // 显示记录
+    leaderboardContent.innerHTML = displayRecords.length > 0 ? 
+        displayRecords.map((entry, index) => `
+            <div class="leaderboard-item">
+                <div class="leaderboard-rank">#${index + 1}</div>
+                <div class="leaderboard-name">${entry.name}</div>
+                <div class="leaderboard-score">${entry.score}</div>
+                <div class="leaderboard-date">${entry.displayDate || new Date(entry.date).toLocaleDateString()}</div>
+            </div>
+        `).join('') :
+        '<div class="leaderboard-empty">No records yet</div>';
 }
 
 // 初始化排行榜
@@ -492,28 +393,47 @@ function saveLeaderboard(gameType, leaderboard) {
 
 // 提交分数
 function submitScore(gameType, playerName, score) {
-    if (!score) return;
+    if (!score || !playerName) return;
     
     let leaderboard = getLeaderboard(gameType);
+    const timestamp = new Date().toISOString();
     
     // 添加新分数
     leaderboard.push({
         name: playerName,
         score: score,
-        date: new Date().toISOString()
+        date: timestamp,
+        displayDate: new Date(timestamp).toLocaleDateString()
     });
     
     // 按分数排序（降序）
     leaderboard.sort((a, b) => b.score - a.score);
     
-    // 只保留前5名
-    if (leaderboard.length > 5) {
-        leaderboard = leaderboard.slice(0, 5);
+    // 只保留前10名
+    if (leaderboard.length > 10) {
+        leaderboard = leaderboard.slice(0, 10);
     }
     
     // 保存并更新显示
     saveLeaderboard(gameType, leaderboard);
     displayLeaderboard(gameType);
+    
+    // 显示成功消息
+    const successMessage = document.createElement('div');
+    successMessage.textContent = 'Score submitted successfully!';
+    successMessage.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        animation: fadeOut 2s forwards;
+        z-index: 1000;
+    `;
+    document.body.appendChild(successMessage);
+    setTimeout(() => successMessage.remove(), 2000);
 }
 
 // 设置游戏监听器

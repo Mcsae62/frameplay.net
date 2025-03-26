@@ -227,20 +227,19 @@
         
         /* Game container */
         .game-container {
+            width: 100%;
+            max-width: 800px;
             margin: 20px auto;
-            max-width: 900px;
-            height: 700px;
-            border: 2px solid #B3E5FC;
-            background-color: white;
+            background: white;
             border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             overflow: hidden;
         }
         
-        .game-container iframe {
+        .game-frame {
             width: 100%;
-            height: 100%;
+            height: 600px;
             border: none;
-            display: block;
         }
         
         /* Game information sections */
@@ -397,7 +396,8 @@
             .language-dropdown:hover .language-content {
                 display: block;
             }
-        }</style>
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -410,42 +410,62 @@
                     <button class="search-button">Search</button>
                 </div>
                 
-                <div class="dropdown">
-                    <button class="dropdown-button">Game Navigation</button>
-                    <div class="dropdown-content">
-                        <a href="2048.html">2048</a>
-                        <a href="adarkroom.html">A Dark Room</a>
-                        <a href="chess.html">Chess</a>
-                        <a href="connect3.html">Connect 3</a>
-                        <a href="pacman.html">Pacman</a>
-                        <a href="snake.html" class="active">Snake</a>
-                        <a href="tetris.html">Tetris</a>
-                    </div>
-                </div>
+                
+        <div class="dropdown">
+            <button class="dropdown-button">Game Navigation</button>
+            <div class="dropdown-content">
+                <a href="../pages/casual.html">Casual</a>
+                <a href="../pages/brain.html">Brain</a>
+                <a href="../pages/fast-paced.html">Fast-Paced</a>
             </div>
         </div>
-    </header>
+            </div>
+        </header>
     
     <div class="container">
         <h1 class="game-title">Snake</h1>
         
         <div class="game-container">
-            <p class="game-description">贪吃蛇是一款经典的街机游戏。控制蛇移动去吃食物，每吃到一个食物蛇身就会变长。注意不要撞到墙壁或自己的身体！</p>
+            <iframe src="http://frameplay.net/games/snake/" class="game-frame" frameborder="0" scrolling="no" allowfullscreen></iframe>
+        </div>
+        
+        <div class="info-container">
+            <div class="info-box">
+                <h2 class="info-title">Game Description</h2>
+                <p>Snake is a classic arcade game where players control a growing snake on a map. The objective is to eat food to make the snake longer while avoiding collisions with walls and the snake's own body. While easy to learn, achieving a high score requires skill and strategy.</p>
+            </div>
             
-            <div class="game-controls">
-                <h3>游戏控制</h3>
+            <div class="info-box">
+                <h2 class="info-title">How to Play</h2>
                 <ul>
-                    <li>�?向上移动</li>
-                    <li>�?向下移动</li>
-                    <li>�?向左移动</li>
-                    <li>�?向右移动</li>
-                    <li>空格�?- 开�?暂停游戏</li>
-                    <li>R�?- 重新开始游�?/li>
+                    <li class="list-item">Use arrow keys (↑↓←→) or WASD to control the snake's direction</li>
+                    <li class="list-item">Eat food to grow longer</li>
+                    <li class="list-item">Avoid hitting the walls</li>
+                    <li class="list-item">Don't collide with your own body</li>
+                    <li class="list-item">Game speed increases as your score grows</li>
                 </ul>
             </div>
             
-            <div class="game-area">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div class="info-box">
+                <h2 class="info-title">Game Features</h2>
+                <ul>
+                    <li class="list-item">Classic Snake gameplay mechanics</li>
+                    <li class="list-item">Smooth control system</li>
+                    <li class="list-item">Real-time score display</li>
+                    <li class="list-item">Progressive difficulty increase</li>
+                    <li class="list-item">Online leaderboard support</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h2 class="info-title">Tips & Strategies</h2>
+                <ul>
+                    <li class="list-item">Stay calm to avoid directional mistakes</li>
+                    <li class="list-item">Move along the walls for better path planning</li>
+                    <li class="list-item">Use zigzag patterns in open spaces to maximize scoring</li>
+                    <li class="list-item">Anticipate food placement and plan your route ahead</li>
+                    <li class="list-item">Be extra careful not to trap yourself when the snake gets longer</li>
+                </ul>
             </div>
         </div>
         
@@ -455,75 +475,21 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="../pages/privacy.html">Privacy Policy</a>
-                <a href="../pages/policy.html">Usage Policy</a>
-                <a href="../pages/terms.html">Terms of Service</a>
-                <a href="../pages/contact.html">Contact Us</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/policy">Usage Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact Us</a>
             </div>
         </div>
     </footer>
 
-    <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const searchInput = document.getElementById('search-input');
-                    const searchButton = document.getElementById('search-button');
-                    
-                    function performSearch(term) {
-                        if (term) {
-                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
-                        }
-                    }
-                    
-                    if (searchButton) {
-                        searchButton.addEventListener('click', function() {
-                            const term = searchInput.value.trim();
-                            performSearch(term);
-                        });
-                    }
-                    
-                    if (searchInput) {
-                        searchInput.addEventListener('keypress', function(e) {
-                            if (e.key === 'Enter') {
-                                const term = this.value.trim();
-                                performSearch(term);
-                            }
-                        });
-                    }
-                });
-            </script>
-            <!-- Discord invite link -->
+    <!-- Discord invite link -->
     <a href="https://discord.gg/cNqwCq4q7y" class="discord-invite" target="_blank">
         👉 Join Discord
     </a>
 
-    <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const searchInput = document.getElementById('search-input');
-                    const searchButton = document.getElementById('search-button');
-                    
-                    function performSearch(term) {
-                        if (term) {
-                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
-                        }
-                    }
-                    
-                    if (searchButton) {
-                        searchButton.addEventListener('click', function() {
-                            const term = searchInput.value.trim();
-                            performSearch(term);
-                        });
-                    }
-                    
-                    if (searchInput) {
-                        searchInput.addEventListener('keypress', function(e) {
-                            if (e.key === 'Enter') {
-                                const term = this.value.trim();
-                                performSearch(term);
-                            }
-                        });
-                    }
-                });
-            </script>
+    <!-- 排行榜组件 -->
+    <script src="../js/leaderboard.js"></script>
 
     <script src="../js/games-data.js"></script>
     <script>
@@ -572,6 +538,13 @@
             }
         }
     </script>
+
+    <div class="leaderboard-container">
+        <h3 class="leaderboard-title">Leaderboard</h3>
+        <ul class="leaderboard-list">
+            <!-- 排行榜数据将通过JavaScript动态添加 -->
+        </ul>
+    </div>
 </body>
 </html> 
 

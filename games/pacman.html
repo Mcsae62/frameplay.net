@@ -439,21 +439,17 @@
                     <button class="search-button">Search</button>
                 </div>
                 
-                <div class="dropdown">
-                    <button class="dropdown-button">Game Navigation</button>
-                    <div class="dropdown-content">
-                        <a href="2048.html">2048</a>
-                        <a href="adarkroom.html">A Dark Room</a>
-                        <a href="chess.html">Chess</a>
-                        <a href="connect3.html">Connect 3</a>
-                        <a href="pacman.html" class="active">Pacman</a>
-                        <a href="snake.html">Snake</a>
-                        <a href="tetris.html">Tetris</a>
-                    </div>
-                </div>
+                
+        <div class="dropdown">
+            <button class="dropdown-button">Game Navigation</button>
+            <div class="dropdown-content">
+                <a href="../pages/casual.html">Casual</a>
+                <a href="../pages/brain.html">Brain</a>
+                <a href="../pages/fast-paced.html">Fast-Paced</a>
             </div>
         </div>
-    </header>
+            </div>
+        </header>
     
     <div class="container">
         <h1 class="game-title">Pacman</h1>
@@ -523,44 +519,13 @@
         </div>
     </footer>
 
-    <!-- 聊天框组�?-->
-    <script src="../js/chat-component.js"></script>
-    
-    <!-- 排行榜组�?-->
-    <script src="../js/leaderboard.js"></script>
-            <!-- Discord invite link -->
+    <!-- Discord invite link -->
     <a href="https://discord.gg/cNqwCq4q7y" class="discord-invite" target="_blank">
         👉 Join Discord
     </a>
 
-    <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const searchInput = document.getElementById('search-input');
-                    const searchButton = document.getElementById('search-button');
-                    
-                    function performSearch(term) {
-                        if (term) {
-                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
-                        }
-                    }
-                    
-                    if (searchButton) {
-                        searchButton.addEventListener('click', function() {
-                            const term = searchInput.value.trim();
-                            performSearch(term);
-                        });
-                    }
-                    
-                    if (searchInput) {
-                        searchInput.addEventListener('keypress', function(e) {
-                            if (e.key === 'Enter') {
-                                const term = this.value.trim();
-                                performSearch(term);
-                            }
-                        });
-                    }
-                });
-            </script>
+    <!-- 排行榜组件 -->
+    <script src="../js/leaderboard.js"></script>
 
     <script src="../js/games-data.js"></script>
     <script>
@@ -609,6 +574,13 @@
             }
         }
     </script>
+
+    <div class="leaderboard-container">
+        <h3 class="leaderboard-title">Leaderboard</h3>
+        <ul class="leaderboard-list">
+            <!-- 排行榜数据将通过JavaScript动态添加 -->
+        </ul>
+    </div>
 </body>
 </html> 
 
