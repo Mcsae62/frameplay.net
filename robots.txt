@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
+
+# 允许所有搜索引擎机器人访问整个网站
+# 如果有不想被索引的目录，可以添加 Disallow 指令
+
+# 指向站点地图位置
 Sitemap: https://frameplay.net/sitemap.xml
