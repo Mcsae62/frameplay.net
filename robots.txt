@@ -1,3 +1,4 @@
+# 全局规则
 User-agent: *
 Allow: /
 Disallow: /admin/
@@ -7,24 +8,21 @@ Disallow: /wp-admin/
 Disallow: /temp/
 Disallow: /backup/
 
+# 特定搜索引擎规则
 User-agent: Googlebot
 Allow: /games/
 Allow: /pages/
-Disallow: /admin/
-Disallow: /private/
 
 User-agent: Bingbot
 Allow: /games/
 Allow: /pages/
-Disallow: /admin/
-Disallow: /private/
 
 User-agent: Yandex
 Allow: /games/
-Disallow: /admin/
-Disallow: /private/
 
+# 爬虫访问频率
 Crawl-delay: 10
 
+# 站点地图
 Sitemap: https://frameplay.net/sitemap.xml
 Sitemap: https://frameplay.net/games-sitemap.xml
