@@ -1,48 +1,50 @@
 from PIL import Image
 import os
 
-def resize_image(input_path, output_path, target_size=(800, 600)):
+def resize_and_crop(image_path, target_size=(800, 600)):
     # 打开图片
-    img = Image.open(input_path)
+    img = Image.open(image_path)
     
     # 计算宽高比
     img_ratio = img.width / img.height
     target_ratio = target_size[0] / target_size[1]
     
     if img_ratio > target_ratio:
-        # 图片更宽，以高度为基准
-        new_height = target_size[1]
-        new_width = int(new_height * img_ratio)
+        # 图片更宽，需要裁剪宽度
+        new_width = int(img.height * target_ratio)
+        left = (img.width - new_width) // 2
+        img = img.crop((left, 0, left + new_width, img.height))
     else:
-        # 图片更高，以宽度为基准
-        new_width = target_size[0]
-        new_height = int(new_width / img_ratio)
+        # 图片更高，需要裁剪高度
+        new_height = int(img.width / target_ratio)
+        top = (img.height - new_height) // 2
+        img = img.crop((0, top, img.width, top + new_height))
     
-    # 调整图片大小
-    resized_img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
-    
-    # 创建新的图片
-    new_img = Image.new('RGB', target_size, (0, 0, 0))
-    
-    # 计算粘贴位置（居中）
-    paste_x = (target_size[0] - new_width) // 2
-    paste_y = (target_size[1] - new_height) // 2
-    
-    # 粘贴调整后的图片
-    new_img.paste(resized_img, (paste_x, paste_y))
+    # 调整到目标尺寸
+    img = img.resize(target_size, Image.Resampling.LANCZOS)
     
     # 保存图片
-    new_img.save(output_path, 'JPEG', quality=95)
+    output_path = image_path.replace('.jpeg', '_resized.jpeg')
+    img.save(output_path, quality=95)
+    print(f'已处理: {image_path}')
 
-# 处理两张图片
-images_to_resize = [
-    'resized_images/Alien Attack-demo.jpeg',
-    'resized_images/Aliens Attack-demo.jpeg'
-]
+def main():
+    # 需要处理的图片列表
+    images_to_process = [
+        'Solitaire Classic-demo.jpeg',
+        'Spider Solitaire-demo.jpeg'
+    ]
+    
+    # 处理每张图片
+    for image_name in images_to_process:
+        image_path = os.path.join('resized_images', image_name)
+        try:
+            if os.path.exists(image_path):
+                resize_and_crop(image_path)
+            else:
+                print(f'找不到文件: {image_path}')
+        except Exception as e:
+            print(f'处理 {image_path} 时出错: {str(e)}')
 
-for img_path in images_to_resize:
-    if os.path.exists(img_path):
-        resize_image(img_path, img_path)
-        print(f'已处理: {img_path}')
-    else:
-        print(f'文件不存在: {img_path}') 
+if __name__ == '__main__':
+    main() 
