@@ -7,8 +7,7 @@ def verify_image_size(image_path):
 
 # 验证处理后的图片
 images_to_verify = [
-    'Solitaire Classic-demo_resized.jpeg',
-    'Spider Solitaire-demo_resized.jpeg'
+    'Miner Block-demo_resized.jpeg'
 ]
 
 for image_name in images_to_verify:

@@ -31,8 +31,7 @@ def resize_and_crop(image_path, target_size=(800, 600)):
 def main():
     # 需要处理的图片列表
     images_to_process = [
-        'Solitaire Classic-demo.jpeg',
-        'Spider Solitaire-demo.jpeg'
+        'Miner Block-demo.jpeg'
     ]
     
     # 处理每张图片
