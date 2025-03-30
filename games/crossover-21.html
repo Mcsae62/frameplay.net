@@ -397,7 +397,34 @@
             .language-dropdown:hover .language-content {
                 display: block;
             }
-        }</style>
+        }
+    /* Rating system styles */
+    .rating-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin: 10px 0 20px 0;
+    }
+    
+    .rating-star {
+        font-size: 24px;
+        cursor: pointer;
+        color: #ddd;
+        transition: color 0.2s;
+    }
+    
+    .rating-star:hover,
+    .rating-star.active {
+        color: #ff4081;
+    }
+    
+    .rating-count {
+        margin-left: 10px;
+        color: #666;
+        font-size: 14px;
+    }
+</style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
     <script>
@@ -450,12 +477,23 @@
                     </div>
                 </div>
                 
-                <div class="dropdown">
+                                <div class="dropdown">
                     <button class="dropdown-button">Game Navigation</button>
                     <div class="dropdown-content">
-                        <a href="../pages/casual.html">Casual Games</a>
-                        <a href="../pages/brain.html">Brain Games</a>
-                        <a href="../pages/fast-paced.html">Fast-Paced Games</a>
+                        <a href="../pages/puzzle.html">Puzzle</a>
+                        <a href="../pages/quiz.html">Quiz</a>
+                        <a href="../pages/cards.html">Cards</a>
+                        <a href="../pages/casual.html">Casual</a>
+                        <a href="../pages/match3.html">Match 3</a>
+                        <a href="../pages/bubble-shooter.html">Bubble Shooter</a>
+                        <a href="../pages/clicker.html">Clicker</a>
+                        <a href="../pages/beauty.html">Beauty</a>
+                        <a href="../pages/jump-run.html">Jump & Run</a>
+                        <a href="../pages/racing.html">Racing</a>
+                        <a href="../pages/sport.html">Sport</a>
+                        <a href="../pages/horror.html">Horror</a>
+                        <a href="../pages/action.html">Action</a>
+                        <a href="../pages/multiplayer.html">Multiplayer</a>
                     </div>
                 </div>
             </div>
@@ -463,6 +501,15 @@
     </header>
     
     <h1 class="game-title">Cross Over 21</h1>
+    <div class="rating-container">
+        <span class="rating-star" data-rating="1">❤</span>
+        <span class="rating-star" data-rating="2">❤</span>
+        <span class="rating-star" data-rating="3">❤</span>
+        <span class="rating-star" data-rating="4">❤</span>
+        <span class="rating-star" data-rating="5">❤</span>
+        <span class="rating-count">(0 ratings)</span>
+    </div>
+
     
     <div class="game-container">
         <iframe src="https://play.famobi.com/crossover-21" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen></iframe>
@@ -611,6 +658,51 @@
                 });
             }
         }
+    </script>
+
+    <script>
+        // Rating system functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.rating-star');
+            const ratingCount = document.querySelector('.rating-count');
+            
+            // Get game ID from filename
+            const gameId = window.location.pathname.split('/').pop().replace('.html', '');
+            const savedRating = localStorage.getItem(`rating_${gameId}`);
+            const savedCount = localStorage.getItem(`rating_count_${gameId}`);
+            
+            if (savedRating) {
+                updateRatingDisplay(parseInt(savedRating));
+            }
+            
+            if (savedCount) {
+                ratingCount.textContent = `(${savedCount} ratings)`;
+            }
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.dataset.rating);
+                    localStorage.setItem(`rating_${gameId}`, rating);
+                    
+                    // Update rating count
+                    const currentCount = parseInt(savedCount || 0) + 1;
+                    localStorage.setItem(`rating_count_${gameId}`, currentCount);
+                    ratingCount.textContent = `(${currentCount} ratings)`;
+                    
+                    updateRatingDisplay(rating);
+                });
+            });
+            
+            function updateRatingDisplay(rating) {
+                stars.forEach(star => {
+                    if (parseInt(star.dataset.rating) <= rating) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html> 

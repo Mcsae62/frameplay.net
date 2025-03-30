@@ -1,32 +1,55 @@
 from PIL import Image
 import os
 
-def resize_image(input_path, output_path, target_size=(800, 600)):
-    try:
-        # 打开图片
-        with Image.open(input_path) as img:
-            # 调整图片大小，使用LANCZOS重采样方法以保持质量
-            resized_img = img.resize(target_size, Image.Resampling.LANCZOS)
-            # 保存调整后的图片
-            resized_img.save(output_path, quality=95)
-            print(f"Successfully resized {input_path} to {output_path}")
-    except Exception as e:
-        print(f"Error processing {input_path}: {str(e)}")
+def get_target_size():
+    # 获取目标图片的尺寸
+    target_path = "resized_images/3D Chess-demo.jpeg"
+    with Image.open(target_path) as img:
+        return img.size
 
-def process_directory(input_dir, output_dir):
-    # 确保输出目录存在
-    os.makedirs(output_dir, exist_ok=True)
+def resize_image(source_path, target_path, target_size):
+    # 打开图片
+    with Image.open(source_path) as img:
+        # 计算缩放比例，保持宽高比
+        ratio = max(target_size[0] / img.size[0], target_size[1] / img.size[1])
+        new_size = (int(img.size[0] * ratio), int(img.size[1] * ratio))
+        
+        # 调整图片大小
+        resized_img = img.resize(new_size, Image.Resampling.LANCZOS)
+        
+        # 创建新的图片，使用白色背景
+        new_img = Image.new('RGB', target_size, (255, 255, 255))
+        
+        # 计算居中位置
+        position = ((target_size[0] - new_size[0]) // 2,
+                   (target_size[1] - new_size[1]) // 2)
+        
+        # 将调整后的图片粘贴到新图片上
+        new_img.paste(resized_img, position)
+        
+        # 保存图片
+        new_img.save(target_path, 'JPEG', quality=95)
+
+def main():
+    # 获取目标尺寸
+    target_size = get_target_size()
+    print(f"目标尺寸: {target_size}")
     
-    # 处理目录中的所有图片
-    for filename in os.listdir(input_dir):
-        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
-            input_path = os.path.join(input_dir, filename)
-            output_path = os.path.join(output_dir, filename)
-            resize_image(input_path, output_path)
+    # 需要处理的图片列表
+    images = [
+        "Pets Rush-demo.jpeg"
+    ]
+    
+    # 处理每张图片
+    for image_name in images:
+        source_path = f"original_images/{image_name}"
+        target_path = f"resized_images/{image_name}"
+        
+        if os.path.exists(source_path):
+            print(f"处理图片: {image_name}")
+            resize_image(source_path, target_path, target_size)
+        else:
+            print(f"找不到源图片: {image_name}")
 
 if __name__ == "__main__":
-    # 设置输入和输出目录
-    input_directory = "original_images"  # 存放原始图片的目录
-    output_directory = "resized_images"  # 存放调整后图片的目录
-    
-    process_directory(input_directory, output_directory) 
+    main() 

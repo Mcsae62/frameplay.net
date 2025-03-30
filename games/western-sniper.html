@@ -6,6 +6,8 @@
     <meta name="description" content="Play Western Sniper online for free! Take aim and become the ultimate gunslinger in this thrilling Wild West shooting game.">
     <title>Western Sniper - Free Online Game</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../css/rating.css" rel="stylesheet">
+    <script src="../js/rating.js"></script>
     <style>
         /* Base colors and styles */
         body {
@@ -397,7 +399,62 @@
             .language-dropdown:hover .language-content {
                 display: block;
             }
-        }</style>
+        }
+
+        /* Rating system styles */
+        .rating-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin: 10px 0 20px 0;
+        }
+        
+        .rating-star {
+            font-size: 24px;
+            cursor: pointer;
+            color: #ddd;
+            transition: color 0.2s;
+        }
+        
+        .rating-star:hover,
+        .rating-star.active {
+            color: #ff4081;
+        }
+        
+        .rating-count {
+            margin-left: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+    
+    /* Rating system styles */
+    .rating-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin: 10px 0 20px 0;
+    }
+    
+    .rating-star {
+        font-size: 24px;
+        cursor: pointer;
+        color: #ddd;
+        transition: color 0.2s;
+    }
+    
+    .rating-star:hover,
+    .rating-star.active {
+        color: #ff4081;
+    }
+    
+    .rating-count {
+        margin-left: 10px;
+        color: #666;
+        font-size: 14px;
+    }
+</style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXKH7CR53S"></script>
     <script>
@@ -428,6 +485,37 @@
                     }
                 });
             </script>
+    <script src="../js/rating-system.js"></script>
+    <style>
+        ${window.ratingSystem.styles}
+    
+    /* Rating system styles */
+    .rating-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin: 10px 0 20px 0;
+    }
+    
+    .rating-star {
+        font-size: 24px;
+        cursor: pointer;
+        color: #ddd;
+        transition: color 0.2s;
+    }
+    
+    .rating-star:hover,
+    .rating-star.active {
+        color: #ff4081;
+    }
+    
+    .rating-count {
+        margin-left: 10px;
+        color: #666;
+        font-size: 14px;
+    }
+</style>
 </head>
 <body>
     <header>
@@ -450,12 +538,23 @@
                     </div>
                 </div>
                 
-                <div class="dropdown">
+                                <div class="dropdown">
                     <button class="dropdown-button">Game Navigation</button>
                     <div class="dropdown-content">
-                        <a href="../pages/casual.html">Casual Games</a>
-                        <a href="../pages/brain.html">Brain Games</a>
-                        <a href="../pages/fast-paced.html">Fast-Paced Games</a>
+                        <a href="../pages/puzzle.html">Puzzle</a>
+                        <a href="../pages/quiz.html">Quiz</a>
+                        <a href="../pages/cards.html">Cards</a>
+                        <a href="../pages/casual.html">Casual</a>
+                        <a href="../pages/match3.html">Match 3</a>
+                        <a href="../pages/bubble-shooter.html">Bubble Shooter</a>
+                        <a href="../pages/clicker.html">Clicker</a>
+                        <a href="../pages/beauty.html">Beauty</a>
+                        <a href="../pages/jump-run.html">Jump & Run</a>
+                        <a href="../pages/racing.html">Racing</a>
+                        <a href="../pages/sport.html">Sport</a>
+                        <a href="../pages/horror.html">Horror</a>
+                        <a href="../pages/action.html">Action</a>
+                        <a href="../pages/multiplayer.html">Multiplayer</a>
                     </div>
                 </div>
             </div>
@@ -463,6 +562,14 @@
     </header>
     
     <h1 class="game-title">Western Sniper</h1>
+    <div class="rating-container">
+        <span class="rating-star" data-rating="1">❤</span>
+        <span class="rating-star" data-rating="2">❤</span>
+        <span class="rating-star" data-rating="3">❤</span>
+        <span class="rating-star" data-rating="4">❤</span>
+        <span class="rating-star" data-rating="5">❤</span>
+        <span class="rating-count">(0 ratings)</span>
+    </div>
     
     <div class="game-container">
         <iframe src="https://play.famobi.com/western-sniper" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen></iframe>
@@ -471,7 +578,7 @@
     <div class="info-container">
         <div class="info-box">
             <h2 class="info-title">Game Description</h2>
-            <p>Take aim and become the ultimate gunslinger in Western Sniper �?the wildest shooting challenge in the Wild West! Step into the boots of a fearless sharpshooter tasked with cleaning up a town overrun by dangerous bandits. From smoky saloons to dusty streets, every level presents new enemies and increasingly challenging scenarios that will test your marksmanship to the limit. With immersive Wild West environments, thrilling shootouts, and precision-based gameplay, Western Sniper delivers an action-packed experience that will keep you on the edge of your seat as you fight to become the fastest gun in the West.</p>
+            <p>Take aim and become the ultimate gunslinger in Western Sniper - the wildest shooting challenge in the Wild West! Step into the boots of a fearless sharpshooter tasked with cleaning up a town overrun by dangerous bandits. From smoky saloons to dusty streets, every level presents new enemies and increasingly challenging scenarios that will test your marksmanship to the limit. With immersive Wild West environments, thrilling shootouts, and precision-based gameplay, Western Sniper delivers an action-packed experience that will keep you on the edge of your seat as you fight to become the fastest gun in the West.</p>
         </div>
         
         <div class="info-box">
@@ -536,33 +643,49 @@
     </a>
 
     <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const searchInput = document.getElementById('search-input');
-                    const searchButton = document.getElementById('search-button');
+        // Rating system functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.rating-star');
+            const ratingCount = document.querySelector('.rating-count');
+            
+            // Get game ID from filename
+            const gameId = window.location.pathname.split('/').pop().replace('.html', '');
+            const savedRating = localStorage.getItem(`rating_${gameId}`);
+            const savedCount = localStorage.getItem(`rating_count_${gameId}`);
+            
+            if (savedRating) {
+                updateRatingDisplay(parseInt(savedRating));
+            }
+            
+            if (savedCount) {
+                ratingCount.textContent = `(${savedCount} ratings)`;
+            }
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.dataset.rating);
+                    localStorage.setItem(`rating_${gameId}`, rating);
                     
-                    function performSearch(term) {
-                        if (term) {
-                            window.location.href = '../search-results.html?q=' + encodeURIComponent(term);
-                        }
-                    }
+                    // Update rating count
+                    const currentCount = parseInt(savedCount || 0) + 1;
+                    localStorage.setItem(`rating_count_${gameId}`, currentCount);
+                    ratingCount.textContent = `(${currentCount} ratings)`;
                     
-                    if (searchButton) {
-                        searchButton.addEventListener('click', function() {
-                            const term = searchInput.value.trim();
-                            performSearch(term);
-                        });
-                    }
-                    
-                    if (searchInput) {
-                        searchInput.addEventListener('keypress', function(e) {
-                            if (e.key === 'Enter') {
-                                const term = this.value.trim();
-                                performSearch(term);
-                            }
-                        });
+                    updateRatingDisplay(rating);
+                });
+            });
+            
+            function updateRatingDisplay(rating) {
+                stars.forEach(star => {
+                    if (parseInt(star.dataset.rating) <= rating) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
                     }
                 });
-            </script>
+            }
+        });
+    </script>
 
     <script src="../js/games-data.js"></script>
     <script>
