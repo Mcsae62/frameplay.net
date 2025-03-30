@@ -29,6 +29,13 @@ export const allGames = [
         category: "Puzzle"
     },
     {
+        title: "Om Nom Connect Classic",
+        description: "Help Om Nom connect with his friends and share tasty candies in this colorful matching game!",
+        image: "resized_images/Om Nom Connect Classic-demo_resized.jpeg",
+        link: "games/om nom connect classic.html",
+        category: "Puzzle"
+    },
+    {
         title: "Spot The Cat",
         description: "Find the hidden cat in each level!",
         image: "resized_images/Spot The Cat-demo.jpeg",
@@ -367,7 +374,29 @@ export const allGames = [
         link: "games/connect3.html",
         category: "Match 3"
     },
+    {
+        title: "Dragon: Fire and Fury",
+        description: "A turn-based Match 3 game where you play as a mighty dragon defending treasures against an evil king!",
+        image: "resized_images/Dragon Fire and Fury-demo_resized.jpeg",
+        link: "games/dragon-fire-fury.html",
+        category: "Match 3"
+    },
+    {
+        title: "Food Rush",
+        description: "在桶中收集相同类型的食物，快速匹配三个相同的食物。但要小心，如果所有槽位都被填满或食物溢出桶外，游戏就结束了！通过快速的反应和敏捷的思维，你可以建立连击并激活火焰模式，这将清空桶中的所有食物，让你重新开始收集。",
+        image: "../resized_images/Food Rush-demo_resized.jpeg",
+        link: "../games/food rush.html",
+        category: "Match 3",
+        tags: ["Match 3", "Puzzle", "Food", "Arcade"]
+    },
     // Bubble Shooter Games
+    {
+        title: "Om Nom Bubbles",
+        description: "Get ready for Om Nom's new challenging adventure and help him shoot all those tasty candies! Shoot as many candies as possible and be quick, because the time is ticking!",
+        image: "resized_images/Om Nom Bubbles-demo_resized.jpeg",
+        link: "games/om nom bubbles.html",
+        category: "Bubble Shooter"
+    },
     {
         title: "Bubble Tower 3D",
         description: "Shoot bubbles in 3D!",
@@ -387,6 +416,13 @@ export const allGames = [
         description: "Shoot shards to clear the board!",
         image: "resized_images/Shards-demo.jpeg",
         link: "games/shards.html",
+        category: "Bubble Shooter"
+    },
+    {
+        title: "Fuzzies",
+        description: "Once upon a time, the colorful and cuddly Fuzzies lived happily together in their village. But the resident villain in the castle isn't confident with his pale appearance and therefore decides to squeeze the Fuzzies in order to get their colors with his brutal machine. And so, the villain invades the peaceful Fuzzie village. Save the Fuzzies and help them escape from the cruel crushing machine! Merge at least 3 Fuzzies of the same color and try to clear all of them. Through combos you will gain mighty bomb- or rainbowfuzzies! Can you save the Fuzzies before they're getting squeezed?",
+        image: "resized_images/Fuzzies-demo_resized.jpeg",
+        link: "games/fuzzies.html",
         category: "Bubble Shooter"
     },
     // Clicker Games
@@ -460,6 +496,13 @@ export const allGames = [
         description: "Jump through pirate islands!",
         image: "resized_images/Pirates Of Islets-demo.jpeg",
         link: "games/pirates-of-islets.html",
+        category: "Jump & Run"
+    },
+    {
+        title: "Pengu Slide",
+        description: "Slide to survive and fly to thrive in this ultimate penguin adventure game!",
+        image: "resized_images/Pengu Slide-demo.jpeg",
+        link: "games/pengu-slide.html",
         category: "Jump & Run"
     },
     // Racing Games
@@ -557,9 +600,16 @@ export const allGames = [
     },
     {
         title: "Street Ball Star",
-        description: "Play street basketball!",
+        description: "Become a street basketball star!",
         image: "resized_images/Street Ball Star-demo.jpeg",
         link: "games/street-ball-star.html",
+        category: "Sport"
+    },
+    {
+        title: "Tap Tap Dunk",
+        description: "Tap your way through the playfield and dunk as many times as possible!",
+        image: "resized_images/Tap Tap Dunk-demo.jpeg",
+        link: "games/tap-tap-dunk.html",
         category: "Sport"
     },
     {
@@ -600,4 +650,26 @@ export const allGames = [
         category: "Action"
     },
     // Multiplayer Games
+    // Casual Games
+    {
+        title: "Aliens Attack",
+        description: "Defend Earth from alien invasion in this exciting space shooting game!",
+        image: "resized_images/Aliens Attack-demo.jpeg",
+        link: "games/aliens attack.html",
+        category: "Casual"
+    },
+    {
+        title: "Alien Attack",
+        description: "Protect Earth from alien invaders in this action-packed space shooter!",
+        image: "resized_images/Alien Attack-demo.jpeg",
+        link: "games/alien attack.html",
+        category: "Casual"
+    },
+    {
+        title: "Frankenstein Go",
+        description: "Help Frankenstein save his girlfriend from the powers of evil in this exciting adventure!",
+        image: "resized_images/Frankenstein Go-demo.jpeg",
+        link: "games/frankenstein go.html",
+        category: "Casual"
+    },
 ]; 

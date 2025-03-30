@@ -1,55 +1,48 @@
 from PIL import Image
 import os
 
-def get_target_size():
-    # 获取目标图片的尺寸
-    target_path = "resized_images/3D Chess-demo.jpeg"
-    with Image.open(target_path) as img:
-        return img.size
-
-def resize_image(source_path, target_path, target_size):
+def resize_image(input_path, output_path, target_size=(800, 600)):
     # 打开图片
-    with Image.open(source_path) as img:
-        # 计算缩放比例，保持宽高比
-        ratio = max(target_size[0] / img.size[0], target_size[1] / img.size[1])
-        new_size = (int(img.size[0] * ratio), int(img.size[1] * ratio))
-        
-        # 调整图片大小
-        resized_img = img.resize(new_size, Image.Resampling.LANCZOS)
-        
-        # 创建新的图片，使用白色背景
-        new_img = Image.new('RGB', target_size, (255, 255, 255))
-        
-        # 计算居中位置
-        position = ((target_size[0] - new_size[0]) // 2,
-                   (target_size[1] - new_size[1]) // 2)
-        
-        # 将调整后的图片粘贴到新图片上
-        new_img.paste(resized_img, position)
-        
-        # 保存图片
-        new_img.save(target_path, 'JPEG', quality=95)
-
-def main():
-    # 获取目标尺寸
-    target_size = get_target_size()
-    print(f"目标尺寸: {target_size}")
+    img = Image.open(input_path)
     
-    # 需要处理的图片列表
-    images = [
-        "Pets Rush-demo.jpeg"
-    ]
+    # 计算宽高比
+    img_ratio = img.width / img.height
+    target_ratio = target_size[0] / target_size[1]
     
-    # 处理每张图片
-    for image_name in images:
-        source_path = f"original_images/{image_name}"
-        target_path = f"resized_images/{image_name}"
-        
-        if os.path.exists(source_path):
-            print(f"处理图片: {image_name}")
-            resize_image(source_path, target_path, target_size)
-        else:
-            print(f"找不到源图片: {image_name}")
+    if img_ratio > target_ratio:
+        # 图片更宽，以高度为基准
+        new_height = target_size[1]
+        new_width = int(new_height * img_ratio)
+    else:
+        # 图片更高，以宽度为基准
+        new_width = target_size[0]
+        new_height = int(new_width / img_ratio)
+    
+    # 调整图片大小
+    resized_img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+    
+    # 创建新的图片
+    new_img = Image.new('RGB', target_size, (0, 0, 0))
+    
+    # 计算粘贴位置（居中）
+    paste_x = (target_size[0] - new_width) // 2
+    paste_y = (target_size[1] - new_height) // 2
+    
+    # 粘贴调整后的图片
+    new_img.paste(resized_img, (paste_x, paste_y))
+    
+    # 保存图片
+    new_img.save(output_path, 'JPEG', quality=95)
 
-if __name__ == "__main__":
-    main() 
+# 处理两张图片
+images_to_resize = [
+    'resized_images/Alien Attack-demo.jpeg',
+    'resized_images/Aliens Attack-demo.jpeg'
+]
+
+for img_path in images_to_resize:
+    if os.path.exists(img_path):
+        resize_image(img_path, img_path)
+        print(f'已处理: {img_path}')
+    else:
+        print(f'文件不存在: {img_path}') 
