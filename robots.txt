@@ -1,0 +1,31 @@
+# Global Rules
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /temp/
+Disallow: /backup/
+Disallow: /wp-admin/
+
+# Search Engine Specific Rules
+User-agent: Googlebot
+Allow: /tools/
+Allow: /market/
+Allow: /recommendations/
+
+User-agent: Bingbot
+Allow: /tools/
+Allow: /market/
+Allow: /recommendations/
+
+User-agent: Baiduspider
+Allow: /tools/
+Allow: /market/
+Allow: /recommendations/
+
+# Crawl Rate Control
+Crawl-delay: 5
+
+# Sitemaps
+Sitemap: https://frameplay.net/sitemap.xml
